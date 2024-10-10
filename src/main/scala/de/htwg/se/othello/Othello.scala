@@ -26,7 +26,7 @@ object Othello {
     val pos1 = (row - 1) / 2
     val pos2 = ( column - 1) / 2
 
-
+    // Test Komment
     board(pos1)(pos2) = "W"
     board(pos1)(pos2+1) = "B"
     board(pos1+1)(pos2) = "B" 
