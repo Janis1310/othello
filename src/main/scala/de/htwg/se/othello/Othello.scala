@@ -43,7 +43,7 @@ object Othello {
     for (row <- board.indices) {
       print("  ")
 
-      print("+---" * board.length)
+      print("+---" * board(0).length)
       println("+")
       print(s"$row | ") 
       for (col <- board(row).indices) {
@@ -52,7 +52,7 @@ object Othello {
       println()
     }
     print("  ")
-    print("+---" * board.length)
+    print("+---" * board(0).length)
     println("+")
 
   }
