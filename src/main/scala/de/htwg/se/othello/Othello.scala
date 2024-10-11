@@ -7,7 +7,7 @@ object Othello {
 
     println("Welcome to Othello ")
 
-    val p1_name = readLine("Geben Sie den Name vom Player1 ein: ")
+    val p1_name = readLine("Geben Si ")
     val p2_name = readLine("Geben Sie den Name vom Player2 ein: ")
     val p1 = Player(p1_name, "W")
     val p2 = Player(p2_name, "S")
