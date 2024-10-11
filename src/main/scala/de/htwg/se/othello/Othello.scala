@@ -4,7 +4,7 @@ import scala.io.StdIn._
 
 object Othello {
   def main(args:Array[String]) = {
-
+a
     println("Welcome to Othello ")
 
     val p1_name = readLine("Geben Si ")
