@@ -2,6 +2,7 @@ package de.htwg.se.othello
 
 import scala.io.StdIn._
 
+// Testkomment
 object Othello {
   def main(args:Array[String]) = {
     println("Welcome to Othello ")
