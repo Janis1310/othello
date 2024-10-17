@@ -24,7 +24,7 @@ object Othello {
     val board = Array.fill(row, column)(".")
     val pos1 = (row - 1) / 2
     val pos2 = ( column - 1) / 2
-// hier wird das Spielfeld initialisiert
+
     board(pos1)(pos2) = "W"
     board(pos1)(pos2+1) = "B"
     board(pos1+1)(pos2) = "B" 
