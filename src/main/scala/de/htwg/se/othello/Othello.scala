@@ -1,11 +1,10 @@
 package de.htwg.se.othello
 
 import scala.io.StdIn._
-
 object Othello {
   def main(args:Array[String]) = {
     println("Welcome to Othello ")
-
+//test
     val p1_name = readLine("Geben Sie den Name vom Player1 ein: ")
     val p2_name = readLine("Geben Sie den Name vom Player2 ein: ")
     val p1 = Player(p1_name, "W")
