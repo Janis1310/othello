@@ -4,7 +4,6 @@ import scala.io.StdIn._
 
 object Othello {
   def main(args:Array[String]) = {
-a
     println("Welcome to Othello ")
 
     val p1_name = readLine("Geben Sie den Name vom Player1 ein: ")
@@ -36,14 +35,17 @@ a
   }
 
   def printboard(board: Array[Array[String]]) : Unit = {
+    val boardmaxcol = board(0).length
+    val boardmaxrow = board.indices
+
     print("    ")
     board(0).indices.foreach(i => print(s"$i   "))
     println()
     
-    for (row <- board.indices) {
+    for (row <- boardmaxrow) {
       print("  ")
 
-      print("+---" * board(0).length)
+      print("+---" * boardmaxcol)
       println("+")
       print(s"$row | ") 
       for (col <- board(row).indices) {
@@ -52,7 +54,7 @@ a
       println()
     }
     print("  ")
-    print("+---" * board(0).length)
+    print("+---" * boardmaxcol)
     println("+")
 
   }
