@@ -15,7 +15,7 @@ object Othello {
 
     val board = createboard(row, column)
     printboard(board)
-    //test Janis
+    //test imran
 
   }
 
