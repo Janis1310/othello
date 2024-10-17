@@ -62,6 +62,7 @@ object Othello {
 
 }
 
+// create player class
 case class Player(name:String, color:String){
     override def toString(): String = name +": " + color
 
