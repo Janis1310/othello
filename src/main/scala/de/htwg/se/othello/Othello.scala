@@ -2,7 +2,6 @@ package de.htwg.se.othello
 
 import scala.io.StdIn._
 
-// Testkomment
 object Othello {
   def main(args:Array[String]) = {
     println("Welcome to Othello ")
@@ -17,7 +16,7 @@ object Othello {
 
     val board = createboard(row, column)
     printboard(board)
-//Testkomment 1
+
 
   }
 
@@ -26,7 +25,6 @@ object Othello {
     val pos1 = (row - 1) / 2
     val pos2 = ( column - 1) / 2
 
-    // Test Komment
     board(pos1)(pos2) = "W"
     board(pos1)(pos2+1) = "B"
     board(pos1+1)(pos2) = "B" 
