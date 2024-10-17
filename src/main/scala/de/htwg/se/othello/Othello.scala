@@ -15,6 +15,7 @@ object Othello {
     val Array(row, column) = feld.split(",").map(_.trim.toInt)
 
     val board = createboard(row, column)
+    print("Test")
     printboard(board)
 
 
