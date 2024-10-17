@@ -33,6 +33,7 @@ object Othello {
   
   }
 
+  // print the board
   def printboard(board: Array[Array[String]]) : Unit = {
     val boardmaxcol = board(0).length
     val boardmaxrow = board.indices
