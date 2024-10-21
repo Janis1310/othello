@@ -1,5 +1,6 @@
 package de.htwg.se.othello.model
 
-class Player {
+case class Player(name:String, stone:Stone) {
+    override def toString(): String = name +": " + stone
   
 }
