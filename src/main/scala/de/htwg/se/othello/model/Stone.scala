@@ -1,5 +1,5 @@
 package de.htwg.se.othello.model
 
 enum Stone {
-  case Black, White;
+  case Black, White, Empty
 }
