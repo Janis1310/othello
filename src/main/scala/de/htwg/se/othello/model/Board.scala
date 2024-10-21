@@ -14,31 +14,31 @@ class Board(private val board: Vector[Vector[Stone]]) {
       .updated(pos1 + 1, board(pos1 + 1).updated(pos2 + 1, Stone.White)) // Platziere den zweiten weißen Stein
     
   }
- override def toString: String = {
-    val boardmaxcol = board(0).length
-    val boardmaxrow = board.indices
+    override def toString: String = {
+        val boardmaxcol = board(0).length
+        val boardmaxrow = board.indices
 
-    val sb = new StringBuilder
-    sb.append("    ") 
-    for (i <- 0 until boardmaxcol) {
-      sb.append(s"$i   ")
-    }
-    sb.append("\n")
+        val sb = new StringBuilder
+        sb.append("    ") 
+        for (i <- 0 until boardmaxcol) {
+          sb.append(s"$i   ")
+        }
+        sb.append("\n")
 
-    for (row <- boardmaxrow) {
-      sb.append("  ")
-      sb.append("+---" * boardmaxcol)
-      sb.append("+\n")
-      sb.append(s"$row | ") 
-      for (col <- board(row).indices) {
-        sb.append(s"${board(row)(col).toString} | ")
+        for (row <- boardmaxrow) {
+          sb.append("  ")
+          sb.append("+---" * boardmaxcol)
+          sb.append("+\n")
+          sb.append(s"$row | ") 
+          for (col <- board(row).indices) {
+            sb.append(s"${board(row)(col).toString} | ")
+          }
+          sb.append("\n")
+        }
+        sb.append("  ")
+        sb.append("+---" * boardmaxcol) 
+        sb.append("+\n")
+
+        sb.toString()
       }
-      sb.append("\n")
-    }
-    sb.append("  ")
-    sb.append("+---" * boardmaxcol) 
-    sb.append("+\n")
-
-    sb.toString()
-  }
 }
