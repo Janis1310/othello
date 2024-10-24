@@ -46,6 +46,12 @@ class StoneSpec extends AnyWordSpec with Matchers {
       val stone = Stone.White
       stone.flip shouldBe Stone.Black
     }
+    "throw an UnsupportedOperationException when flip is called on Empty" in {
+      val stone = Stone.Empty
+      assertThrows[UnsupportedOperationException] {
+        stone.flip
+      }
+    }
 
   }
 }
