@@ -7,4 +7,11 @@ enum Stone {
     case Black => "S"    
     case White => "W"
     case Empty => "."
+
+  def flip: Stone = this match
+    case Black => White
+    case White => Black
+    case Empty => Empty
+
 }
+
