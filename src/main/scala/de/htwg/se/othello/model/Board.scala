@@ -16,7 +16,7 @@ class Board(private val board: Vector[Vector[Stone]]) {
     })
   }
   
-     def getBoard: Vector[Vector[Stone]] = board
+     //def getBoard: Vector[Vector[Stone]] = board
 
     override def toString: String = {
         val boardmaxcol = board(0).length
