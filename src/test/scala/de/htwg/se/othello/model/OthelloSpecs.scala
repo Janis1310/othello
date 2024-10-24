@@ -2,12 +2,10 @@ package de.htwg.se.othello.model
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
-import de.htwg.se.othello.model.{Board, Stone} // import board and stone
 
-class BoardSpec extends AnyWordSpec with Matchers {
-  "A Board" should {
-
-    "be initialized with the correct default size and stones" in {
+class OthelloSpec extends AnyWordSpec with Matchers {
+  "The Othello object" should {
+    "initialize a board with the correct default size and stones" in {
       val board = new Board(8, 8)
 
       val initialBoardStr = """
@@ -30,9 +28,7 @@ class BoardSpec extends AnyWordSpec with Matchers {
         7 | . | . | . | . | . | . | . | . |
           +---+---+---+---+---+---+---+---+ """
 
-        println(board.toString()) // Gibt die tatsächliche Ausgabe des Boards aus
-        board.toString().replaceAll("\\s+", "") shouldBe initialBoardStr.replaceAll("\\s+", "")
+      board.toString().replaceAll("\\s+", "") shouldBe initialBoardStr.replaceAll("\\s+", "")
     }
-    
   }
 }

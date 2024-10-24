@@ -12,7 +12,5 @@ class PlayerSpec extends AnyWordSpec with Matchers {
       player.toString should be("Your Name")
     }
   }}
-
-
 }
 
