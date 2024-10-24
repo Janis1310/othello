@@ -10,20 +10,20 @@ class OthelloSpecs extends AnyWordSpec with Matchers {
   "The Othello main method" should {
 
     "print the 8x8 board correctly to the console" in {
-      // Erstelle einen ByteArrayOutputStream, um die Ausgabe zu speichern
+
       val outStream = new ByteArrayOutputStream()
       val printStream = new PrintStream(outStream)
 
-      // Umleiten der Ausgabe mit Console.withOut
+
       Console.withOut(printStream) {
-        Othello.main(Array.empty) // Aufruf der main-Methode
+        Othello.main(Array.empty)
       }
 
-      // Die tatsächliche Ausgabe abrufen
+
       val printedOutput = outStream.toString
       print(printedOutput)
 
-      // Erwartete Ausgabe für das 8x8-Board dynamisch erzeugen
+
       val expectedOutput = """
             0   1   2   3   4   5   6   7
           +---+---+---+---+---+---+---+---+
