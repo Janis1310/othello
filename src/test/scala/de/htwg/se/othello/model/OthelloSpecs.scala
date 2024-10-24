@@ -3,12 +3,28 @@ package de.htwg.se.othello.model
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
-class OthelloSpec extends AnyWordSpec with Matchers {
-  "The Othello object" should {
-    "initialize a board with the correct default size and stones" in {
-      val board = new Board(8, 8)
+import java.io.{ByteArrayOutputStream, PrintStream}
 
-      val initialBoardStr = """
+class OthelloSpecs extends AnyWordSpec with Matchers {
+
+  "The Othello main method" should {
+
+    "print the 8x8 board correctly to the console" in {
+      // Erstelle einen ByteArrayOutputStream, um die Ausgabe zu speichern
+      val outStream = new ByteArrayOutputStream()
+      val printStream = new PrintStream(outStream)
+
+      // Umleiten der Ausgabe mit Console.withOut
+      Console.withOut(printStream) {
+        Othello.main(Array.empty) // Aufruf der main-Methode
+      }
+
+      // Die tatsächliche Ausgabe abrufen
+      val printedOutput = outStream.toString
+      print(printedOutput)
+
+      // Erwartete Ausgabe für das 8x8-Board dynamisch erzeugen
+      val expectedOutput = """
             0   1   2   3   4   5   6   7
           +---+---+---+---+---+---+---+---+
         0 | . | . | . | . | . | . | . | . |
@@ -26,9 +42,10 @@ class OthelloSpec extends AnyWordSpec with Matchers {
         6 | . | . | . | . | . | . | . | . |
           +---+---+---+---+---+---+---+---+
         7 | . | . | . | . | . | . | . | . |
-          +---+---+---+---+---+---+---+---+ """
+          +---+---+---+---+---+---+---+---+ """.stripMargin
 
-      board.toString().replaceAll("\\s+", "") shouldBe initialBoardStr.replaceAll("\\s+", "")
+      print(expectedOutput)
+      printedOutput.replaceAll("\\s+", "") shouldBe expectedOutput.replaceAll("\\s+", "")
     }
   }
 }
