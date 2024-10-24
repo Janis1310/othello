@@ -36,5 +36,16 @@ class StoneSpec extends AnyWordSpec with Matchers {
       val stone = Stone.Empty
       stone.toString shouldBe "."
     }
+
+    "flip from Black to White" in {
+      val stone = Stone.Black
+      stone.flip shouldBe Stone.White
+    }
+
+    "flip from White to Black" in {
+      val stone = Stone.White
+      stone.flip shouldBe Stone.Black
+    }
+
   }
 }
