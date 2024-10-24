@@ -2,6 +2,7 @@ package de.htwg.se.othello.model
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
+<<<<<<< HEAD
 import de.htwg.se.othello.model.{Board, Stone} // import board and stone
 
 class BoardSpec extends AnyWordSpec with Matchers {
@@ -35,3 +36,10 @@ class BoardSpec extends AnyWordSpec with Matchers {
     }
   }
 }
+=======
+
+
+class BoardSpec extends AnyWordSpec with Matchers {
+    
+}
+>>>>>>> aceee7150e392e5a03ca3afe74a22c8885d59825
