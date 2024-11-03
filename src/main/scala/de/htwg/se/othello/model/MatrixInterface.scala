@@ -4,10 +4,9 @@ trait MatrixInterface[T] {
   
     def numRows: Int       // Number of rows
     def numCols: Int       // Number of columns
-    def rows: Vector[Vector[T]]
 
     // Method to get a cell value at a specific position
-    def cell(row: Int, col: Int): T = rows(row)(col)
+    def cell(row: Int, col: Int): T
 
     // Method to fill the matrix with a specific value
     def fill(filling: T): MatrixInterface[T]
