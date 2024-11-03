@@ -14,9 +14,8 @@ class Board(private val board: Vector[Vector[Stone]]) {
         updatedBoard
 
     })
-    
-    
   }
+  
     override def toString: String = {
         val boardmaxcol = board(0).length
         val boardmaxrow = board.indices
@@ -31,7 +30,7 @@ class Board(private val board: Vector[Vector[Stone]]) {
         for (row <- boardmaxrow) {
           sb.append("  ")
           sb.append("+---" * boardmaxcol)
-          sb.append("+\n")
+          sb.append("+\r\n")
           sb.append(s"$row | ") 
           for (col <- board(row).indices) {
             sb.append(s"${board(row)(col).toString} | ")
