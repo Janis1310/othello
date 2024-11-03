@@ -21,7 +21,7 @@ class Board(private val board: Matrix[Stone]) {
     }
 
     def getBoard: Matrix[Stone] = board // Get the board
-    
+  
     
     override def toString: String = {
        val numRows = board.numRows
