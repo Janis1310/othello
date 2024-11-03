@@ -25,20 +25,23 @@ object moveValidator {
 
         val player = stoneposition.stone
         val opponent = if (stoneposition.stone == Stone.White) Stone.Black else Stone.White
+        val valid_pos = Seq.empty[(Int, Int)]
         
         directions.exists { case (dx, dy) =>
-        checkDirection(dx, dy, stoneposition.x + dx, stoneposition.y + dy, false, opponent, player, board)
+        checkDirection(dx, dy, stoneposition.x + dx, stoneposition.y + dy, false, opponent, player, board, valid_pos)
         }
       }
 
-      private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board): Boolean = {
+      private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board, valid_pos: Seq[(Int, Int)]): Boolean = {
     // Überprüfen, ob die Position innerhalb der Grenzen ist
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
       return false // Aus dem Board heraus
     }
 
     board.getBoard.cell(x, y) match {
-      case `opponent` => checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board) // Gegnerstein gefunden, weiter in die Richtung
+      case `opponent` => 
+        valid_pos.appended(x,y)
+        checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board, valid_pos) // Gegnerstein gefunden, weiter in die Richtung
       case `player` if foundOpponent => true // Gültiger Zug gefunden
       case Stone.Empty => false // Leeres Feld, keine gültige Reihe
       case _ => false // Eigenes Feld ohne Gegnersteine
