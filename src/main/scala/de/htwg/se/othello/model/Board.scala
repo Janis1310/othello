@@ -5,7 +5,7 @@ class Board(private val board: Matrix[Stone]) {
     def this(row: Int, column: Int) = {
       this({
            // Create an empty matrix with the specified dimensions filled with Stone.Empty
-      val emptyBoard = new Matrix(row, column, Stone.Empty)
+      val emptyBoard = new Matrix[Stone](row, column, Stone.Empty)
 
       // Calculate center positions for the initial stones
       val pos1 = (row - 1) / 2
