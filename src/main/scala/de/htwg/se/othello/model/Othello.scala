@@ -10,12 +10,13 @@ object Othello {
 
 
     //Test: isValidMove
-    if (moveValidator.isValidMove(2, 4, Stone.White, board)) {
-      println("Move is valid")
-      val newBoard = board.updated(2, 4, Stone.White)
-      println(newBoard)
-    } else {
-      println("Move is not valid")
-    }
+  //   if (moveValidator.isValidMove(2, 4, Stone.White, board)) {
+  //     println("Move is valid")
+  //     val newBoard = board.updated(2, 4, Stone.White)
+  //     println(newBoard)
+  //   } else {
+  //     println("Move is not valid")
+  //   }
+  // }
   }
 }

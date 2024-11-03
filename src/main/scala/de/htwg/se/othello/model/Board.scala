@@ -4,26 +4,24 @@ class Board(private val board: Matrix[Stone]) {
 
     def this(row: Int, column: Int) = {
       this({
-          val emptyBoard = Vector.fill(row, column)(Stone.Empty) // Create empty board
-          val pos1 = (row - 1) / 2
-          val pos2 = ( column - 1) / 2
+           // Create an empty matrix with the specified dimensions filled with Stone.Empty
+      val emptyBoard = new Matrix(row, column, Stone.Empty)
 
-          val updatedBoard = emptyBoard
-          .updated(pos1, emptyBoard(pos1).updated(pos2, Stone.White).updated(pos2 + 1,Stone.Black)) // Platziere den ersten weißen Stein
-          .updated(pos1 + 1, emptyBoard(pos1 + 1).updated(pos2, Stone.Black).updated(pos2+1, Stone.White)) // Platziere den zweiten schwarzen Stein
-          updatedBoard
+      // Calculate center positions for the initial stones
+      val pos1 = (row - 1) / 2
+      val pos2 = (column - 1) / 2
+
+      // Place the initial stones on the board
+      emptyBoard
+        .replaceCell(pos1, pos2, Stone.White)         // Top-left of the center
+        .replaceCell(pos1, pos2 + 1, Stone.Black)     // Top-right of the center
+        .replaceCell(pos1 + 1, pos2, Stone.Black)     // Bottom-left of the center
+        .replaceCell(pos1 + 1, pos2 + 1, Stone.White) // Bottom-right of the center
       })
     }
 
-    def getBoard: Vector[Vector[Stone]] = board // Get the board
+    def getBoard: Matrix[Stone] = board // Get the board
     
-    def getStoneAt(x: Int, y: Int): Stone = board(x)(y) // Get the stone at a specific position
-
-
-    def updated(x: Int, y: Int, stone: Stone): Board = { //create a new board with a new stone
-      val newBoard = board.updated(x, board(x).updated(y, stone))
-      new Board(newBoard)
-    }
     
     override def toString: String = {
        val numRows = board.numRows
