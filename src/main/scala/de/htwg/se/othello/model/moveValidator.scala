@@ -40,7 +40,6 @@ object moveValidator {
 
     board.getBoard.cell(x, y) match {
       case `opponent` => 
-        valid_pos.appended(x,y)
         checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board, valid_pos) // Gegnerstein gefunden, weiter in die Richtung
       case `player` if foundOpponent => true // Gültiger Zug gefunden
       case Stone.Empty => false // Leeres Feld, keine gültige Reihe

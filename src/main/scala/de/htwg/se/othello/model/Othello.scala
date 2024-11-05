@@ -6,7 +6,7 @@ object Othello {
     val board = new Board(8, 8)
     println(board)
 
-    val stonePosition = Stoneposition(3, 2, Stone.White) // Beispielposition
+    val stonePosition = Stoneposition(3, 5, Stone.White) // Beispielposition
     val isValid = moveValidator.isValidMove(stonePosition, board)
 
     println(s"Is the move valid? $isValid")
