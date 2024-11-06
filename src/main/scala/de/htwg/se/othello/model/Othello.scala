@@ -3,13 +3,12 @@ package de.htwg.se.othello.model
 object Othello {
   def main(args: Array[String]): Unit = {
 
-    val board = new Board(8, 8)
-    println(board)
+val stonePosition = Stoneposition(2, 4, Stone.White) // Beispielposition und Steinfarbe
+val board = new Board(8, 8) // Beispiel für ein 8x8 Othello-Board
 
-    val stonePosition = Stoneposition(3, 5, Stone.White) // Beispielposition
-    val isValid = MoveHandler.isValidMove(stonePosition, board)
-
-    println(s"Is the move valid? $isValid")
+// Erhalte die Liste der Zwischenzustände
+val flipSteps = MoveHandler.flipStones(stonePosition, board)
+print(flipSteps)
 
 
 
