@@ -48,25 +48,25 @@ object MoveHandler {
 
   
   
-  def flipStones(stonePosition: Stoneposition, board: Board): String = {
+  def flipStones(stonePosition: Stoneposition, board: Board): Board = {
   val player = stonePosition.stone
   val opponent = if (player == Stone.White) Stone.Black else Stone.White
 
   // Überprüfe, ob der Zug gültig ist
   if (!isValidMove(stonePosition, board)) {
-    return board.toString // Gib das Board als String zurück, wenn der Zug ungültig ist
+    return board // Gib das Board als String zurück, wenn der Zug ungültig ist
   }
 
   // Setze den Stein auf das Board, wenn der Zug gültig ist
-  var updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
+  val updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
 
   // Iteriere über alle Richtungen und flippe die Steine, wenn möglich
-  directions.foreach { case (dx, dy) =>
-    updatedBoard = flipDirection(dx, dy, stonePosition.x + dx, stonePosition.y + dy, opponent, player, updatedBoard)
+  val finalBoard = directions.foldLeft(updatedBoard) { (currentBoard, direction) =>
+    flipDirection(direction._1, direction._2, stonePosition.x + direction._1, stonePosition.y + direction._2, opponent, player, currentBoard)
   }
 
-  // Gib das aktualisierte Board als String zurück
-  updatedBoard.toString
+  // Gib das endgültige Board als String zurück
+  finalBoard
 }
 
 
