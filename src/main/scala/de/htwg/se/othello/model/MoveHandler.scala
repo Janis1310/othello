@@ -52,11 +52,6 @@ object MoveHandler {
   val player = stonePosition.stone
   val opponent = if (player == Stone.White) Stone.Black else Stone.White
 
-  // Überprüfe, ob der Zug gültig ist
-  if (!isValidMove(stonePosition, board)) {
-    return board // Gib das Board als String zurück, wenn der Zug ungültig ist
-  }
-
   // Setze den Stein auf das Board, wenn der Zug gültig ist
   val updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
 
