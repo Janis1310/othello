@@ -20,7 +20,12 @@ class Board(private val board: Matrix[Stone]) {
       })
     }
 
-    def getBoard: Matrix[Stone] = board // Get the board
+    def getBoard: Matrix[Stone] = board
+
+    def placeStone(x: Int, y: Int, stone: Stone): Board = {
+    val newMatrix = board.replaceCell(x, y, stone)
+    new Board(newMatrix) // Create and return a new Board with the updated matrix
+  }
   
     
     override def toString: String = {
