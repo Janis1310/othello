@@ -52,21 +52,20 @@ object MoveHandler {
   val player = stonePosition.stone
   val opponent = if (player == Stone.White) Stone.Black else Stone.White
 
-  // Setze den Stein auf das Board, wenn der Zug gültig ist
-  val updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
-
-  // Iteriere über alle Richtungen und flippe die Steine, wenn möglich
-  val finalBoard = directions.foldLeft(updatedBoard) { (currentBoard, direction) =>
-    flipDirection(direction._1, direction._2, stonePosition.x + direction._1, stonePosition.y + direction._2, opponent, player, currentBoard)
+  var updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
+  
+  directions.foreach { case (dx, dy) =>
+    updatedBoard = flipDirection(dx, dy, stonePosition.x + dx, stonePosition.y + dy, opponent, player, updatedBoard)
   }
-
-  // Gib das endgültige Board als String zurück
-  finalBoard
+  
+  updatedBoard  // Gib das aktualisierte Board zurück
 }
 
 
 
   private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: Stone, player: Stone, board: Board): Board = {
+
+    if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) return board
 
 
     board.getBoard.cell(x, y) match {
@@ -75,7 +74,7 @@ object MoveHandler {
         flipDirection(dx, dy, x + dx, y + dy, opponent, player, newBoard)
 
       case `player` =>
-        // Wenn ein eigener Stein gefunden wurde und Gegnersteine geflippt wurden
+      // Wenn ein eigener Stein gefunden wurde und Gegnersteine geflippt wurden
         return board  // Rekursion stoppen und das Board zurückgeben
 
       case _ => 
