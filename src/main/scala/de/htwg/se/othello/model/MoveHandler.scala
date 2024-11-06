@@ -32,7 +32,6 @@ object moveValidator {
       }
 
       private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board): Boolean = {
-    // Überprüfen, ob die Position innerhalb der Grenzen ist
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
       return false // Aus dem Board heraus
     }
