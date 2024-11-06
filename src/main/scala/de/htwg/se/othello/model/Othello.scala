@@ -1,32 +1,34 @@
 package de.htwg.se.othello.model
 
+import de.htwg.se.othello.aview.TUI
+
 object Othello {
   def main(args: Array[String]): Unit = {
 
-val stonePosition1 = Stoneposition(2, 4, Stone.White) // Beispielposition und Steinfarbe
-val board = new Board(8, 8) // Beispiel für ein 8x8 Othello-Board
+    // val tui = new TUI
+    // var players = tui.inputPlayerName()
+    // val (row, column) = tui.inputBoardSize()
+    // var board = new Board(row, column)
 
-// Erhalte die Liste der Zwischenzustände
-val setStone1 = MoveHandler.flipStones(stonePosition1, board)
-print(setStone1)
+    // println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
 
-val stonePosition2 = Stoneposition(4,2, Stone.White)
+    // while (true){
+    //   val currentPlayer = players.head
+    //   println(board)
 
-val setStone2 = MoveHandler.flipStones(stonePosition2, setStone1)
-print(setStone2)
+    //   println(s"${currentPlayer.name}, du bist am Zug! Deine Farbe ist: ${currentPlayer.stone}")
+
+    //   board = tui.playTurn(board, currentPlayer = currentPlayer )
+    //   players = players.tail.enqueue(currentPlayer)
+
+    // }
+    var board = new Board(6,6)
+    println(board)
+    board = MoveHandler.flipStones(Stoneposition(1,3,Stone.White), board = board )
+    println(board)
+     board = MoveHandler.flipStones(Stoneposition(3,4,Stone.Black), board = board )
+    println(board)
 
 
-
-
-
-    //Test: isValidMove
-  //   if (moveValidator.isValidMove(2, 4, Stone.White, board)) {
-  //     println("Move is valid")
-  //     val newBoard = board.updated(2, 4, Stone.White)
-  //     println(newBoard)
-  //   } else {
-  //     println("Move is not valid")
-  //   }
-  // }
   }
 }
