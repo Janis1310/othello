@@ -14,7 +14,7 @@ class TUI {
   }
 
   def inputBoardSize(): (Int, Int) = {
-    val Array(row, column) = readLine("Geben Sie die Größe des Feldes x,y: ").split(",").map(_.trim.toInt)
+    val Array(row, column) = readLine("Geben Sie die Größe des Feldes Zeilen,Spalten: ").split(",").map(_.trim.toInt)
     (row, column) 
   }
 
@@ -25,16 +25,15 @@ class TUI {
 
   def playTurn(board: Board, currentPlayer: Player) : Board = {
 
-    val Array(x, y) = readLine("Gib die Koordinaten für deinen Zug im Format x,y ein: ").split(",").map(_.trim.toInt)
     
-    val newBoard = if (MoveHandler.isValidMove(Stoneposition(x, y, currentPlayer.stone), board)) {
-      MoveHandler.flipStones(Stoneposition(x, y, currentPlayer.stone), board)
-    } else {
-      println("Ungültiger Zug. Bitte versuche es erneut.")
-      board
+    while(true) {
+      val Array(x, y) = readLine("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein: ").split(",").map(_.trim.toInt)
+      if (MoveHandler.isValidMove(Stoneposition(x, y, currentPlayer.stone), board)) {
+        return MoveHandler.flipStones(Stoneposition(x, y, currentPlayer.stone), board)
+      } else {
+        println("Ungültiger Zug. Bitte versuche es erneut.")
+      }
     }
-
-    newBoard
+    return null
   }
-  
 }
