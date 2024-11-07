@@ -10,11 +10,11 @@ class MoveHandlerSpec extends AnyWordSpec {
         "isValidMove" should {
             "be false when field is full" in {
                 val board = new Board(8,8)
-                board.isValidMove(3,3,Stone.Black) should be(false)
+                MoveHandler.isValidMove(Stoneposition(3,3,Stone.Black), board) should be(false)
             }
             "be false when field is out of bounds" in {
                 val board = new Board(8,8)
-                board.isValidMove(9,9,Stone.Black) should be(false)
+                MoveHandler.isValidMove(Stoneposition(9,9,Stone.Black), board) should be(false)
             }
             
 

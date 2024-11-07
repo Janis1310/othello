@@ -13,14 +13,15 @@ object MoveHandler {
           (-1, 1)   // rechts oben
         )
     def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
-        if ( board.getBoard.cell(stoneposition.x, stoneposition.y)!= Stone.Empty) { //field is empty?
-            println("Field is not empty")
-            return false
-        }
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
           return false
+        }
+        
+        if ( board.getBoard.cell(stoneposition.x, stoneposition.y)!= Stone.Empty) { 
+            println("Field is not empty")
+            return false
         }
 
         val player = stoneposition.stone
