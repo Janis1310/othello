@@ -31,20 +31,20 @@ object MoveHandler {
         checkDirection(dx, dy, stoneposition.x + dx, stoneposition.y + dy, false, opponent, player, board)
         }
       }
-
+    // checkDirction(x_newdirection, y_newdirection, x_positionCurrent, y_positionCurrent, ?foundOpponent?, opponentColor, playerColor, board)
     private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board): Boolean = {
-    if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
-      return false // Aus dem Board heraus
-    }
+      if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
+        return false // Aus dem Board heraus
+      }
 
-    board.getBoard.cell(x, y) match {
-      case `opponent` => 
-        checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board) // Gegnerstein gefunden, weiter in die Richtung
-      case `player` if foundOpponent => 
-        true // Gültiger Zug gefunden
-      case Stone.Empty => false // Leeres Feld, keine gültige Reihe
-      case _ => false // Eigenes Feld ohne Gegnersteine
-    }
+      board.getBoard.cell(x, y) match {
+        case `opponent` => 
+          checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board) // Gegnerstein gefunden, weiter in die Richtung
+        case `player` if foundOpponent => 
+          true // Gültiger Zug gefunden
+        case Stone.Empty => false // Leeres Feld, keine gültige Reihe
+        case _ => false // Eigenes Feld ohne Gegnersteine
+      }
   }
 
   
@@ -89,7 +89,4 @@ object MoveHandler {
         board
     }
   }
-
-
 }
-
