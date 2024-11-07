@@ -34,6 +34,6 @@ class TUI {
         println("Ungültiger Zug. Bitte versuche es erneut.")
       }
     }
-    return null
+    return null // Unreachable code
   }
 }
