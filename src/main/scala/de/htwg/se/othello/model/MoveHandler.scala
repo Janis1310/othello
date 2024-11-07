@@ -67,21 +67,28 @@ object MoveHandler {
 
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) return board
 
-
     board.getBoard.cell(x, y) match {
       case `opponent` =>
-        val newBoard = board.placeStone(x, y, player)
-        flipDirection(dx, dy, x + dx, y + dy, opponent, player, newBoard)
+        // Geh in die Richtung weiter, um das Ende der Reihe zu suchen
+        val flipboard = flipDirection(dx, dy, x + dx, y + dy, opponent, player, board)
+        
+        // Falls ein `player`-Stein das Ende markiert hat, flippe den aktuellen `opponent`-Stein
+        if (flipboard.getBoard.cell(x + dx, y + dy) == player) {
+          flipboard.placeStone(x, y, player)
+        } else {
+          board // Keine Umwandlung, da nicht von `player` eingeschlossen
+        }
 
       case `player` =>
-      // Wenn ein eigener Stein gefunden wurde und Gegnersteine geflippt wurden
-        return board  // Rekursion stoppen und das Board zurückgeben
+        // Ende der Kette gefunden, Rückgabe für das Flippen in anderen rekursiven Aufrufen
+        board
 
       case _ => 
-        // Wenn die Zelle leer ist oder ein anderes Feld gefunden wird, stoppe die Rekursion
-        return board  // Rekursion stoppen und das Board zurückgeben
+        // Wenn die Zelle leer ist oder ein anderes Feld gefunden wird, beenden ohne zu flippen
+        board
     }
   }
+
 
 }
 
