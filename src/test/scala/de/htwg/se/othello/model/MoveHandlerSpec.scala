@@ -19,12 +19,5 @@ class MoveHandlerSpec extends AnyWordSpec {
             
 
         }
-        /*"checkDirection" should {
-            "be false when direction is out of bounds" in {
-                val board = new Board(8,8)
-                board.checkDirection(9,9,Stone.Black,1,1) should be(false)
-
-            }
-        }*/
-}
+    }
 }
