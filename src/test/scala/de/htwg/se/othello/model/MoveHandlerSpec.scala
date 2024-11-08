@@ -16,8 +16,8 @@ class MoveHandlerSpec extends AnyWordSpec {
                 val board = new Board(8,8)
                 MoveHandler.isValidMove(Stoneposition(9,9,Stone.Black), board) should be(false)
             }
-            
 
+            
         }
     }
 }
