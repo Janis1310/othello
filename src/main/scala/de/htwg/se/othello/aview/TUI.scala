@@ -24,8 +24,6 @@ class TUI {
   }
 
   def playTurn(board: Board, currentPlayer: Player) : Board = {
-
-    
     while(true) {
       val Array(x, y) = readLine("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein: ").split(",").map(_.trim.toInt)
       if (MoveHandler.isValidMove(Stoneposition(x, y, currentPlayer.stone), board)) {
