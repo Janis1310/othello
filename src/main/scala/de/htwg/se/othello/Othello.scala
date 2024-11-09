@@ -1,6 +1,7 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello
 
 import de.htwg.se.othello.aview.TUI
+import de.htwg.se.othello.model.Board
 
 object Othello {
   def main(args: Array[String]): Unit = {
@@ -22,13 +23,5 @@ object Othello {
       players = players.tail.enqueue(currentPlayer)
 
     }
-    // var board = new Board(6,6)
-    // println(board)
-    // board = MoveHandler.flipStones(Stoneposition(1,3,Stone.White), board = board )
-    // println(board)
-    //  board = MoveHandler.flipStones(Stoneposition(3,4,Stone.Black), board = board )
-    // println(board)
-
-
   }
 }
