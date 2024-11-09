@@ -5,8 +5,11 @@ import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
 import de.htwg.se.othello.model.Player
 
-class TUI {
+import de.htwg.se.othello.controller.Controller
+import de.htwg.se.othello.util.Observer
 
+class TUI(controller: Controller) extends Observer {
+  controller.add(this)
   def inputPlayerName(): Queue[Player] = {
     val player1 = Player(readPlayerName(1), Stone.White)
     val player2 = Player(readPlayerName(2), Stone.Black)
@@ -14,8 +17,14 @@ class TUI {
   }
 
   def inputBoardSize(): (Int, Int) = {
-    val Array(row, column) = readLine("Geben Sie die Größe des Feldes Zeilen,Spalten: ").split(",").map(_.trim.toInt)
-    (row, column) 
+    try {
+      val Array(row, column) = readLine("Geben Sie die Größe des Feldes Zeilen,Spalten: ").split(",").map(_.trim.toInt)
+      (row, column)
+    } catch {
+      case _: Exception =>
+        println("Ungültige Eingabe. Bitte geben Sie zwei ganze Zahlen getrennt durch ein Komma ein.")
+        inputBoardSize() // retry
+    }
   }
 
     private def readPlayerName(playerNumber: Int): String = {
@@ -23,15 +32,29 @@ class TUI {
     readLine()
   }
 
-  def playTurn(board: Board, currentPlayer: Player) : Board = {
-    while(true) {
+  def playTurn(board: Board, currentPlayer: Player): Board = {
+  var validBoard: Option[Board] = None
+
+  while (validBoard.isEmpty) {
+    try {
       val Array(x, y) = readLine("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein: ").split(",").map(_.trim.toInt)
-      if (MoveHandler.isValidMove(Stoneposition(x, y, currentPlayer.stone), board)) {
-        return MoveHandler.flipStones(Stoneposition(x, y, currentPlayer.stone), board)
+      val position = Stoneposition(x, y, currentPlayer.stone)
+      
+      if (MoveHandler.isValidMove(position, board)) { 
+        validBoard = Some(MoveHandler.flipStones(position, board)) // Spielfeld speichern, falls der Zug gültig ist
       } else {
         println("Ungültiger Zug. Bitte versuche es erneut.")
       }
+    } catch {
+      case _: Exception =>
+        println("Ungültiges Format. Bitte geben Sie zwei ganze Zahlen im Format Zeile,Spalte ein.")
     }
-    return null // Unreachable code
+  }
+
+  validBoard.get // Rückgabe des gültigen Spielfelds
+}
+
+  override def update: Unit = {
+    println(controller.boardToString) // Print the updated board
   }
 }

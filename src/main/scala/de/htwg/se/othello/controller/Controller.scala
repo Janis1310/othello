@@ -9,10 +9,10 @@ class Controller(var board:Board) extends Observable{
   }
 
 
-  def BoardToString: String = board.toString
+  def boardToString: String = board.toString
 
   def setNewStone(stonePosition: Stoneposition, board: Board):Unit = {
-    board = MoveHandler.isValidMove(stonePosition, board) match {
+    val updatedBoard = MoveHandler.isValidMove(stonePosition, board) match {
       case true => MoveHandler.flipStones(stonePosition, board)
       case false => board
     }

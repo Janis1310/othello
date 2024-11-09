@@ -2,11 +2,15 @@ package de.htwg.se.othello
 
 import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.model.Board
+import de.htwg.se.othello.controller.Controller
 
 object Othello {
-  def main(args: Array[String]): Unit = {
 
-    val tui = new TUI
+
+  def main(args: Array[String]): Unit = {
+    val controller = new Controller(new Board(8, 8))
+    val tui = new TUI(controller)
+    controller.notifyObservers
     var players = tui.inputPlayerName()
     val (row, column) = tui.inputBoardSize()
     var board = new Board(row, column)
