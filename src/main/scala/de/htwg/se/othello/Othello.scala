@@ -14,6 +14,8 @@ object Othello {
     val (row, column) = tui.inputBoardSize()
     var board = new Board(row, column)
 
+    controller.board = board
+
     println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
     while (true){
       val currentPlayer = players.head
@@ -22,6 +24,8 @@ object Othello {
       println(s"${currentPlayer.name}, du bist am Zug! Deine Farbe ist: ${currentPlayer.stone}")
 
       board = tui.playTurn(board, currentPlayer = currentPlayer )
+      controller.board = board
+      controller.notifyObservers
       players = players.tail.enqueue(currentPlayer)
 
     }
