@@ -24,8 +24,6 @@ object Othello {
       println(s"${currentPlayer.name}, du bist am Zug! Deine Farbe ist: ${currentPlayer.stone}")
 
       board = tui.playTurn(board, currentPlayer = currentPlayer )
-      controller.board = board
-      controller.notifyObservers
       players = players.tail.enqueue(currentPlayer)
 
     }
