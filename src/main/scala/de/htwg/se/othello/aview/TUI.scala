@@ -32,7 +32,7 @@ class TUI(controller: Controller) extends Observer {
     readLine()
   }
 
-  def playTurn(board: Board, currentPlayer: Player): Board = {
+  def playTurn(board: Board, currentPlayer: Player): Board = { // Board muss hier noch raus!!!
     var validBoard: Option[Board] = None
 
     while (validBoard.isEmpty) {
