@@ -10,50 +10,53 @@ import de.htwg.se.othello.util.Observer
 
 class TUI(controller: Controller) extends Observer {
   controller.add(this)
-  def inputPlayerName(): Queue[Player] = {
-    val player1 = controller.newPlayerController(readPlayerName(1), Stone.White)
-    val player2 = controller.newPlayerController(readPlayerName(2), Stone.Black)
-    Queue(player1, player2) // Rückgabe des erstellten Queue
+
+  def inputPlayers(): Unit = {
+    println("Geben Sie den Namen des ersten Spielers ein:")
+    val player1Name = readLine()
+    println("Geben Sie den Namen des zweiten Spielers ein:")
+    val player2Name = readLine()
+
+    controller.addPlayers(player1Name, player2Name)
+    println(s"Spieler wurden hinzugefügt: $player1Name (Weiß), $player2Name (Schwarz).")
   }
 
-  def inputBoardSize(): (Int, Int) = {
+  def inputBoardSize(): Unit = {
     try {
-      val Array(row, column) = readLine("Geben Sie die Größe des Feldes Zeilen,Spalten: ").split(",").map(_.trim.toInt)
-      (row, column)
+      println("Geben Sie die Größe des Spielfelds ein (Zeilen, Spalten):")
+      val Array(rows, cols) = readLine().split(",").map(_.trim.toInt)
+      controller.createNewBoard(rows, cols)
+      println(s"Ein neues Spielfeld mit $rows Zeilen und $cols Spalten wurde erstellt.")
     } catch {
       case _: Exception =>
         println("Ungültige Eingabe. Bitte geben Sie zwei ganze Zahlen getrennt durch ein Komma ein.")
-        inputBoardSize() // retry
+        inputBoardSize() // Wiederholung bei Fehler
     }
   }
 
-    private def readPlayerName(playerNumber: Int): String = {
-    println(s"Geben Sie den Namen des Spielers $playerNumber ein:")
-    readLine()
-  }
+  def playTurn(): Unit = {
+    val currentPlayer = controller.getCurrentPlayer
+    println(s"${currentPlayer.name}, du bist am Zug. Deine Farbe ist ${currentPlayer.stone}.")
 
-  def playTurn(board: Board, currentPlayer: Player): Board = {
-    var validBoard: Option[Board] = None
-
-    while (validBoard.isEmpty) {
-      try {
-        val Array(x, y) = readLine("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein: ").split(",").map(_.trim.toInt)
-        val position = controller.newStonePositionController(x, y, currentPlayer.stone)
-        
-        if (controller.isValidMoveController(position, board)) { // test
-          validBoard = Some(controller.setNewStoneController(position, board)) // test
-        } else {
-          println("Ungültiger Zug. Bitte versuche es erneut.")
-        }
-      } catch {
-        case _: Exception =>
-          println("Ungültiges Format. Bitte geben Sie zwei ganze Zahlen im Format Zeile,Spalte ein.")
+    try {
+      println("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein:")
+      val Array(x, y) = readLine().split(",").map(_.trim.toInt)
+      controller.makeMove(x, y) match {
+        case Right(updatedBoard) =>
+          println("Zug erfolgreich! Aktuelles Spielfeld:")
+          println(updatedBoard)
+          controller.nextPlayer() // Spieler wechseln
+        case Left(errorMessage) =>
+          println(s"Fehler: $errorMessage")
       }
+    } catch {
+      case _: Exception =>
+        println("Ungültige Eingabe. Bitte im Format Zeile,Spalte eingeben.")
     }
-    validBoard.get // Rückgabe des gültigen Spielfelds
   }
 
   override def update: Unit = {
-    println(controller.boardToString) // Print the updated board
+    println("Das Spielfeld wurde aktualisiert.")
+    println(controller.boardToString)
   }
 }
