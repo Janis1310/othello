@@ -1,3 +1,6 @@
+![Build Status](https://github.com/Janis1310/othello/actions/workflows/scala.yml/badge.svg?branch=main)
+
+
 ## sbt project compiled with Scala 3
 
 ### Usage
