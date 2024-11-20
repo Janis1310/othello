@@ -1,5 +1,7 @@
 ![Build Status](https://github.com/Janis1310/othello/actions/workflows/scala.yml/badge.svg?branch=main)
 
+[![Coverage Status](https://coveralls.io/repos/github/Janis1310/othello/badge.svg?branch=main)](https://coveralls.io/github/Janis1310/othello?branch=main)
+
 
 ## sbt project compiled with Scala 3
 
