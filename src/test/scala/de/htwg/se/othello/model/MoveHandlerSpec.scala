@@ -28,6 +28,10 @@ class MoveHandlerSpec extends AnyWordSpec {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
                 MoveHandler.isValidMove(Stoneposition(5, 3, Stone.White), board) should be(true)
             }
+            "be false when trying to place a stone next to the same stone" in {
+                val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
+                MoveHandler.isValidMove(Stoneposition(3, 5, Stone.Black), board) should be(false)
+            }
         }
 
         "flipStones" should {
