@@ -25,7 +25,7 @@ object MoveHandler {
         }
 
         val player = stoneposition.stone
-        val opponent = if (stoneposition.stone == Stone.White) Stone.Black else Stone.White
+        val opponent = stoneposition.stone.flip
         
         directions.exists { case (dx, dy) =>
         checkDirection(dx, dy, stoneposition.x + dx, stoneposition.y + dy, false, opponent, player, board)
@@ -49,14 +49,14 @@ object MoveHandler {
 
   def flipStones(stonePosition: Stoneposition, board: Board): Board = {
     val player = stonePosition.stone
-    val opponent = if (player == Stone.White) Stone.Black else Stone.White
+    val opponent = player.flip
 
     var updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
     
     directions.foreach { case (dx, dy) =>
       updatedBoard = flipDirection(dx, dy, stonePosition.x + dx, stonePosition.y + dy, opponent, player, updatedBoard)
     }
-    updatedBoard  // Gib das aktualisierte Board zurück
+    updatedBoard
 }
 
 
