@@ -1,17 +1,28 @@
 package de.htwg.se.othello.model
 
-sealed trait PlayerType
-case object Human extends PlayerType
-case object AI extends PlayerType
-
-object PlayerFactory {
-  def createPlayer(name: String, stone: Stone, playerType: PlayerType): Player = playerType match {
-    case Human => Player(name, stone)
-    case AI    => Player(name + " (AI)", stone)
-  }
+// Product (interface)
+trait Player {
+  def name: String
+  def stone: Stone
+  override def toString: String = s"$name: $stone"
 }
 
-case class Player(name:String, stone: Stone) {
-    override def toString(): String = name + ": " + stone
-  
+// concreteProduct: HumanPlayer
+case class HumanPlayer(name: String, stone: Stone) extends Player
+
+// concreteProduct: AIPlayer
+case class AIPlayer(name: String, stone: Stone) extends Player
+
+// (Creator)
+abstract class PlayerCreator {
+  def createPlayer(name: String, stone: Stone): Player //factoryMethod()
+}
+// concreteCreator: HumanPlayerCreator
+class HumanPlayerCreator extends PlayerCreator {
+  override def createPlayer(name: String, stone: Stone): Player = HumanPlayer(name, stone)//factoryMethod()
+}
+
+// concreteCreator: AIPlayerCreator
+class AIPlayerCreator extends PlayerCreator {
+  override def createPlayer(name: String, stone: Stone): Player = AIPlayer(name + " (AI)", stone) //factoryMethod()
 }

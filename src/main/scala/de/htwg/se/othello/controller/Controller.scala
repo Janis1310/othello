@@ -1,8 +1,8 @@
 package de.htwg.se.othello.controller
-import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, Human, AI}
+import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, HumanPlayerCreator, AIPlayerCreator}
 import de.htwg.se.othello.util.Observable
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.model.PlayerFactory
+import de.htwg.se.othello.model
 
 
 class Controller(private var board: Board) extends Observable {
@@ -13,7 +13,10 @@ class Controller(private var board: Board) extends Observable {
 
   // Spieler hinzufügen und den aktuellen Zustand zurückgeben
   def addPlayers(player1Name: String,player2Name: String): Unit = {
-    players = Queue(PlayerFactory.createPlayer(player1Name, Stone.White, Human), PlayerFactory.createPlayer(player2Name, Stone.Black, Human))
+    val humanCreator = new HumanPlayerCreator
+    val aiCreator = new AIPlayerCreator
+
+    players = Queue(humanCreator.createPlayer(player1Name, Stone.White), humanCreator.createPlayer(player2Name, Stone.Black))
   }
 
   def getCurrentPlayer: Player = players.head

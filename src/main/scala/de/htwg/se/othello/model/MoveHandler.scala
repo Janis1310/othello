@@ -1,6 +1,6 @@
 package de.htwg.se.othello.model
 
-object MoveHandler { // Ist das nicht schon das Singelton-Pattern?!
+object MoveHandler {
 
   private val directions = Seq(
           (0, 1),   // rechts
