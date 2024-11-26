@@ -3,7 +3,6 @@ package de.htwg.se.othello.aview
 import de.htwg.se.othello.model.{Stone, Board}
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.model.Player
 
 import de.htwg.se.othello.controller.Controller
 import de.htwg.se.othello.util.Observer
@@ -18,7 +17,8 @@ class TUI(controller: Controller) extends Observer {
     val player2Name = readLine()
 
     controller.addPlayers(player1Name, player2Name)
-    println(s"Spieler wurden hinzugefügt: $player1Name (Weiß), $player2Name (Schwarz).")
+    val players = controller.getPlayers
+    println(s"Spieler wurden hinzugefügt: ${players.head}, ${players.last}")
   }
 
   def inputBoardSize(): Unit = {

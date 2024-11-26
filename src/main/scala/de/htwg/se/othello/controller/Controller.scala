@@ -17,6 +17,7 @@ class Controller(private var board: Board) extends Observable {
       Player(player1Name, Stone.White, "Human"), 
       Player(player2Name, Stone.Black, "AI"))
   }
+  def getPlayers: Queue[Player] = players
 
   def getCurrentPlayer: Player = players.head
 
