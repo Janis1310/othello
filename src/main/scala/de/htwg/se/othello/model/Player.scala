@@ -8,21 +8,18 @@ trait Player {
 }
 
 // concreteProduct: HumanPlayer
-case class HumanPlayer(name: String, stone: Stone) extends Player
+private class HumanPlayer(val name: String, val stone: Stone) extends Player {
+  override def toString: String = s"$name: $stone"
+}
 
 // concreteProduct: AIPlayer
-case class AIPlayer(name: String, stone: Stone) extends Player
-
-// (Creator)
-abstract class PlayerCreator {
-  def createPlayer(name: String, stone: Stone): Player //factoryMethod()
-}
-// concreteCreator: HumanPlayerCreator
-class HumanPlayerCreator extends PlayerCreator {
-  override def createPlayer(name: String, stone: Stone): Player = HumanPlayer(name, stone)//factoryMethod()
+private class AIPlayer(val name: String, val stone: Stone) extends Player {
+  override def toString: String = s"$name (AI): $stone"
 }
 
-// concreteCreator: AIPlayerCreator
-class AIPlayerCreator extends PlayerCreator {
-  override def createPlayer(name: String, stone: Stone): Player = AIPlayer(name + " (AI)", stone) //factoryMethod()
+object Player {
+  def apply(name: String, stone: Stone, kind: String) = kind match {
+    case "Human" => HumanPlayer(name, stone)
+    case "AI" => AIPlayer(name, stone)
+  }
 }
