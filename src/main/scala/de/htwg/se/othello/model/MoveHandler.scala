@@ -57,7 +57,7 @@ object MoveHandler {
       updatedBoard = flipDirection(dx, dy, stonePosition.x + dx, stonePosition.y + dy, opponent, player, updatedBoard)
     }
     updatedBoard
-}
+  }
 
 
 
