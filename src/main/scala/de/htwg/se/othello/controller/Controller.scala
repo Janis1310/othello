@@ -3,11 +3,14 @@ import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Playe
 import de.htwg.se.othello.util.Observable
 import scala.collection.immutable.Queue
 import de.htwg.se.othello.model
+import de.htwg.se.othello.model.handler.MoveHandlerInterface
+import de.htwg.se.othello.model.ScoringMoveHandlerDecorator
 
 
 class Controller(private var board: Board) extends Observable {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
+  private var moveHandler: MoveHandlerInterface = new ScoringMoveHandlerDecorator(MoveHandler)
 
   // Gibt das Board als Zeichenkette zurück
   def boardToString: String = board.toString
@@ -47,8 +50,8 @@ class Controller(private var board: Board) extends Observable {
         val stone = getCurrentPlayer.stone
         val stonePosition = Stoneposition(x, y, stone)
 
-        if (MoveHandler.isValidMove(stonePosition, board)) {
-          board = MoveHandler.flipStones(stonePosition, board)
+        if (moveHandler.isValidMove(stonePosition, board)) {
+          board = moveHandler.flipStones(stonePosition, board)
           nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
           notifyObservers
           Right(boardToString)
@@ -80,4 +83,9 @@ class Controller(private var board: Board) extends Observable {
   }
 
   def getGameState: GameState.GameState = gameState
+
+   def addScoringDecorator(): Unit = {
+    moveHandler = new ScoringMoveHandlerDecorator(moveHandler)
+    println("Scoring-Dekorator wurde hinzugefügt.")
+  }
 }
