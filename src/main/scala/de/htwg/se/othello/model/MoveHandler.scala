@@ -1,6 +1,7 @@
 package de.htwg.se.othello.model
+import de.htwg.se.othello.model.handler.MoveHandlerInterface
 
-object MoveHandler {
+object MoveHandler extends MoveHandlerInterface{
 
   private val directions = Seq(
           (0, 1),   // rechts
