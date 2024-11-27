@@ -4,7 +4,7 @@ import de.htwg.se.othello.model.{Stone, Board}
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
 
-import de.htwg.se.othello.controller.Controller
+import de.htwg.se.othello.controller.{GameState, Controller}
 import de.htwg.se.othello.util.Observer
 
 class TUI(controller: Controller) extends Observer {
@@ -45,7 +45,6 @@ class TUI(controller: Controller) extends Observer {
         case Right(updatedBoard) =>
           println("Zug erfolgreich! Aktuelles Spielfeld:")
           println(updatedBoard)
-          controller.nextPlayer() // Spieler wechseln
         case Left(errorMessage) =>
           println(s"Fehler: $errorMessage")
       }
@@ -58,5 +57,6 @@ class TUI(controller: Controller) extends Observer {
   override def update: Unit = {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
+    println(GameState.message(controller.getGameState))
   }
 }
