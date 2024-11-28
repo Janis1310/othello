@@ -12,10 +12,10 @@ class Board(private val board: Matrix[Stone]) {
 
         // Place the initial stones on the board
         emptyBoard
-          .replaceCell(pos1, pos2, Stone.White)         // Top-left of the center
-          .replaceCell(pos1, pos2 + 1, Stone.Black)     // Top-right of the center
-          .replaceCell(pos1 + 1, pos2, Stone.Black)     // Bottom-left of the center
-          .replaceCell(pos1 + 1, pos2 + 1, Stone.White) // Bottom-right of the center
+          .replaceCell(pos1, pos2, Stone.White)
+          .replaceCell(pos1, pos2 + 1, Stone.Black)
+          .replaceCell(pos1 + 1, pos2, Stone.Black)
+          .replaceCell(pos1 + 1, pos2 + 1, Stone.White)
       })
     }
 
@@ -23,7 +23,7 @@ class Board(private val board: Matrix[Stone]) {
 
     def placeStone(x: Int, y: Int, stone: Stone): Board = {
       val newMatrix = board.replaceCell(x, y, stone)
-      new Board(newMatrix) // Create and return a new Board with the updated matrix
+      new Board(newMatrix)
     }
   
     

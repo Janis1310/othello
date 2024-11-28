@@ -4,14 +4,14 @@ import de.htwg.se.othello.model.handler.MoveHandlerTemplate
 object MoveHandler extends MoveHandlerTemplate{
 
   private val directions = Seq(
-          (0, 1),   // rechts
-          (1, 1),   // rechts unten
-          (1, 0),   // unten
-          (1, -1),  // links unten
-          (0, -1),  // links
-          (-1, -1), // links oben
-          (-1, 0),  // oben
-          (-1, 1)   // rechts oben
+          (0, 1),
+          (1, 1),
+          (1, 0),
+          (1, -1),
+          (0, -1),
+          (-1, -1),
+          (-1, 0),
+          (-1, 1)
         )
     override protected def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
 
