@@ -19,7 +19,7 @@ private class AIPlayer(val name: String, val stone: Stone) extends Player {
 
 object Player {
   def apply(name: String, stone: Stone, kind: String) = kind match {
-    case "Human" => HumanPlayer(name, stone)
-    case "AI" => AIPlayer(name, stone)
+    case "Human" => new HumanPlayer(name, stone)
+    case "AI" => new AIPlayer(name, stone)
   }
 }
