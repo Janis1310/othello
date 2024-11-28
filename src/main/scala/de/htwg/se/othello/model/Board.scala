@@ -20,6 +20,8 @@ class Board(private val board: Matrix[Stone]) {
     }
 
     def getBoard: Matrix[Stone] = board
+    def numRows: Int = board.numRows
+    def numCols: Int = board.numCols
 
     def placeStone(x: Int, y: Int, stone: Stone): Board = {
       val newMatrix = board.replaceCell(x, y, stone)

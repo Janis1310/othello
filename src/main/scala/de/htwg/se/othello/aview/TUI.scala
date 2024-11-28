@@ -34,7 +34,7 @@ class TUI(controller: Controller) extends Observer {
     }
   }
 
-  def playTurn(): Unit = {
+  /*def playTurn(): Unit = {
     val currentPlayer = controller.getCurrentPlayer
     println(s"${currentPlayer.name}, du bist am Zug. Deine Farbe ist ${currentPlayer.stone}.")
 
@@ -53,6 +53,9 @@ class TUI(controller: Controller) extends Observer {
       case _: Exception =>
         println("Ungültige Eingabe. Bitte im Format Zeile,Spalte eingeben.")
     }
+  }*/
+    def playTurn(): Unit = {
+    controller.processTurn() // Nutze die Methode, die entscheidet, ob der Spieler oder die KI am Zug ist
   }
 
   override def update: Unit = {
