@@ -1,7 +1,7 @@
 package de.htwg.se.othello.model
-import de.htwg.se.othello.model.handler.MoveHandlerInterface
+import de.htwg.se.othello.model.handler.MoveHandlerTemplate
 
-object MoveHandler extends MoveHandlerInterface{
+object MoveHandler extends MoveHandlerTemplate{
 
   private val directions = Seq(
           (0, 1),   // rechts
@@ -13,7 +13,7 @@ object MoveHandler extends MoveHandlerInterface{
           (-1, 0),  // oben
           (-1, 1)   // rechts oben
         )
-    def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
+    override protected def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
@@ -48,7 +48,7 @@ object MoveHandler extends MoveHandlerInterface{
       }
   }
 
-  def flipStones(stonePosition: Stoneposition, board: Board): Board = {
+  override protected def flipStones(stonePosition: Stoneposition, board: Board): Board = {
     val player = stonePosition.stone
     val opponent = player.flip
 
