@@ -5,7 +5,6 @@ import scala.util.control.Breaks._
 import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player}
 import de.htwg.se.othello.util.Observable
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.model
 
 
 object StrategyContext {
@@ -33,7 +32,7 @@ object StrategyContext {
             for (j <- 0 until board.numCols) {
             if (MoveHandler.isValidMove(Stoneposition(i, j, stone), board)) {
                 result = Some(Stoneposition(i, j, stone))
-                break() // man muss das so machen, weil return nicht abbreechen kann
+                break() // man muss das so machen, weil return nicht abbrechen kann
             }
             }
         }

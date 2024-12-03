@@ -15,6 +15,7 @@ object Othello {
     println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
     while (true) {
       tui.playTurn()
+      println("teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeestMAIN")
     }
   }
 }
