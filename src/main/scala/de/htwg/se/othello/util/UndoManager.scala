@@ -2,19 +2,19 @@ package de.htwg.se.othello.util
 
 
 class UndoManager {
-  private var undoStack: List[Command]= Nil
-  private var redoStack: List[Command]= Nil
-  def doStep(command: Command) = {
-    undoStack = command::undoStack
+  private var undoStack: List[Command]= Nil // Stack of runed commands
+  private var redoStack: List[Command]= Nil // Stack der rückgängig gemachten Befehle
+  def doStep(command: Command) = { // führt neuen Befehl aus
+    undoStack = command::undoStack // add command to undoStack
     command.doStep
   }
   def undoStep  = {
     undoStack match {
-      case  Nil =>
+      case  Nil => // Stack is empty
       case head::stack => {
         head.undoStep
         undoStack=stack
-        redoStack= head::redoStack
+        redoStack= head::redoStack // add undone command to redoStack
       }
     }
   }
