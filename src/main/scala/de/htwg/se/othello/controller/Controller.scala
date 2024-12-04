@@ -134,17 +134,17 @@ class Controller(var board: Board) extends Observable {
   }
 
   // ab hier für Command Pattern
-  var gameStatus: GameStatus = IDLE
+  //var gameStatus: GameStatus = IDLE
   private val undoManager = new UndoManager
-  def set(row: Int, col: Int, value: Int): Unit = {
-    undoManager.doStep(new SetCommand(row, col, value, this))
+  def set(row: Int, col: Int, stone: Stone): Unit = {
+    undoManager.doStep(new SetCommand(row, col, stone, this))
     notifyObservers
   }
 
-  def solve: Unit = {
+  /*def solve: Unit = {
     undoManager.doStep(new SolveCommand(this))
     notifyObservers
-  }
+  }*/
 
   def undo: Unit = {
     undoManager.undoStep
