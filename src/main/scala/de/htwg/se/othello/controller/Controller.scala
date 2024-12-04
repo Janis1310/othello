@@ -2,14 +2,14 @@ package de.htwg.se.othello.controller
 
 import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player}
 import de.htwg.se.othello.ai.StrategyContext
-import de.htwg.se.othello.util.Observable
+import de.htwg.se.othello.util.{Observable, UndoManager}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
 
 
 
-class Controller(private var board: Board) extends Observable {
+class Controller(var board: Board) extends Observable {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var moveHandler: MoveHandlerTemplate = MoveHandler
@@ -131,5 +131,28 @@ class Controller(private var board: Board) extends Observable {
           println("Ungültige Eingabe. Bitte im Format Zeile,Spalte eingeben.")
       }
     }
+  }
+
+  // ab hier für Command Pattern
+  var gameStatus: GameStatus = IDLE
+  private val undoManager = new UndoManager
+  def set(row: Int, col: Int, value: Int): Unit = {
+    undoManager.doStep(new SetCommand(row, col, value, this))
+    notifyObservers
+  }
+
+  def solve: Unit = {
+    undoManager.doStep(new SolveCommand(this))
+    notifyObservers
+  }
+
+  def undo: Unit = {
+    undoManager.undoStep
+    notifyObservers
+  }
+
+  def redo: Unit = {
+    undoManager.redoStep
+    notifyObservers
   }
 }

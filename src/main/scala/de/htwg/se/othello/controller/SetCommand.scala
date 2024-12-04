@@ -1,12 +1,12 @@
 package de.htwg.se.othello.controller
 
+import de.htwg.se.othello.model.Stone
+import de.htwg.se.othello.util.Command
 
-import de.htwg.se.sudoku.util.Command
+class SetCommand(row:Int, col: Int, stone:Stone, controller: Controller) extends Command {
+  override def doStep: Unit =   controller.board = controller.board.placeStone(row, col, stone)
 
-class SetCommand(row:Int, col: Int, value:Int, controller: Controller) extends Command {
-  override def doStep: Unit =   controller.grid = controller.grid.set(row, col, value)
+  override def undoStep: Unit = controller.board = controller.board.placeStone(row, col, Stone.Empty) // Das muss noch angepasst werden
 
-  override def undoStep: Unit = controller.grid = controller.grid.set(row, col, 0)
-
-  override def redoStep: Unit = controller.grid = controller.grid.set(row, col, value)
+  override def redoStep: Unit = controller.board = controller.board.placeStone(row, col, stone)
 }
