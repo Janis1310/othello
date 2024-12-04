@@ -22,7 +22,7 @@ class Controller(var board: Board) extends Observable {
      if (gameState == GameState.SETUP) {
       players = Queue(
         Player(player1Name, Stone.White,"Human" ),
-        Player(player2Name, Stone.Black, "AI" )
+        Player(player2Name, Stone.Black, "Human" )
       )
     } else {
       println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
@@ -140,11 +140,6 @@ class Controller(var board: Board) extends Observable {
     undoManager.doStep(new SetCommand(row, col, stone, this))
     notifyObservers
   }
-
-  /*def solve: Unit = {
-    undoManager.doStep(new SolveCommand(this))
-    notifyObservers
-  }*/
 
   def undo: Unit = {
     undoManager.undoStep

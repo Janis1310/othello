@@ -42,7 +42,7 @@ class TUI(controller: Controller) extends Observer {
       case _ =>       
         try {
           val Array(row, column) = input.split(",").map(_.trim.toInt)
-          controller.makeMove(row, column)
+          controller.set(row, column, controller.getCurrentPlayer.stone)
         } catch {
           case _: MatchError =>
             println("Eingabe muss im Format 'x,y' sein.")

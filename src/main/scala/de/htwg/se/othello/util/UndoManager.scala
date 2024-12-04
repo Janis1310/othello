@@ -5,6 +5,7 @@ class UndoManager {
   private var undoStack: List[Command]= Nil // Stack of runed commands
   private var redoStack: List[Command]= Nil // Stack der rückgängig gemachten Befehle
   def doStep(command: Command) = { // führt neuen Befehl aus
+    println("doStep!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     undoStack = command::undoStack // add command to undoStack
     command.doStep
   }
