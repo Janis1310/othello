@@ -1,6 +1,8 @@
 package de.htwg.se.othello.util
 
-class CommandManager { private var undoStack: List[Command]= Nil
+
+class UndoManager {
+  private var undoStack: List[Command]= Nil
   private var redoStack: List[Command]= Nil
   def doStep(command: Command) = {
     undoStack = command::undoStack
@@ -26,6 +28,4 @@ class CommandManager { private var undoStack: List[Command]= Nil
       }
     }
   }
-
-  
 }
