@@ -57,9 +57,9 @@ class Controller(var board: Board) extends Observable {
          val previousBoard = board.copy()
 
         val moveresult = Try {
-          board = moveHandler.processMove(stonePosition, board)
+          
           nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
-          undoManager.doStep(new SetCommand(previousBoard, board, this))
+          undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           board.toString
         }
 
