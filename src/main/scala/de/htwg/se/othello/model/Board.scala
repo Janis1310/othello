@@ -56,4 +56,8 @@ class Board(private val board: Matrix[Stone]) {
 
         sb.toString()
       }
+
+    def copy(): Board = {
+    new Board(board.copy()) // Nutzt die copy-Methode der Matrix
+  }
 }
