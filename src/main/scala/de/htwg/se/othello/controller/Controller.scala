@@ -7,6 +7,7 @@ import scala.util.{Try, Success, Failure}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
+import scala.util.{Try, Success, Failure}
 
 
 
@@ -53,15 +54,19 @@ class Controller(var board: Board) extends Observable {
         val stone = getCurrentPlayer.stone
         val stonePosition = Stoneposition(x, y, stone)
 
-        try {
-          val previousBoard = board.copy()
+         val previousBoard = board.copy()
+
+        val moveresult = Try {
           board = moveHandler.processMove(stonePosition, board)
           nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
           undoManager.doStep(new SetCommand(previousBoard, board, this))
-          Right(boardToString)
-        } catch {
-           case _: IllegalArgumentException => Left(" Ungültiger Zug.")
+          board.toString
         }
+
+        moveresult match {
+        case Success(boardString) => Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
+        case Failure(_) => Left("Ungültiger Zug.") // Fehler im Zug
+      }
 
       case _ =>
         Left("Züge sind nur während eines Spielzugs erlaubt.")
