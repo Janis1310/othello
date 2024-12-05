@@ -23,17 +23,24 @@ class TUI(controller: Controller) extends Observer {
   }
 
   def inputBoardSize(): Unit = {
-    try {
-      println("Geben Sie die Größe des Spielfelds ein (Zeilen, Spalten):")
-      val Array(rows, cols) = readLine().split(",").map(_.trim.toInt)
-      controller.createNewBoard(rows, cols)
-      println(s"Ein neues Spielfeld mit $rows Zeilen und $cols Spalten wurde erstellt.")
-    } catch {
-      case _: Exception =>
-        println("Ungültige Eingabe. Bitte geben Sie zwei ganze Zahlen getrennt durch ein Komma ein.")
-        inputBoardSize() // Wiederholung bei Fehler
+    println("Geben Sie die Größe des Spielfelds ein (Zeilen, Spalten):")
+
+    val result = Try(readLine().split(",").map(_.trim.toInt)) match {
+      case Success(Array(rows, cols)) =>
+        controller.createNewBoard(rows, cols)
+        println(s"Ein neues Spielfeld mit $rows Zeilen und $cols Spalten wurde erstellt.")
+      case Success(_) =>
+        println("Ungültige Eingabe. Bitte geben Sie genau zwei Zahlen ein.")
+        inputBoardSize()
+      case Failure(_: NumberFormatException) =>
+        println("Ungültige Eingabe. Bitte geben Sie gültige ganze Zahlen ein.")
+        inputBoardSize() 
+      case Failure(e) =>
+        println(s"Ein unerwarteter Fehler ist aufgetreten: ${e.getMessage}")
+        inputBoardSize() 
     }
   }
+  
   def processInputLine(input: String):Unit = {
     input match {
       case "q" =>
@@ -44,17 +51,7 @@ class TUI(controller: Controller) extends Observer {
       }
       case "z" => controller.undo
       case "y" => controller.redo
-      case _ =>       
-       /* try {
-          val Array(x, y) = input.split(",").map(_.trim.toInt)
-          controller.processTurn(x, y)
-        } catch {
-          case _: MatchError =>
-            println("Eingabe muss im Format 'x,y' sein.")
-          case _: NumberFormatException =>
-            println("Eingabe enthält ungültige Zahlen.")
-        }*/
-        
+      case _ =>               
         val result = for {
           Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
         } yield (x, y)
