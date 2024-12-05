@@ -1,8 +1,8 @@
 package de.htwg.se.othello.controller
 
-import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player}
+import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, UndoManager, SetCommand}
 import de.htwg.se.othello.ai.StrategyContext
-import de.htwg.se.othello.util.{Observable, UndoManager}
+import de.htwg.se.othello.util.{Observable}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}

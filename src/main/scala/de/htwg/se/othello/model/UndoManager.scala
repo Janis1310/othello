@@ -1,4 +1,4 @@
-package de.htwg.se.othello.util
+package de.htwg.se.othello.model
 
 
 class UndoManager {
