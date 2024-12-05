@@ -81,7 +81,7 @@ class Controller(var board: Board) extends Observable {
    def changeState(newState: GameState.GameState): Unit = {
     gameState = newState
     GameState.action(gameState)
-    notifyObservers
+    //notifyObservers
   }
 
   def getGameState: GameState.GameState = gameState
