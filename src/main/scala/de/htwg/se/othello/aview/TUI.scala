@@ -37,7 +37,11 @@ class TUI(controller: Controller) extends Observer {
   def processInputLine(input: String):Unit = {
     input match {
       case "q" =>
-      case "n"=> controller.createNewBoard(8,8)
+      case "n"=> {
+        controller.changeState(GameState.SETUP)
+        inputPlayers()
+        inputBoardSize()
+      }
       case "z" => controller.undo
       case "y" => controller.redo
       case _ =>       
