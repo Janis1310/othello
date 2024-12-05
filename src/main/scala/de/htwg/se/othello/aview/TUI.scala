@@ -41,8 +41,7 @@ class TUI(controller: Controller) extends Observer {
       case "y" => controller.redo
       case _ =>       
         try {
-          val Array(row, column) = input.split(",").map(_.trim.toInt)
-          controller.makeMove(row, column);
+          controller.processTurn()
         } catch {
           case _: MatchError =>
             println("Eingabe muss im Format 'x,y' sein.")
@@ -51,9 +50,6 @@ class TUI(controller: Controller) extends Observer {
         }
 
     }
-  }
-  def playTurn(): Unit = {
-    controller.processTurn() // Methode entscheidet Ki oder Mensch
   }
 
   override def update: Unit = {

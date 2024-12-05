@@ -15,15 +15,13 @@ object Othello {
     tui.inputBoardSize()
 
     println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
-    var input: String = ""
-    if (args.length>0) input=args(0)
-    if (!input.isEmpty)  tui.processInputLine(input)
-    else {
+    var input: String = "staret"
+    while (input != null && input != "q") {
+      
+      tui.processInputLine(input)
       input = readLine()
-      while (input != "q") {
-        tui.processInputLine(input)
-        input = readLine()
-      }
-    } 
+      
+    }
+   
   }
 }
