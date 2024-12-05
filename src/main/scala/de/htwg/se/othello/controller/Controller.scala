@@ -35,16 +35,15 @@ class Controller(var board: Board) extends Observable {
 
   def getCurrentPlayer: Player = players.head
 
-    def nextPlayer(): Unit = {
-      val (currentPlayer, updatedQueue) = players.dequeue
-      players = updatedQueue.enqueue(currentPlayer)
-      gameState match {
+  def nextPlayer(): Unit = {
+    val (currentPlayer, updatedQueue) = players.dequeue
+    players = updatedQueue.enqueue(currentPlayer)
+    gameState match {
       case GameState.WHITE_TURN => changeState(GameState.BLACK_TURN)
       case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
       case _ => println("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
-    
-      notifyObservers
+    notifyObservers
   }
 
   // Führt einen Zug aus und gibt den neuen Zustand des Spiels zurück
