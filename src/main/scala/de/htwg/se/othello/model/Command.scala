@@ -7,10 +7,21 @@ trait Command {
     def redoStep:Unit
 }
 
-class SetCommand(board:Board, exBoard : Board, stone:Stone, controller: Controller) extends Command {
-  override def doStep: Unit = controller.board = board// hier neuen Board und Alten zustand übergeben, Contoller die Instanzvariable übergeben. 
+class SetCommand(private val previousBoard: Board, private val newBoard: Board, private val controller: Controller) extends Command {
 
-  override def undoStep: Unit = controller.board = exBoard
+  override def doStep: Unit = {
+    // Setze das Board im Controller auf den neuen Zustand
+    controller.setBoard(newBoard)
+  }
 
-  override def redoStep: Unit = controller.board = board
+  override def undoStep: Unit = {
+    // Setze das Board im Controller auf den vorherigen Zustand zurück
+    controller.setBoard(previousBoard)
+  }
+
+  override def redoStep: Unit = {
+    // Wiederhole den Schritt, indem das Board auf den neuen Zustand gesetzt wird
+    controller.setBoard(newBoard)
+  }
 }
+
