@@ -12,17 +12,7 @@ object Othello {
   val tui = new TUI(controller)
 
   def main(args: Array[String]): Unit = {
-    tui.inputPlayers()
-    tui.inputBoardSize()
 
-    println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
-    var input: String = ""
-    while (input != null && input != "q") {
-      
-      tui.processInputLine(input)
-      input = readLine()
-      
-    }
-   
+    tui.start()
   }
 }

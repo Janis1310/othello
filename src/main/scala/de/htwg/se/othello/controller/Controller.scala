@@ -98,7 +98,6 @@ class Controller(var board: Board) extends Observable {
   // Verarbeitet den nächsten Zug, entweder vom menschlichen Spieler oder von der KI
   def processTurn(curRow : Int, curCol : Int): Unit = {
     val currentPlayer = getCurrentPlayer
-    println("currentplayer.role: " + currentPlayer.role) // Tests
     if (currentPlayer.role == "AI") {
       println("KI ist am ZugTesteawdownjoiawdjipdawdawkoiawdkopwdokawdokpawdokado")
       StrategyContext.setPlayers(players)

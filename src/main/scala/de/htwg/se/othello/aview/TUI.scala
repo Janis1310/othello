@@ -50,6 +50,7 @@ class TUI(controller: Controller) extends Observer {
           case _: NumberFormatException =>
             println("Eingabe enthält ungültige Zahlen.")
         }*/
+        
         val result = for {
           Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
         } yield (x, y)
@@ -72,5 +73,24 @@ class TUI(controller: Controller) extends Observer {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
     println(GameState.message(controller.getGameState))
+  }
+
+  def start(): Unit = {
+    inputPlayers()
+    inputBoardSize()
+    println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
+    var input: String = ""
+    while (input != "q") {  // Schleife weiter ausführen, bis "q" eingegeben wird
+    println(controller.getCurrentPlayer.name + ", ist im Zug, Deine Farbe ist " + controller.getCurrentPlayer.stone);
+      println("q => quit, z => undo, y => redo")
+      
+      // Lese die Benutzereingabe
+      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")  // Hier wird die Eingabe des Benutzers abgefragt
+
+      // Verarbeite die Eingabe
+      processInputLine(input)  // Eingabe verarbeiten
+    }
+
+    println("Das Spiel wurde beendet.")
   }
 }
