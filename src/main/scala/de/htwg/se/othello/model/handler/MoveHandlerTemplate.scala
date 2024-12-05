@@ -13,6 +13,6 @@ abstract class MoveHandlerTemplate {
     updatedBoard
   }
 
-  protected def isValidMove(stonePosition: Stoneposition, board: Board): Boolean
+  def isValidMove(stonePosition: Stoneposition, board: Board): Boolean
   protected def flipStones(stonePosition: Stoneposition, board: Board): Board
 }

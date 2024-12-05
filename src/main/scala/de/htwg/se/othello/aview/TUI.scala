@@ -33,25 +33,27 @@ class TUI(controller: Controller) extends Observer {
         inputBoardSize() // Wiederholung bei Fehler
     }
   }
+  def processInputLine(input: String):Unit = {
+    input match {
+      case "q" =>
+      case "n"=> controller.createNewBoard(8,8)
+      case "z" => controller.undo
+      case "y" => controller.redo
+      case _ =>       
+        try {
+          val Array(row, column) = input.split(",").map(_.trim.toInt)
+          controller.set(row, column, controller.getCurrentPlayer.stone)
+        } catch {
+          case _: MatchError =>
+            println("Eingabe muss im Format 'x,y' sein.")
+          case _: NumberFormatException =>
+            println("Eingabe enthält ungültige Zahlen.")
+        }
 
-  def playTurn(): Unit = {
-    val currentPlayer = controller.getCurrentPlayer
-    println(s"${currentPlayer.name}, du bist am Zug. Deine Farbe ist ${currentPlayer.stone}.")
-
-    try {
-      println("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein:")
-      val Array(x, y) = readLine().split(",").map(_.trim.toInt)
-      controller.makeMove(x, y) match {
-        case Right(updatedBoard) =>
-          println("Zug erfolgreich! Aktuelles Spielfeld:")
-          println(updatedBoard)
-        case Left(errorMessage) =>
-          println(s"Fehler: $errorMessage")
-      }
-    } catch {
-      case _: Exception =>
-        println("Ungültige Eingabe. Bitte im Format Zeile,Spalte eingeben.")
     }
+  }
+  def playTurn(): Unit = {
+    controller.processTurn() // Methode entscheidet Ki oder Mensch
   }
 
   override def update: Unit = {

@@ -13,7 +13,7 @@ object MoveHandler extends MoveHandlerTemplate{
           (-1, 0),
           (-1, 1)
         )
-    override protected def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
+    override def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
