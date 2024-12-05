@@ -79,16 +79,12 @@ class TUI(controller: Controller) extends Observer {
   def start(): Unit = {
     inputPlayers()
     inputBoardSize()
-    println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
+    println("Das Spiel beginnt!")
     var input: String = ""
-    while (input != "q") {  // Schleife weiter ausführen, bis "q" eingegeben wird
-    println(controller.getCurrentPlayer.name + ", ist im Zug, Deine Farbe ist " + controller.getCurrentPlayer.stone);
-      println("q => quit, z => undo, y => redo")
-      
-      // Lese die Benutzereingabe
-      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")  // Hier wird die Eingabe des Benutzers abgefragt
-
-      // Verarbeite die Eingabe
+    while (input != "q") {
+      println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
+      println("q => quit, z => undo, y => redo, n => new game")
+      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
       processInputLine(input)  // Eingabe verarbeiten
     }
 
