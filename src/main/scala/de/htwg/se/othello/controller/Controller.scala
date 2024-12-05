@@ -3,6 +3,7 @@ package de.htwg.se.othello.controller
 import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, UndoManager, SetCommand}
 import de.htwg.se.othello.ai.StrategyContext
 import de.htwg.se.othello.util.{Observable}
+import scala.util.{Try, Success, Failure}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
@@ -90,7 +91,7 @@ class Controller(var board: Board) extends Observable {
 
 
   // Verarbeitet den nächsten Zug, entweder vom menschlichen Spieler oder von der KI
-  def processTurn(): Unit = {
+  def processTurn(curRow : Int, curCol : Int): Unit = {
     val currentPlayer = getCurrentPlayer
     println("currentplayer.role: " + currentPlayer.role) // Tests
     if (currentPlayer.role == "AI") {
@@ -115,30 +116,15 @@ class Controller(var board: Board) extends Observable {
         System.exit(0)
       }
     } else {
-      // Der aktuelle Spieler ist ein menschlicher Spieler, er muss seinen Zug manuell eingeben
-      println(s"${currentPlayer.name}, du bist am Zug. Deine Farbe ist ${currentPlayer.stone}.")
-      try {
-        println("Gib die Koordinaten für deinen Zug im Format Zeile,Spalte ein:")
-        val Array(x, y) = readLine().split(",").map(_.trim.toInt)
-        makeMove(x, y) match {
-          case Right(updatedBoard) =>
-            println("Zug erfolgreich! Aktuelles Spielfeld:")
-            // println(updatedBoard)
-            //nextPlayer() // Spieler wechseln
-          case Left(errorMessage) =>
-            println(s"Fehler: $errorMessage")
-        }
-      } catch {
-        case _: Exception =>
-          println("Ungültige Eingabe. Bitte im Format Zeile,Spalte eingeben.")
+      makeMove(curRow, curCol) match {
+        case Right(updatedBoard) =>
+        case Left(errorMessage) =>
+          println(s"Fehler: $errorMessage")
       }
     }
   }
 
   // ab hier für Command Pattern
-  //var gameStatus: GameStatus = IDLE
-  
-
   def undo: Unit = {
     undoManager.undoStep
     notifyObservers
@@ -152,7 +138,5 @@ class Controller(var board: Board) extends Observable {
   def setBoard(board: Board): Unit = {
   this.board = board
   notifyObservers // Observer über den neuen Zustand informieren
-}
-
-  
+  }
 }

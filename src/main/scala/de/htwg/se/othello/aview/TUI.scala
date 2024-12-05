@@ -6,6 +6,7 @@ import scala.collection.immutable.Queue
 
 import de.htwg.se.othello.controller.{GameState, Controller}
 import de.htwg.se.othello.util.Observer
+import scala.util.{Try, Success, Failure}
 
 class TUI(controller: Controller) extends Observer {
   controller.add(this)
@@ -40,13 +41,28 @@ class TUI(controller: Controller) extends Observer {
       case "z" => controller.undo
       case "y" => controller.redo
       case _ =>       
-        try {
-          controller.processTurn()
+       /* try {
+          val Array(x, y) = input.split(",").map(_.trim.toInt)
+          controller.processTurn(x, y)
         } catch {
           case _: MatchError =>
             println("Eingabe muss im Format 'x,y' sein.")
           case _: NumberFormatException =>
             println("Eingabe enthält ungültige Zahlen.")
+        }*/
+        val result = for {
+          Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
+        } yield (x, y)
+
+        result match {
+          case Success((x, y)) =>
+            controller.processTurn(x, y)
+          case Failure(_: MatchError) =>
+            println("Eingabe muss im Format 'x,y' sein.")
+          case Failure(_: NumberFormatException) =>
+            println("Eingabe enthält ungültige Zahlen.")
+          case Failure(e) =>
+            println(s"Ein unerwarteter Fehler ist aufgetreten: ${e.getMessage}")
         }
 
     }

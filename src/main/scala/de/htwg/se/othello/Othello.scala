@@ -3,6 +3,7 @@ package de.htwg.se.othello
 import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.model.Board
 import de.htwg.se.othello.controller.Controller
+import scala.util.{Try, Success, Failure}
 
 import scala.io.StdIn.readLine
 
@@ -15,7 +16,7 @@ object Othello {
     tui.inputBoardSize()
 
     println("Das Spiel beginnt! Drücken Sie Strg + C, um das Spiel zu beenden.")
-    var input: String = "staret"
+    var input: String = ""
     while (input != null && input != "q") {
       
       tui.processInputLine(input)
