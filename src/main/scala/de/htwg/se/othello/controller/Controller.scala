@@ -13,6 +13,7 @@ class Controller(var board: Board) extends Observable {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var moveHandler: MoveHandlerTemplate = MoveHandler
+  private val undoManager = new UndoManager
 
   // Gibt das Board als Zeichenkette zurück
   def boardToString: String = board.toString
@@ -52,9 +53,10 @@ class Controller(var board: Board) extends Observable {
         val stonePosition = Stoneposition(x, y, stone)
 
         try {
-          board = moveHandler.processMove(stonePosition, board) // Template-Methode aufrufen
+          val previousBoard = board.copy()
+          board = moveHandler.processMove(stonePosition, board)
           nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
-          notifyObservers
+          undoManager.doStep(new SetCommand(previousBoard, board, this))
           Right(boardToString)
         } catch {
            case _: IllegalArgumentException => Left(" Ungültiger Zug.")
@@ -135,11 +137,7 @@ class Controller(var board: Board) extends Observable {
 
   // ab hier für Command Pattern
   //var gameStatus: GameStatus = IDLE
-  private val undoManager = new UndoManager
-  def set(row: Int, col: Int, stone: Stone): Unit = {
-    undoManager.doStep(new SetCommand(row, col, stone, this))
-    notifyObservers
-  }
+  
 
   def undo: Unit = {
     undoManager.undoStep
@@ -150,4 +148,11 @@ class Controller(var board: Board) extends Observable {
     undoManager.redoStep
     notifyObservers
   }
+
+  def setBoard(board: Board): Unit = {
+  this.board = board
+  notifyObservers // Observer über den neuen Zustand informieren
+}
+
+  
 }
