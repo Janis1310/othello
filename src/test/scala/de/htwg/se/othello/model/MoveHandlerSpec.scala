@@ -16,6 +16,10 @@ class MoveHandlerSpec extends AnyWordSpec {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
                 MoveHandler.isValidMove(Stoneposition(3, 3, Stone.Black), board) should be(false)
             }
+            "be false when trying to place a stone on the edge of the board" in {
+                val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
+                MoveHandler.isValidMove(Stoneposition(0, 0, Stone.Black), board) should be(false)
+            }
             "be true for a valid move in the top-left direction" in {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
                 MoveHandler.isValidMove(Stoneposition(2, 4, Stone.White), board) should be(true)
@@ -23,6 +27,10 @@ class MoveHandlerSpec extends AnyWordSpec {
             "be true for a valid move in the bottom-right direction" in {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
                 MoveHandler.isValidMove(Stoneposition(5, 3, Stone.White), board) should be(true)
+            }
+            "be false when trying to place a stone next to the same stone" in {
+                val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
+                MoveHandler.isValidMove(Stoneposition(3, 5, Stone.Black), board) should be(false)
             }
         }
 
