@@ -1,6 +1,6 @@
 package de.htwg.se.othello
 
-import de.htwg.se.othello.aview.{TUI, GuiMain}
+import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.model.Board
 import de.htwg.se.othello.controller.Controller
 import scala.util.{Try, Success, Failure}
