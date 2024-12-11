@@ -11,7 +11,8 @@ lazy val root = project
     libraryDependencies ++= Seq(
       "org.scalameta" %% "munit" % "1.0.0" % Test,
       "org.scalactic" %% "scalactic" % "3.2.19",
-      "org.scalatest" %% "scalatest" % "3.2.19" % Test
+      "org.scalatest" %% "scalatest" % "3.2.19" % Test,
+      "org.scalafx" %% "scalafx" % "23.0.1-R34"
     ),
 
     coverageExcludedPackages := ".*Othello.*" ,
