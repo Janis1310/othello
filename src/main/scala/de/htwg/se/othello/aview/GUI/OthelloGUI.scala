@@ -75,44 +75,44 @@ class OthelloGUI(controller:Controller) extends MainFrame{
 
   }
 
-def createBoardPanel: BorderPanel = new BorderPanel {
-    // Obere Statusanzeige
-    layout(new Label(s"${controller.getCurrentPlayer.name}'s Turn")) = BorderPanel.Position.North
+    def createBoardPanel: BorderPanel = new BorderPanel {
+        // Obere Statusanzeige
+        layout(new Label(s"${controller.getCurrentPlayer.name}'s Turn")) = BorderPanel.Position.North
 
-    // Spielfeld als zentrales Element
-    layout(new GridPanel(controller.board.getBoard.numRows, controller.board.getBoard.numCols) {
-      for (row <- 0 until controller.board.getBoard.numRows; col <- 0 until controller.board.getBoard.numCols) {
-        val cellValue = controller.board.getBoard.cell(row, col) // Zelleninhalt abrufen
-        val button = new Button {
-          text = " " // Text bleibt leer
-          preferredSize = new Dimension(50, 50)
+        // Spielfeld als zentrales Element
+        layout(new GridPanel(controller.board.getBoard.numRows, controller.board.getBoard.numCols) {
+          for (row <- 0 until controller.board.getBoard.numRows; col <- 0 until controller.board.getBoard.numCols) {
+            val cellValue = controller.board.getBoard.cell(row, col) // Zelleninhalt abrufen
+            val button = new Button {
+              text = " " // Text bleibt leer
+              preferredSize = new Dimension(50, 50)
 
-          // Hintergrundfarbe je nach Zellenwert setzen
-          cellValue match {
-            case Stone.Empty => background = java.awt.Color.GREEN // Leeres Feld
-            case Stone.Black => background = java.awt.Color.BLACK // Schwarzer Stein
-            case Stone.White => background = java.awt.Color.WHITE // Weißer Stein
-          }
-        }
-
-        // Button-Event für einen Zug
-        listenTo(button)
-        reactions += {
-          case ButtonClicked(`button`) =>
-            val result = controller.makeMove(row, col)
-            result match {
-              case Right(_) =>
-                // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
-                refreshBoard() // Oder setze den Inhalt des GridPanels direkt
-              case Left(message) =>
-                Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
+              // Hintergrundfarbe je nach Zellenwert setzen
+              cellValue match {
+                case Stone.Empty => background = java.awt.Color.GREEN // Leeres Feld
+                case Stone.Black => background = java.awt.Color.BLACK // Schwarzer Stein
+                case Stone.White => background = java.awt.Color.WHITE // Weißer Stein
+              }
             }
-        }
 
-        contents += button
+            // Button-Event für einen Zug
+            listenTo(button)
+            reactions += {
+              case ButtonClicked(`button`) =>
+                val result = controller.makeMove(row, col)
+                result match {
+                  case Right(_) =>
+                    // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
+                    refreshBoard() // Oder setze den Inhalt des GridPanels direkt
+                  case Left(message) =>
+                    Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
+                }
+            }
+
+            contents += button
+          }
+        }) = BorderPanel.Position.Center
       }
-    }) = BorderPanel.Position.Center
-  }
   
   centerOnScreen()  // Das Fenster wird zentriert
   visible = true
