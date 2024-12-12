@@ -1,16 +1,18 @@
 package de.htwg.se.othello.aview
 
-import de.htwg.se.othello.model.{Stone, Board}
+import de.htwg.se.othello.model.{Board, Stone}
+
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
-
-import de.htwg.se.othello.controller.{GameState, Controller}
+import de.htwg.se.othello.controller.{CellChanged, Controller, CreateBoard, GameState, PlayerChanged}
 import de.htwg.se.othello.util.Observer
-import scala.util.{Try, Success, Failure}
 
-class TUI(controller: Controller) extends Observer {
-  controller.add(this)
+import scala.util.{Failure, Success, Try}
+import scala.swing.Reactor
+import scala.swing.event.Event
 
+class TUI(controller: Controller) extends Reactor {
+listenTo(controller)
   def inputPlayers(): Unit = {
     println("Geben Sie den Namen des ersten Spielers ein:")
     val player1Name = readLine()
@@ -69,9 +71,23 @@ class TUI(controller: Controller) extends Observer {
 
     }
   }
-  override def update: Unit = {
-    println("Das Spielfeld wurde aktualisiert.")
+
+  reactions += {
+    case event: CellChanged => printTui
+    case event: CreateBoard => printTui
+    case event: PlayerChanged => printPlayers
+  }
+
+  def printTui: Unit = {
     println(controller.boardToString)
     println(GameState.message(controller.getGameState))
   }
+  def printPlayers: Unit = {
+    println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
+  }
+  /*override def update: Unit = {
+    println("Das Spielfeld wurde aktualisiert.")
+    println(controller.boardToString)
+    println(GameState.message(controller.getGameState))
+  }*/
 }

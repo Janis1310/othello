@@ -1,13 +1,16 @@
 package de.htwg.se.othello.aview.GUI
 
-import scala.swing._
+import scala.swing.*
 import scala.swing.event.ButtonClicked
-import de.htwg.se.othello.controller.Controller
+import de.htwg.se.othello.controller.{CellChanged, Controller, CreateBoard, PlayerChanged}
+
 import scala.util.Try
 import de.htwg.se.othello.model.Stone
+
 import javax.swing.ImageIcon
 
 class OthelloGUI(controller:Controller) extends MainFrame{
+  listenTo(controller)
   title = "Othello"
 
   val white_stone = new ImageIcon("src/main/resources/pieces/white.png")
@@ -126,11 +129,17 @@ class OthelloGUI(controller:Controller) extends MainFrame{
     contents = createinitboard
   }
 
+  reactions += {
+    case event: CellChanged => refreshBoard()
+    case event: CreateBoard => refreshBoard()
+    case event: PlayerChanged => refreshBoard()
+  }
+
   def refreshBoard(): Unit = { 
     contents = createboard 
     validate() // Aktualisiert das Layout repaint() // Zeichnet die GUI neu
     repaint()
-}
+  }
 
 }
 

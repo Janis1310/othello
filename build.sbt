@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
             "org.scalactic" %% "scalactic" % "3.2.14",
             "org.scalatest" %% "scalatest" % "3.2.14" % Test,
 
-            "org.scalafx" %% "scalafx" % "20.0.0-R31",
+          "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
             "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
         )
     )

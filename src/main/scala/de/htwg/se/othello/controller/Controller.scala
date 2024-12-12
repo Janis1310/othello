@@ -9,9 +9,10 @@ import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
 import scala.util.{Try, Success, Failure}
 
+import scala.swing.Publisher
 
 
-class Controller(var board: Board) extends Observable {
+class Controller(var board: Board) extends Publisher {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var moveHandler: MoveHandlerTemplate = MoveHandler
@@ -43,7 +44,7 @@ class Controller(var board: Board) extends Observable {
       case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
       case _ => println("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
-    notifyObservers
+    publish(new PlayerChanged)
   }
 
   // Führt einen Zug aus und gibt den neuen Zustand des Spiels zurück
@@ -79,7 +80,7 @@ class Controller(var board: Board) extends Observable {
     if (gameState == GameState.SETUP) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN) // Erst nach Erstellung des Boards den Zustand ändern
-      notifyObservers
+      publish(new CreateBoard)
       board
     } else {
       println("Das Board kann nur im SETUP-Zustand erstellt werden.")
@@ -132,16 +133,18 @@ class Controller(var board: Board) extends Observable {
   // ab hier für Command Pattern
   def undo: Unit = {
     undoManager.undoStep
-    notifyObservers
+    publish(new CellChanged)
   }
 
   def redo: Unit = {
     undoManager.redoStep
-    notifyObservers
+    publish(new CellChanged)
   }
 
   def setBoard(board: Board): Unit = {
   this.board = board
-  notifyObservers // Observer über den neuen Zustand informieren
+  publish(new CellChanged) // Observer über den neuen Zustand informieren
   }
+
+
 }
