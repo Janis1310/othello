@@ -3,12 +3,15 @@ package de.htwg.se.othello.aview.GUI
 import scala.swing._
 import scala.swing.event.ButtonClicked
 import de.htwg.se.othello.controller.Controller
-import scalafx.scene.shape.StrokeLineCap.Butt
 import scala.util.Try
 import de.htwg.se.othello.model.Stone
+import javax.swing.ImageIcon
 
 class OthelloGUI(controller:Controller) extends MainFrame{
   title = "Othello"
+
+  val white_stone = new ImageIcon("src/main/resources/pieces/white.png")
+  val black_stone = new ImageIcon("src/main/resources/pieces/black.png")
 
    // Die Methode, um das Initialisierungs-Panel zu erstellen
   def createinitboard = new BoxPanel(Orientation.Vertical) {
@@ -42,6 +45,7 @@ class OthelloGUI(controller:Controller) extends MainFrame{
 
     val button = new Button("Start"){
       Alignment.Center
+
     }
     listenTo(button)
 
@@ -89,9 +93,9 @@ class OthelloGUI(controller:Controller) extends MainFrame{
 
               // Hintergrundfarbe je nach Zellenwert setzen
               cellValue match {
-                case Stone.Empty => background = java.awt.Color.GREEN // Leeres Feld
-                case Stone.Black => background = java.awt.Color.BLACK // Schwarzer Stein
-                case Stone.White => background = java.awt.Color.WHITE // Weißer Stein
+                case Stone.Empty => background = new Color(65,100,40) // Leeres Feld
+                case Stone.Black => icon = black_stone; background = new Color(65,100,40)  // Schwarzer Stein
+                case Stone.White => icon = white_stone; background = new Color(65,100,40) // Weißer Stein
               }
             }
 
