@@ -69,25 +69,9 @@ class TUI(controller: Controller) extends Observer {
 
     }
   }
-
   override def update: Unit = {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
     println(GameState.message(controller.getGameState))
-  }
-
-  def start(): Unit = {
-    inputPlayers()
-    inputBoardSize()
-    println("Das Spiel beginnt!")
-    var input: String = ""
-    while (input != "q") {
-      println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
-      println("q => quit, z => undo, y => redo, n => new game")
-      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
-      processInputLine(input)  // Eingabe verarbeiten
-    }
-
-    println("Das Spiel wurde beendet.")
   }
 }
