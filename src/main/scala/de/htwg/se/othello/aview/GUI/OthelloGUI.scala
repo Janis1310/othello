@@ -11,7 +11,7 @@ class OthelloGUI(controller:Controller) extends MainFrame{
   title = "Othello"
 
    // Die Methode, um das Initialisierungs-Panel zu erstellen
-  def createInitPanel = new BoxPanel(Orientation.Vertical) {
+  def createinitboard = new BoxPanel(Orientation.Vertical) {
     val player1Field = new TextField { columns = 15 }
     val player2Field = new TextField { columns = 15 }
 
@@ -75,7 +75,7 @@ class OthelloGUI(controller:Controller) extends MainFrame{
 
   }
 
-    def createBoardPanel: BorderPanel = new BorderPanel {
+    def createboard: BorderPanel = new BorderPanel {
         // Obere Statusanzeige
         layout(new Label(s"${controller.getCurrentPlayer.name}'s Turn")) = BorderPanel.Position.North
 
@@ -103,6 +103,7 @@ class OthelloGUI(controller:Controller) extends MainFrame{
                 result match {
                   case Right(_) =>
                     // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
+
                     refreshBoard() // Oder setze den Inhalt des GridPanels direkt
                   case Left(message) =>
                     Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
@@ -118,11 +119,11 @@ class OthelloGUI(controller:Controller) extends MainFrame{
   visible = true
 
   def start(): Unit = {
-    contents = createInitPanel
+    contents = createinitboard
   }
 
   def refreshBoard(): Unit = { 
-    contents = createBoardPanel 
+    contents = createboard 
     validate() // Aktualisiert das Layout repaint() // Zeichnet die GUI neu
     repaint()
 }
