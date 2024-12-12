@@ -14,7 +14,7 @@ object Othello {
   val gui = new OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
-    //gui.start()
+    gui.start()
     tui.inputPlayers()
     tui.inputBoardSize()
     println("Das Spiel beginnt!")
