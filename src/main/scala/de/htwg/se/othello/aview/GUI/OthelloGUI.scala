@@ -3,6 +3,7 @@ package de.htwg.se.othello.aview.GUI
 import scala.swing._
 import scala.swing.event.ButtonClicked
 import de.htwg.se.othello.controller.Controller
+import scalafx.scene.shape.StrokeLineCap.Butt
 
 class OthelloGUI(controller:Controller) extends MainFrame{
   title = "Othello"
@@ -35,16 +36,28 @@ class OthelloGUI(controller:Controller) extends MainFrame{
       contents += colsField
     }
 
+    contents += new BoxPanel(Orientation.Vertical){
+    val button = new Button("Start"){
+      Alignment.Center
+    }
+    contents += button
+    listenTo(button) 
+    reactions +={
+      case ButtonClicked(button) => print("Hallo")
+    }
   }
 
-  val startButton = new Button("Start")
+
+
+  }
+  
   
 
 
-  reactions += {
-    case event: ButtonClicked if event.source == startButton => println("Hallo")
+  // reactions += {
+  //   case event: ButtonClicked if event.source == button => println("Hallo")
       
-  }
+  // }
   
   centerOnScreen()  // Das Fenster wird zentriert
   visible = true
