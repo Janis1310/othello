@@ -53,17 +53,19 @@ class Controller(var board: Board) extends Observable {
         val stone = getCurrentPlayer.stone
         val stonePosition = Stoneposition(x, y, stone)
 
-         val previousBoard = board.copy()
+        val previousBoard = board.copy()
 
         val moveresult = Try {
           
-          nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
+           // Nach einem gültigen Zug den Spieler wechseln
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           board.toString
         }
 
         moveresult match {
-        case Success(boardString) => Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
+        case Success(boardString) => 
+          nextPlayer()
+          Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
         case Failure(_) => Left("Ungültiger Zug.") // Fehler im Zug
       }
 
