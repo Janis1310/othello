@@ -54,10 +54,10 @@ class OthelloGUI(controller:Controller) extends MainFrame{
   }
     reactions +={
       case ButtonClicked(button) =>
-        val player1 = player1Field.text
-        val player2 = player2Field.text
-        val rows = Try(rowsField.text.toInt).getOrElse(-1) // Fehlerhafte Eingabe wird zu -1
-        val cols = Try(colsField.text.toInt).getOrElse(-1)
+        val player1 = if(player1Field.text.nonEmpty) player1Field.text else "Player 1"
+        val player2 = if(player2Field.text.nonEmpty) player2Field.text else "Player 2"
+        val rows = Try(rowsField.text.toInt).getOrElse(8)
+        val cols = Try(colsField.text.toInt).getOrElse(8)
 
         if (rows > 0 && cols > 0) {
           controller.addPlayers(player1, player2) // Spieler zum Controller hinzufügen
