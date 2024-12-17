@@ -2,7 +2,7 @@ package de.htwg.se.othello.model.handler
 
 import de.htwg.se.othello.model.{Stoneposition, Board}
 
-abstract class MoveHandlerTemplate {
+abstract class MoveHandlerTemplate extends MoveHandlerTemplateInterface{
 
   final def processMove(stonePosition: Stoneposition, board: Board): Board = {
     if (!isValidMove(stonePosition, board)) {
