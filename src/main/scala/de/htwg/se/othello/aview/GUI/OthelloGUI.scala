@@ -6,8 +6,10 @@ import de.htwg.se.othello.controller.Controller
 import scala.util.Try
 import de.htwg.se.othello.model.Stone
 import javax.swing.ImageIcon
+import de.htwg.se.othello.util.Observer
 
-class OthelloGUI(controller:Controller) extends MainFrame{
+class OthelloGUI(controller:Controller) extends MainFrame with Observer{
+  controller.add(this)
   title = "Othello"
 
   val white_stone = new ImageIcon("src/main/resources/pieces/white.png")
@@ -131,6 +133,12 @@ class OthelloGUI(controller:Controller) extends MainFrame{
     validate() // Aktualisiert das Layout repaint() // Zeichnet die GUI neu
     repaint()
 }
+
+  override def update: Unit = {
+      println("Das Spielfeld wurde aktualisiert.")
+      println(controller.boardToString)
+      
+    }
 
 }
 
