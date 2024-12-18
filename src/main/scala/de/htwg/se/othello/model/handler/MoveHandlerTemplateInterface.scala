@@ -1,10 +1,11 @@
 package de.htwg.se.othello.model.handler
-import de.htwg.se.othello.model.{Board, Stoneposition}
+
 import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.Interface.StonepositionComponent
 
 trait MoveHandlerTemplateInterface {
-def processMove(stonePosition: Stoneposition, board: BoardComponent): BoardComponent
-  def isValidMove(stonePosition: Stoneposition, board: BoardComponent): Boolean
-  protected def flipStones(stonePosition: Stoneposition, board: BoardComponent): BoardComponent
+def processMove(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent
+  def isValidMove(stonePosition: StonepositionComponent, board: BoardComponent): Boolean
+  protected def flipStones(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent
   
 }
