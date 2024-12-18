@@ -9,10 +9,11 @@ import scala.io.StdIn.readLine
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.othello.model.Interface.BoardComponent
 import de.htwg.se.othello.model.handler.MoveHandlerTemplateInterface
+import de.htwg.se.othello.controller.Interface.ControllerComponent
 
 
 
-class Controller(var board: BoardComponent) extends Observable {
+class Controller(var board: BoardComponent) extends ControllerComponent{
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var moveHandler: MoveHandlerTemplateInterface = MoveHandler
