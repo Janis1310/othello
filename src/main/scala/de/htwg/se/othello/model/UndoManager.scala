@@ -1,32 +1,35 @@
 package de.htwg.se.othello.model
 
+import de.htwg.se.othello.model.Interface.UndoManagerComponent
 
-class UndoManager {
+
+class UndoManager extends UndoManagerComponent{
   private var undoStack: List[Command]= Nil // Stack of runed commands
   private var redoStack: List[Command]= Nil // Stack der rückgängig gemachten Befehle
-  def doStep(command: Command) = { // führt neuen Befehl aus
-    println("doStep!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    undoStack = command::undoStack // add command to undoStack
-    command.doStep
+
+  override def doStep(command: Command): Unit = {
+    undoStack = command :: undoStack // Füge den Befehl zum undoStack hinzu
+    command.doStep // Führe den Befehl aus
   }
-  def undoStep  = {
+
+// Macht den letzten Befehl rückgängig und fügt ihn zum redoStack hinzu
+  override def undoStep(): Unit = {
     undoStack match {
-      case  Nil => // Stack is empty
-      case head::stack => {
-        head.undoStep
-        undoStack=stack
-        redoStack= head::redoStack // add undone command to redoStack
-      }
+      case Nil => // Stack ist leer, nichts zu tun
+      case head :: stack =>
+        head.undoStep // Mache den Befehl rückgängig
+        undoStack = stack // Entferne den Befehl aus dem undoStack
+        redoStack = head :: redoStack // Füge den rückgängig gemachten Befehl zum redoStack hinzu
     }
   }
-  def redoStep = {
+
+  override def redoStep(): Unit = {
     redoStack match {
-      case Nil =>
-      case head::stack => {
-        head.redoStep
-        redoStack=stack
-        undoStack=head::undoStack
-      }
+      case Nil => // Redo-Stack ist leer, nichts zu tun
+      case head :: stack =>
+        head.redoStep // Wiederhole den rückgängig gemachten Befehl
+        redoStack = stack // Entferne den Befehl aus dem redoStack
+        undoStack = head :: undoStack // Füge den wiederholten Befehl zum undoStack hinzu
     }
   }
 }
