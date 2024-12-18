@@ -8,10 +8,11 @@ import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
 import scala.util.{Try, Success, Failure}
+import de.htwg.se.othello.model.Interface.BoardComponent
 
 
 
-class Controller(var board: Board) extends Observable {
+class Controller(var board: BoardComponent) extends Observable {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var moveHandler: MoveHandlerTemplate = MoveHandler
@@ -75,7 +76,7 @@ class Controller(var board: Board) extends Observable {
   }
 
   // Erstellt ein neues Board und gibt es zurück
-  def createNewBoard(rows: Int, cols: Int): Board = {
+  def createNewBoard(rows: Int, cols: Int): BoardComponent = {
     if (gameState == GameState.SETUP) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN) // Erst nach Erstellung des Boards den Zustand ändern
@@ -140,7 +141,7 @@ class Controller(var board: Board) extends Observable {
     notifyObservers
   }
 
-  def setBoard(board: Board): Unit = {
+  def setBoard(board: BoardComponent): Unit = {
   this.board = board
   notifyObservers // Observer über den neuen Zustand informieren
   }

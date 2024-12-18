@@ -5,6 +5,7 @@ import scala.util.control.Breaks._
 import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player}
 import de.htwg.se.othello.util.Observable
 import scala.collection.immutable.Queue
+import de.htwg.se.othello.model.Interface.BoardComponent
 
 
 object StrategyContext {
@@ -23,7 +24,7 @@ object StrategyContext {
 
         
     // Strategie 1: Iteriert vorwärts
-    def strategy1(board: Board): Option[Stoneposition] = {
+    def strategy1(board: BoardComponent): Option[Stoneposition] = {
         println("Strategie 1:")
         val stone = getCurrentPlayer.stone
         var result: Option[Stoneposition] = None
@@ -41,7 +42,7 @@ object StrategyContext {
     }
 
     // Strategie 2: Iteriert rückwärts
-    def strategy2(board: Board): Option[Stoneposition] = {
+    def strategy2(board: BoardComponent): Option[Stoneposition] = {
         println("Strategie 2:")
         val stone = getCurrentPlayer.stone
         var result: Option[Stoneposition] = None

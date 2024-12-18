@@ -1,5 +1,6 @@
 package de.htwg.se.othello.model
 import de.htwg.se.othello.model.handler.MoveHandlerTemplate
+import de.htwg.se.othello.model.Interface.BoardComponent
 
 object MoveHandler extends MoveHandlerTemplate{
 
@@ -13,7 +14,7 @@ object MoveHandler extends MoveHandlerTemplate{
           (-1, 0),
           (-1, 1)
         )
-    override def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
+    override def isValidMove(stoneposition: Stoneposition, board: BoardComponent): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
@@ -33,7 +34,7 @@ object MoveHandler extends MoveHandlerTemplate{
         }
       }
     // checkDirction(x_newdirection, y_newdirection, x_positionCurrent, y_positionCurrent, ?foundOpponent?, opponentColor, playerColor, board)
-    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board): Boolean = {
+    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: BoardComponent): Boolean = {
       if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
         return false // Aus dem Board heraus
       }
@@ -48,7 +49,7 @@ object MoveHandler extends MoveHandlerTemplate{
       }
   }
 
-  override protected def flipStones(stonePosition: Stoneposition, board: Board): Board = {
+  override protected def flipStones(stonePosition: Stoneposition, board: BoardComponent): BoardComponent = {
     val player = stonePosition.stone
     val opponent = player.flip
 
@@ -62,7 +63,7 @@ object MoveHandler extends MoveHandlerTemplate{
 
 
 
-  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: Stone, player: Stone, board: Board): Board = {
+  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: Stone, player: Stone, board: BoardComponent): BoardComponent = {
 
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) 
       return board // direction is out of bounds
