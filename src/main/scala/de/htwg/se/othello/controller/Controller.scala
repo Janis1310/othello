@@ -2,7 +2,6 @@ package de.htwg.se.othello.controller
 
 import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, UndoManager, SetCommand}
 import de.htwg.se.othello.ai.StrategyContext
-import de.htwg.se.othello.util.{Observable}
 import scala.util.{Try, Success, Failure}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
@@ -10,6 +9,7 @@ import scala.util.{Try, Success, Failure}
 import de.htwg.se.othello.model.Interface.BoardComponent
 import de.htwg.se.othello.model.handler.MoveHandlerTemplateInterface
 import de.htwg.se.othello.controller.Interface.ControllerComponent
+import de.htwg.se.othello.model.Interface.UndoManagerComponent
 
 
 
@@ -133,12 +133,12 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
 
   // ab hier für Command Pattern
   def undo: Unit = {
-    undoManager.undoStep
+    undoManager.undoStep()
     notifyObservers
   }
 
   def redo: Unit = {
-    undoManager.redoStep
+    undoManager.redoStep()
     notifyObservers
   }
 
