@@ -1,14 +1,13 @@
 package de.htwg.se.othello.aview
 
-import de.htwg.se.othello.model.{Stone, Board}
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
-
-import de.htwg.se.othello.controller.{GameState, Controller}
+import de.htwg.se.othello.controller.GameState
 import de.htwg.se.othello.util.Observer
 import scala.util.{Try, Success, Failure}
+import de.htwg.se.othello.controller.Interface.ControllerComponent
 
-class TUI(controller: Controller) extends Observer {
+class TUI(controller: ControllerComponent) extends Observer {
   controller.add(this)
 
   def inputPlayers(): Unit = {
