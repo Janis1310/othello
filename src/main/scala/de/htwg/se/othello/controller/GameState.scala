@@ -1,8 +1,5 @@
 package de.htwg.se.othello.controller
 
-import de.htwg.se.othello.model.{Player, Board}
-
-
 object GameState extends Enumeration {
   type GameState = Value
 
