@@ -1,6 +1,8 @@
 package de.htwg.se.othello.model
 
-class Board(private val board: Matrix[Stone]) {
+import de.htwg.se.othello.model.Interface.BoardComponent
+
+class Board(private val board: Matrix[Stone]) extends BoardComponent{
 
     def this(row: Int, column: Int) = {
       this({
@@ -23,7 +25,7 @@ class Board(private val board: Matrix[Stone]) {
     def numRows: Int = board.numRows
     def numCols: Int = board.numCols
 
-    def placeStone(x: Int, y: Int, stone: Stone): Board = {
+    def placeStone(x: Int, y: Int, stone: Stone): BoardComponent = {
       val newMatrix = board.replaceCell(x, y, stone)
       new Board(newMatrix)
     }
@@ -57,7 +59,7 @@ class Board(private val board: Matrix[Stone]) {
         sb.toString()
       }
 
-    def copy(): Board = {
+    def copy(): BoardComponent = {
     new Board(board.copy()) // Nutzt die copy-Methode der Matrix
   }
 }
