@@ -1,6 +1,7 @@
 package de.htwg.se.othello.model
 import de.htwg.se.othello.model.handler.MoveHandlerTemplate
 import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.Interface.StoneComponent
 
 object MoveHandler extends MoveHandlerTemplate{
 
@@ -34,7 +35,7 @@ object MoveHandler extends MoveHandlerTemplate{
         }
       }
     // checkDirction(x_newdirection, y_newdirection, x_positionCurrent, y_positionCurrent, ?foundOpponent?, opponentColor, playerColor, board)
-    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: BoardComponent): Boolean = {
+    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: StoneComponent, player: StoneComponent, board: BoardComponent): Boolean = {
       if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
         return false // Aus dem Board heraus
       }
@@ -63,7 +64,7 @@ object MoveHandler extends MoveHandlerTemplate{
 
 
 
-  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: Stone, player: Stone, board: BoardComponent): BoardComponent = {
+  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: StoneComponent, player: StoneComponent, board: BoardComponent): BoardComponent = {
 
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) 
       return board // direction is out of bounds

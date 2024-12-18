@@ -1,12 +1,13 @@
 package de.htwg.se.othello.model
 
 import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.Interface.StoneComponent
 
-class Board(private val board: Matrix[Stone]) extends BoardComponent{
+class Board(private val board: Matrix[StoneComponent]) extends BoardComponent{
 
     def this(row: Int, column: Int) = {
       this({
-        val emptyBoard = new Matrix[Stone](row, column, Stone.Empty)
+        val emptyBoard = new Matrix[StoneComponent](row, column, Stone.Empty)
 
         // Calculate center positions for the initial stones
         val pos1 = (row - 1) / 2
@@ -21,11 +22,11 @@ class Board(private val board: Matrix[Stone]) extends BoardComponent{
       })
     }
 
-    def getBoard: Matrix[Stone] = board
+    def getBoard: Matrix[StoneComponent] = board
     def numRows: Int = board.numRows
     def numCols: Int = board.numCols
 
-    def placeStone(x: Int, y: Int, stone: Stone): BoardComponent = {
+    def placeStone(x: Int, y: Int, stone: StoneComponent): BoardComponent = {
       val newMatrix = board.replaceCell(x, y, stone)
       new Board(newMatrix)
     }

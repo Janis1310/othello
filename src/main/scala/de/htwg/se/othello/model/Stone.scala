@@ -1,4 +1,6 @@
 package de.htwg.se.othello.model
+
+import de.htwg.se.othello.model.Interface.StoneComponent
 // enum Stone {
 //   case Black, White, Empty
 
@@ -13,28 +15,51 @@ package de.htwg.se.othello.model
 //     case Empty => throw new UnsupportedOperationException("Empty cannot be flipped")
 // }
 
-sealed trait Stone {
-  def flip: Stone
-  override def toString: String
-}
+// sealed trait Stone {
+//   def flip: Stone
+//   override def toString: String
+// }
 
+// object Stone {
+//   case object Black extends StoneComponent {
+//     override def flip: Stone = White
+//     override def toString: String = "S"
+//   }
+
+//   case object White extends Stone {
+//     override def flip: Stone = Black
+//     override def toString: String = "W"
+//   }
+
+//   case object Empty extends Stone {
+//     override def flip: Stone = throw new UnsupportedOperationException("Empty cannot be flipped")
+//     override def toString: String = "."
+//   }
+
+//   // Exporte für Zugriff als Stone.White, Stone.Black, usw.
+//   val BlackStone: Stone = Black
+//   val WhiteStone: Stone = White
+//   val EmptyStone: Stone = Empty
+// }
 object Stone {
-  case object Black extends Stone {
-    override def flip: Stone = White
+  case object Black extends StoneComponent {
+    override def flip: StoneComponent = White
     override def toString: String = "S"
   }
 
-  case object White extends Stone {
-    override def flip: Stone = Black
+  case object White extends StoneComponent {
+    override def flip: StoneComponent = Black
     override def toString: String = "W"
   }
 
-  case object Empty extends Stone {
-    override def flip: Stone = throw new UnsupportedOperationException("Empty cannot be flipped")
+  case object Empty extends StoneComponent {
+    override def flip: StoneComponent = throw new UnsupportedOperationException("Empty cannot be flipped")
     override def toString: String = "."
   }
 
-  // Exporte für Zugriff als Stone.White, Stone.Black, usw.
+  // Alias für Benutzerfreundlichkeit
+  type Stone = StoneComponent
+
   val BlackStone: Stone = Black
   val WhiteStone: Stone = White
   val EmptyStone: Stone = Empty

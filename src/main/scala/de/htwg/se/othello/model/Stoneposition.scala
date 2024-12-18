@@ -1,3 +1,6 @@
 package de.htwg.se.othello.model
 
-case class Stoneposition(x: Int, y: Int, stone:Stone)
+import de.htwg.se.othello.model.Interface.StonepositionComponent
+import de.htwg.se.othello.model.Interface.StoneComponent
+
+case class Stoneposition(x: Int, y: Int, stone: StoneComponent) extends StonepositionComponent
