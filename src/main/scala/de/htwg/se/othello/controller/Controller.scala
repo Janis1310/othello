@@ -6,16 +6,16 @@ import de.htwg.se.othello.util.{Observable}
 import scala.util.{Try, Success, Failure}
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
-import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.handler.MoveHandlerTemplateInterface
 
 
 
 class Controller(var board: BoardComponent) extends Observable {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private var moveHandler: MoveHandlerTemplate = MoveHandler
+  private var moveHandler: MoveHandlerTemplateInterface = MoveHandler
   private val undoManager = new UndoManager
 
   // Gibt das Board als Zeichenkette zurück
