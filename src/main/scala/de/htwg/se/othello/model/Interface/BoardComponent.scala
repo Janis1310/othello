@@ -1,8 +1,7 @@
 package de.htwg.se.othello.model.Interface
 
-import de.htwg.se.othello.model.Matrix
+
 import de.htwg.se.othello.model.Stone
-import de.htwg.se.othello.model.MatrixInterface
 
 trait BoardComponent {
   def getBoard: MatrixInterface[StoneComponent]
