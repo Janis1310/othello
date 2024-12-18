@@ -57,7 +57,7 @@ object Stone {
     override def toString: String = "."
   }
 
-  // Alias für Benutzerfreundlichkeit
+
   type Stone = StoneComponent
 
   val BlackStone: Stone = Black
