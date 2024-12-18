@@ -3,7 +3,7 @@ package de.htwg.se.othello.model
 import de.htwg.se.othello.model.Interface.BoardComponent
 import de.htwg.se.othello.model.Interface.StoneComponent
 
-class Board(private val board: Matrix[StoneComponent]) extends BoardComponent{
+class Board(private val board: MatrixInterface[StoneComponent]) extends BoardComponent{
 
     def this(row: Int, column: Int) = {
       this({
@@ -22,7 +22,7 @@ class Board(private val board: Matrix[StoneComponent]) extends BoardComponent{
       })
     }
 
-    def getBoard: Matrix[StoneComponent] = board
+    def getBoard: MatrixInterface[StoneComponent] = board
     def numRows: Int = board.numRows
     def numCols: Int = board.numCols
 
@@ -61,6 +61,9 @@ class Board(private val board: Matrix[StoneComponent]) extends BoardComponent{
       }
 
     def copy(): BoardComponent = {
-    new Board(board.copy()) // Nutzt die copy-Methode der Matrix
+      board match {
+      case m: Matrix[StoneComponent] => new Board(m.copy())  // Matrix.copy() wird hier verwendet
+      case _ => throw new UnsupportedOperationException("Unsupported Matrix type for copy")
+    }
   }
 }
