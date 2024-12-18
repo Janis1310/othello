@@ -4,10 +4,10 @@ import de.htwg.se.othello.model.Matrix
 import de.htwg.se.othello.model.Stone
 
 trait BoardComponent {
-  def getBoard: Matrix[Stone]
+  def getBoard: Matrix[StoneComponent]
   def numRows: Int
   def numCols: Int
-  def placeStone(x: Int, y: Int, stone: Stone): BoardComponent
+  def placeStone(x: Int, y: Int, stone: StoneComponent): BoardComponent
   def copy(): BoardComponent
   override def toString: String
 }
