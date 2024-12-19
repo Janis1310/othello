@@ -3,6 +3,7 @@ package de.htwg.se.othello.model
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 import de.htwg.se.othello.model.{Board, Stone} // import board and stone
+import de.htwg.se.othello.model.Stone.BlackStone
 
 class BoardSpec extends AnyWordSpec with Matchers {
   "A Board" should {
@@ -58,5 +59,30 @@ class BoardSpec extends AnyWordSpec with Matchers {
       // Überprüfe, dass ein neues Board-Objekt zurückgegeben wird
       updatedBoard should not be theSameInstanceAs(board)
     }
-  }
+
+    "return row and colum size of the board" in {
+      val board = new Board(6,8)
+
+      board.numRows shouldBe (6)
+
+      board.numCols shouldBe (8)
+    }
+
+     "correctly copy the board" in {
+      val originalBoard = new Board(8, 8)
+
+      // Erstelle eine Kopie des Boards
+      val copiedBoard = originalBoard.copy().asInstanceOf[Board]
+
+      // Stelle sicher, dass das kopierte Board eine andere Instanz ist
+      copiedBoard should not be theSameInstanceAs(originalBoard)
+
+      // Überprüfe, dass die Matrix des kopierten Boards eine andere Instanz ist
+      copiedBoard.getBoard should not be theSameInstanceAs(originalBoard.getBoard)
+
+      // Stelle sicher, dass die Daten der Matrix im kopierten Board gleich sind
+      copiedBoard.getBoard.cell(3,3) should equal(originalBoard.getBoard.cell(3,3))
+
+    }
+}
 }
