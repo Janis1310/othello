@@ -3,7 +3,6 @@ package de.htwg.se.othello
 import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.model.Board
 import de.htwg.se.othello.controller.Controller
-import scala.util.{Try, Success, Failure}
 
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.aview.GUI.OthelloGUI
@@ -25,7 +24,6 @@ object Othello {
       input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
       tui.processInputLine(input)  // Eingabe verarbeiten
     }
-
     println("Das Spiel wurde beendet.")
   }
 }

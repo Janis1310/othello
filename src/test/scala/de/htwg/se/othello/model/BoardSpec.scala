@@ -3,8 +3,7 @@ package de.htwg.se.othello.model
 import de.htwg.se.othello.model.Interface.{MatrixInterface, StoneComponent}
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
-import de.htwg.se.othello.model.{Board, Stone}
-import de.htwg.se.othello.model.Stone.BlackStone
+
 
 class BoardSpec extends AnyWordSpec with Matchers {
   class DummyMatrix[T] extends MatrixInterface[T] {
