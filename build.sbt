@@ -14,7 +14,9 @@ lazy val root = (project in file("."))
 
             "org.scalafx" %% "scalafx" % "20.0.0-R31",
             "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
-        )
+        ),
+
+        coverageExcludedPackages := ".*Othello.*" ,
     )
 
 /*val scala3Version = "3.5.1"

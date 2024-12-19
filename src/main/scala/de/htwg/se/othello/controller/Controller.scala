@@ -146,4 +146,8 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
   this.board = board
   notifyObservers // Observer über den neuen Zustand informieren
   }
+
+  def getBoard() : BoardComponent = {
+    return board
+  }
 }

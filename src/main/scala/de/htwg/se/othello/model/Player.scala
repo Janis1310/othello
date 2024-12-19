@@ -7,7 +7,7 @@ trait Player {
   def name: String
   def stone: StoneComponent
   def role: String  // Add this method to define the player's role
-  override def toString: String = s"$name: $stone"
+  // override def toString: String = s"$name: $stone"
 }
 
 // concreteProduct: HumanPlayer
