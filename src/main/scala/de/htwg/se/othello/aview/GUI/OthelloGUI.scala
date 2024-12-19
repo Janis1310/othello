@@ -110,7 +110,7 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
                   case Right(_) =>
                     // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
 
-                    refreshBoard() // Oder setze den Inhalt des GridPanels direkt
+                  refreshBoard() // Oder setze den Inhalt des GridPanels direkt
                   case Left(message) =>
                     Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
                 }
@@ -136,6 +136,7 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
 
   override def update: Unit = {
       println("Das Spielfeld wurde aktualisiert.")
+      refreshBoard()
       println(controller.boardToString)
       
     }
