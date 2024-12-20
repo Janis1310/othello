@@ -1,14 +1,12 @@
 package de.htwg.se.othello.aview
 
-import de.htwg.se.othello.model.{Stone, Board}
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
-
-import de.htwg.se.othello.controller.{GameState, Controller}
 import de.htwg.se.othello.util.Observer
 import scala.util.{Try, Success, Failure}
+import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
 
-class TUI(controller: Controller) extends Observer {
+class TUI(controller: ControllerComponent) extends Observer {
   controller.add(this)
 
   def inputPlayers(): Unit = {
@@ -69,25 +67,9 @@ class TUI(controller: Controller) extends Observer {
 
     }
   }
-
   override def update: Unit = {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
     println(GameState.message(controller.getGameState))
-  }
-
-  def start(): Unit = {
-    inputPlayers()
-    inputBoardSize()
-    println("Das Spiel beginnt!")
-    var input: String = ""
-    while (input != "q") {
-      println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
-      println("q => quit, z => undo, y => redo, n => new game")
-      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
-      processInputLine(input)  // Eingabe verarbeiten
-    }
-
-    println("Das Spiel wurde beendet.")
   }
 }

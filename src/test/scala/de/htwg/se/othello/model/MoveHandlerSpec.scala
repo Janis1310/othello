@@ -1,9 +1,10 @@
 
 package de.htwg.se.othello.model
 
-import org.scalatest.matchers.should.Matchers._
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Matrix, Stone, Stoneposition}
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
+import org.scalatest.matchers.should.Matchers.*
 import org.scalatest.wordspec.AnyWordSpec
-import de.htwg.se.othello.model.{Matrix, Stone}
 
 class MoveHandlerSpec extends AnyWordSpec {
     "A Move" when {
@@ -37,29 +38,32 @@ class MoveHandlerSpec extends AnyWordSpec {
         "flipStones" should {
             "flip stones horizontally to the left" in {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
-                val newBoard = MoveHandler.flipStones(Stoneposition(3, 2, Stone.Black), board)
+                val newBoard = MoveHandler.processMove(Stoneposition(3, 2, Stone.Black), board)
                 newBoard.getBoard.cell(3, 2) should be(Stone.Black) // neuer Stein
                 newBoard.getBoard.cell(3, 3) should be(Stone.Black) // umgedrehter Stein
             }
             "flip stones vertically upward" in {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
-                val newBoard = MoveHandler.flipStones(Stoneposition(2, 4, Stone.Black), board)
-                newBoard.getBoard.cell(2, 4) should be(Stone.Black) // neuer Stein
-                newBoard.getBoard.cell(3, 4) should be(Stone.Black) // umgedrehter Stein
+                val newBoard = MoveHandler.processMove(Stoneposition(2, 4, Stone.White), board)
+                newBoard.getBoard.cell(2, 4) should be(Stone.White) // neuer Stein
+                newBoard.getBoard.cell(3, 4) should be(Stone.White) // umgedrehter Stein
             }
             "flip stones diagonally bottom-right" in {
                 val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
-                val newBoard = MoveHandler.flipStones(Stoneposition(5, 3, Stone.White), board)
+                val newBoard = MoveHandler.processMove(Stoneposition(5, 3, Stone.White), board)
                 newBoard.getBoard.cell(5, 3) should be(Stone.White) // neuer Stein
                 newBoard.getBoard.cell(4, 3) should be(Stone.White) // umgedrehter Stein
             }
             "not flip any stones for an invalid move" in {
 
-                val board = new Board(8, 8) // Startzustand wird automatisch initialisiert
-                val newBoard = MoveHandler.flipStones(Stoneposition(0, 0, Stone.Black), board)
-                newBoard.getBoard.cell(0, 0) should be(Stone.Black) // Stein wird trotzdem gesetzt
-                newBoard.getBoard.cell(3, 4) should be(Stone.Black) // ursprünglicher Zustand bleibt unverändert
-                newBoard.getBoard.cell(4, 3) should be(Stone.Black) // ursprünglicher Zustand bleibt unverändert
+                val board = new Board(8, 8)
+
+                val invalidMove = Stoneposition(0, 0, Stone.White)
+
+                // Test, dass eine IllegalArgumentException ausgelöst wird
+                an[IllegalArgumentException] shouldBe thrownBy {
+                    MoveHandler.processMove(invalidMove, board)
+                }
             }
         }
     }

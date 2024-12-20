@@ -1,4 +1,4 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello.model.BoardComponents
 
 trait MatrixInterface[T] {
   

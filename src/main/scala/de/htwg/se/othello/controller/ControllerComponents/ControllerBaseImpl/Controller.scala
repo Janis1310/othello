@@ -1,20 +1,24 @@
-package de.htwg.se.othello.controller
+package de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl
 
-import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, UndoManager, SetCommand}
 import de.htwg.se.othello.ai.StrategyContext
-import de.htwg.se.othello.util.{Observable}
-import scala.util.{Try, Success, Failure}
+import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Stoneposition}
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{SetCommand, UndoManager}
+import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
+import de.htwg.se.othello.model.HandlerComponents.MoveHandlerTemplateInterface
+import de.htwg.se.othello.model.Playercomponents.Player
+
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
-import de.htwg.se.othello.model.handler.{MoveHandlerTemplate}
-import scala.util.{Try, Success, Failure}
+import scala.util.{Failure, Success, Try}
 
 
-
-class Controller(var board: Board) extends Observable {
+class Controller(var board: BoardComponent) extends ControllerComponent{
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private var moveHandler: MoveHandlerTemplate = MoveHandler
+  private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
   private val undoManager = new UndoManager
 
   // Gibt das Board als Zeichenkette zurück
@@ -53,17 +57,19 @@ class Controller(var board: Board) extends Observable {
         val stone = getCurrentPlayer.stone
         val stonePosition = Stoneposition(x, y, stone)
 
-         val previousBoard = board.copy()
+        val previousBoard = board.copy()
 
         val moveresult = Try {
           
-          nextPlayer() // Nach einem gültigen Zug den Spieler wechseln
+           // Nach einem gültigen Zug den Spieler wechseln
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           board.toString
         }
 
         moveresult match {
-        case Success(boardString) => Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
+        case Success(boardString) => 
+          nextPlayer()
+          Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
         case Failure(_) => Left("Ungültiger Zug.") // Fehler im Zug
       }
 
@@ -73,7 +79,7 @@ class Controller(var board: Board) extends Observable {
   }
 
   // Erstellt ein neues Board und gibt es zurück
-  def createNewBoard(rows: Int, cols: Int): Board = {
+  def createNewBoard(rows: Int, cols: Int): BoardComponent = {
     if (gameState == GameState.SETUP) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN) // Erst nach Erstellung des Boards den Zustand ändern
@@ -129,17 +135,21 @@ class Controller(var board: Board) extends Observable {
 
   // ab hier für Command Pattern
   def undo: Unit = {
-    undoManager.undoStep
+    undoManager.undoStep()
     notifyObservers
   }
 
   def redo: Unit = {
-    undoManager.redoStep
+    undoManager.redoStep()
     notifyObservers
   }
 
-  def setBoard(board: Board): Unit = {
+  def setBoard(board: BoardComponent): Unit = {
   this.board = board
   notifyObservers // Observer über den neuen Zustand informieren
   }
+
+  /*def getBoard() : BoardComponent = {
+    board
+  }*/
 }

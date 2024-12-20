@@ -1,5 +1,7 @@
-package de.htwg.se.othello.model
-import de.htwg.se.othello.controller.Controller
+package de.htwg.se.othello.model.CommandComponents.CommandBaseImpl
+
+import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
 
 trait Command {
     def doStep:Unit
@@ -7,7 +9,7 @@ trait Command {
     def redoStep:Unit
 }
 
-class SetCommand(private val previousBoard: Board, private val newBoard: Board, private val controller: Controller) extends Command {
+class SetCommand(private val previousBoard: BoardComponent, private val newBoard: BoardComponent, private val controller: ControllerComponent) extends Command {
 
   override def doStep: Unit = {
     // Setze das Board im Controller auf den neuen Zustand

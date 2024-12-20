@@ -1,10 +1,12 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
 
-class Board(private val board: Matrix[Stone]) {
+import de.htwg.se.othello.model.BoardComponents.{BoardComponent, MatrixInterface, StoneComponent}
+
+class Board(private val board: MatrixInterface[StoneComponent]) extends BoardComponent{
 
     def this(row: Int, column: Int) = {
       this({
-        val emptyBoard = new Matrix[Stone](row, column, Stone.Empty)
+        val emptyBoard = new Matrix[StoneComponent](row, column, Stone.Empty)
 
         // Calculate center positions for the initial stones
         val pos1 = (row - 1) / 2
@@ -19,11 +21,11 @@ class Board(private val board: Matrix[Stone]) {
       })
     }
 
-    def getBoard: Matrix[Stone] = board
+    def getBoard: MatrixInterface[StoneComponent] = board
     def numRows: Int = board.numRows
     def numCols: Int = board.numCols
 
-    def placeStone(x: Int, y: Int, stone: Stone): Board = {
+    def placeStone(x: Int, y: Int, stone: StoneComponent): BoardComponent = {
       val newMatrix = board.replaceCell(x, y, stone)
       new Board(newMatrix)
     }
@@ -57,7 +59,10 @@ class Board(private val board: Matrix[Stone]) {
         sb.toString()
       }
 
-    def copy(): Board = {
-    new Board(board.copy()) // Nutzt die copy-Methode der Matrix
+    def copy(): BoardComponent = {
+      board match {
+      case m: Matrix[StoneComponent] => new Board(m.copy())  // Matrix.copy() wird hier verwendet
+      case _ => throw new UnsupportedOperationException("Unsupported Matrix type for copy")
+    }
   }
 }
