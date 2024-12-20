@@ -1,4 +1,4 @@
-package de.htwg.se.othello.controller
+package de.htwg.se.othello.controller.ControllerComponents
 
 import scala.swing.event.Event
 

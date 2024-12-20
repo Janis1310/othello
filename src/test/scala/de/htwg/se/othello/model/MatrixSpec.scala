@@ -1,10 +1,10 @@
 
 package de.htwg.se.othello.model
 
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Matrix, Stone}
+import de.htwg.se.othello.model.BoardComponents.StoneComponent
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
-import de.htwg.se.othello.model.{Matrix, Stone}
-import de.htwg.se.othello.model.Interface.StoneComponent
 
 class MatrixSpec extends AnyWordSpec {
     "A Matrix" when {

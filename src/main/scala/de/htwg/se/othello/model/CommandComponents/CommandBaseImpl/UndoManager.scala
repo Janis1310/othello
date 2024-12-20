@@ -1,6 +1,7 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello.model.CommandComponents.CommandBaseImpl
 
-import de.htwg.se.othello.model.Interface.UndoManagerComponent
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.Command
+import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
 
 
 class UndoManager extends UndoManagerComponent{

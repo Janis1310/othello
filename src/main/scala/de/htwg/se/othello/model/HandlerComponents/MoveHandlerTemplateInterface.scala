@@ -1,7 +1,6 @@
-package de.htwg.se.othello.model.handler
+package de.htwg.se.othello.model.HandlerComponents
 
-import de.htwg.se.othello.model.Interface.BoardComponent
-import de.htwg.se.othello.model.Interface.StonepositionComponent
+import de.htwg.se.othello.model.BoardComponents.{BoardComponent, StonepositionComponent}
 
 trait MoveHandlerTemplateInterface {
 def processMove(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent

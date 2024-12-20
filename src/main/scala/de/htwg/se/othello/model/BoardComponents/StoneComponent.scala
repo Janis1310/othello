@@ -1,4 +1,4 @@
-package de.htwg.se.othello.model.Interface
+package de.htwg.se.othello.model.BoardComponents
 
 trait StoneComponent {
    def flip: StoneComponent

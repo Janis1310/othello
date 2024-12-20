@@ -1,4 +1,4 @@
-package de.htwg.se.othello.controller
+package de.htwg.se.othello.controller.ControllerComponents
 
 object GameState extends Enumeration {
   type GameState = Value

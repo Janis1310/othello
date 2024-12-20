@@ -1,11 +1,11 @@
 package de.htwg.se.othello
 
 import de.htwg.se.othello.aview.TUI
-import de.htwg.se.othello.model.Board
-import de.htwg.se.othello.controller.Controller
 
 import scala.io.StdIn.readLine
 import de.htwg.se.othello.aview.GUI.OthelloGUI
+import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Controller
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
 
 object Othello {
   val controller = new Controller(new Board(8, 8))
