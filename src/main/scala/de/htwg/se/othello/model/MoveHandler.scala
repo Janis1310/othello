@@ -1,18 +1,22 @@
 package de.htwg.se.othello.model
+import de.htwg.se.othello.model.handler.MoveHandlerTemplate
+import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.Interface.StoneComponent
+import de.htwg.se.othello.model.Interface.StonepositionComponent
 
-object MoveHandler {
+object MoveHandler extends MoveHandlerTemplate{
 
   private val directions = Seq(
-          (0, 1),   // rechts
-          (1, 1),   // rechts unten
-          (1, 0),   // unten
-          (1, -1),  // links unten
-          (0, -1),  // links
-          (-1, -1), // links oben
-          (-1, 0),  // oben
-          (-1, 1)   // rechts oben
+          (0, 1),
+          (1, 1),
+          (1, 0),
+          (1, -1),
+          (0, -1),
+          (-1, -1),
+          (-1, 0),
+          (-1, 1)
         )
-    def isValidMove(stoneposition: Stoneposition, board: Board): Boolean = {
+    override def isValidMove(stoneposition: StonepositionComponent, board: BoardComponent): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
@@ -25,14 +29,14 @@ object MoveHandler {
         }
 
         val player = stoneposition.stone
-        val opponent = if (stoneposition.stone == Stone.White) Stone.Black else Stone.White
+        val opponent = stoneposition.stone.flip
         
         directions.exists { case (dx, dy) =>
         checkDirection(dx, dy, stoneposition.x + dx, stoneposition.y + dy, false, opponent, player, board)
         }
       }
     // checkDirction(x_newdirection, y_newdirection, x_positionCurrent, y_positionCurrent, ?foundOpponent?, opponentColor, playerColor, board)
-    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: Stone, player: Stone, board: Board): Boolean = {
+    private def checkDirection(dx: Int, dy: Int, x: Int, y: Int, foundOpponent: Boolean, opponent: StoneComponent, player: StoneComponent, board: BoardComponent): Boolean = {
       if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) {
         return false // Aus dem Board heraus
       }
@@ -47,21 +51,21 @@ object MoveHandler {
       }
   }
 
-  def flipStones(stonePosition: Stoneposition, board: Board): Board = {
+  override protected def flipStones(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent = {
     val player = stonePosition.stone
-    val opponent = if (player == Stone.White) Stone.Black else Stone.White
+    val opponent = player.flip
 
     var updatedBoard = board.placeStone(stonePosition.x, stonePosition.y, player)
     
     directions.foreach { case (dx, dy) =>
       updatedBoard = flipDirection(dx, dy, stonePosition.x + dx, stonePosition.y + dy, opponent, player, updatedBoard)
     }
-    updatedBoard  // Gib das aktualisierte Board zurück
-}
+    updatedBoard
+  }
 
 
 
-  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: Stone, player: Stone, board: Board): Board = {
+  private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: StoneComponent, player: StoneComponent, board: BoardComponent): BoardComponent = {
 
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) 
       return board // direction is out of bounds
