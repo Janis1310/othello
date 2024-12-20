@@ -15,7 +15,6 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
   val white_stone = new ImageIcon("src/main/resources/pieces/white.png")
   val black_stone = new ImageIcon("src/main/resources/pieces/black.png")
 
-   // Die Methode, um das Initialisierungs-Panel zu erstellen
   def createinitboard = new BoxPanel(Orientation.Vertical) {
     val player1Field = new TextField { columns = 15 }
     val player2Field = new TextField { columns = 15 }
