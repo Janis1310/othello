@@ -1,8 +1,8 @@
-package de.htwg.se.othello.model
-import de.htwg.se.othello.model.handler.MoveHandlerTemplate
-import de.htwg.se.othello.model.Interface.BoardComponent
-import de.htwg.se.othello.model.Interface.StoneComponent
-import de.htwg.se.othello.model.Interface.StonepositionComponent
+package de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl
+
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
+import de.htwg.se.othello.model.BoardComponents.{BoardComponent, StoneComponent, StonepositionComponent}
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandlerTemplate
 
 object MoveHandler extends MoveHandlerTemplate{
 

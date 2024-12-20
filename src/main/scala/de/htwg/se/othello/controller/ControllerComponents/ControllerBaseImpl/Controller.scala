@@ -1,16 +1,18 @@
-package de.htwg.se.othello.controller
+package de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl
 
-import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player, UndoManager, SetCommand}
 import de.htwg.se.othello.ai.StrategyContext
-import scala.util.{Try, Success, Failure}
+import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Stoneposition}
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{SetCommand, UndoManager}
+import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
+import de.htwg.se.othello.model.HandlerComponents.MoveHandlerTemplateInterface
+import de.htwg.se.othello.model.Playercomponents.Player
+
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
-import scala.util.{Try, Success, Failure}
-import de.htwg.se.othello.model.Interface.BoardComponent
-import de.htwg.se.othello.model.handler.MoveHandlerTemplateInterface
-import de.htwg.se.othello.controller.Interface.ControllerComponent
-import de.htwg.se.othello.model.Interface.UndoManagerComponent
-
+import scala.util.{Failure, Success, Try}
 
 
 class Controller(var board: BoardComponent) extends ControllerComponent{

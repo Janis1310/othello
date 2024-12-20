@@ -1,5 +1,6 @@
 package de.htwg.se.othello.model
 
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{Command, UndoManager}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

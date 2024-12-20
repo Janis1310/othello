@@ -1,6 +1,7 @@
 package de.htwg.se.othello.model
 
-import de.htwg.se.othello.model.Interface.{MatrixInterface, StoneComponent}
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone}
+import de.htwg.se.othello.model.BoardComponents.{MatrixInterface, StoneComponent}
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 

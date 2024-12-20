@@ -1,10 +1,10 @@
 package de.htwg.se.othello.aview.GUI
 
+import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Controller
 import scala.swing._
 import scala.swing.event.ButtonClicked
-import de.htwg.se.othello.controller.Controller
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 import scala.util.Try
-import de.htwg.se.othello.model.Stone
 import javax.swing.ImageIcon
 import de.htwg.se.othello.util.Observer
 

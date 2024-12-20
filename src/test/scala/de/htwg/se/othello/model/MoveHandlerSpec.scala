@@ -1,9 +1,10 @@
 
 package de.htwg.se.othello.model
 
-import org.scalatest.matchers.should.Matchers._
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Matrix, Stone, Stoneposition}
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
+import org.scalatest.matchers.should.Matchers.*
 import org.scalatest.wordspec.AnyWordSpec
-import de.htwg.se.othello.model.{Matrix, Stone}
 
 class MoveHandlerSpec extends AnyWordSpec {
     "A Move" when {

@@ -1,9 +1,8 @@
-package de.htwg.se.othello.controller.Interface
+package de.htwg.se.othello.controller.ControllerComponents
 
-import de.htwg.se.othello.model.Player
-import de.htwg.se.othello.model.Interface.BoardComponent
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.controller.GameState
+import de.htwg.se.othello.model.Playercomponents.Player
 import de.htwg.se.othello.util.Observable
 
 trait ControllerComponent extends Observable{

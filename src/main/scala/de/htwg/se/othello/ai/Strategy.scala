@@ -1,11 +1,14 @@
 package de.htwg.se.othello.ai
+
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Stoneposition}
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
+import de.htwg.se.othello.model.Playercomponents.Player
 import scala.util.Random
 
 import scala.util.control.Breaks._
-import de.htwg.se.othello.model.{Board, Stone, Stoneposition, MoveHandler, Player}
 import de.htwg.se.othello.util.Observable
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.model.Interface.BoardComponent
 
 
 object StrategyContext {

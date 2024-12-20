@@ -1,5 +1,6 @@
-package de.htwg.se.othello.model
-import Interface.MatrixInterface
+package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
+
+import de.htwg.se.othello.model.BoardComponents.MatrixInterface
 
 case class Matrix[T](matrix: Vector[Vector[T]]) extends MatrixInterface[T] {
   val numRows: Int = matrix.size

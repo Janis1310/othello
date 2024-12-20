@@ -1,6 +1,6 @@
-package de.htwg.se.othello.model.Interface
+package de.htwg.se.othello.model.CommandComponents
 
-import de.htwg.se.othello.model.Command
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.Command
 
 trait UndoManagerComponent {
   // Führe einen neuen Befehl aus
