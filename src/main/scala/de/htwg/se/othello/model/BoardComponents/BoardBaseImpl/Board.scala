@@ -1,8 +1,6 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
 
-import de.htwg.se.othello.model.Interface.BoardComponent
-import de.htwg.se.othello.model.Interface.StoneComponent
-import Interface.MatrixInterface
+import de.htwg.se.othello.model.BoardComponents.{BoardComponent, MatrixInterface, StoneComponent}
 
 class Board(private val board: MatrixInterface[StoneComponent]) extends BoardComponent{
 

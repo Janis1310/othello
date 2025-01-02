@@ -1,7 +1,7 @@
-package de.htwg.se.othello.model
-import de.htwg.se.othello.controller.Controller
-import de.htwg.se.othello.model.Interface.BoardComponent
-import de.htwg.se.othello.controller.Interface.ControllerComponent
+package de.htwg.se.othello.model.CommandComponents.CommandBaseImpl
+
+import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
+import de.htwg.se.othello.model.BoardComponents.BoardComponent
 
 trait Command {
     def doStep:Unit

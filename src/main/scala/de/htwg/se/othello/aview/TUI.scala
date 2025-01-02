@@ -2,10 +2,9 @@ package de.htwg.se.othello.aview
 
 import scala.io.StdIn.readLine
 import scala.collection.immutable.Queue
-import de.htwg.se.othello.controller.GameState
 import de.htwg.se.othello.util.Observer
 import scala.util.{Try, Success, Failure}
-import de.htwg.se.othello.controller.Interface.ControllerComponent
+import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
 
 class TUI(controller: ControllerComponent) extends Observer {
   controller.add(this)

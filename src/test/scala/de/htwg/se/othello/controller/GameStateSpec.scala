@@ -1,8 +1,9 @@
 package de.htwg.se.othello.controller
 
+import de.htwg.se.othello.controller.ControllerComponents.GameState
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import GameState._
+import de.htwg.se.othello.controller.ControllerComponents.GameState.*
 
 class GameStateSpec extends AnyWordSpec with Matchers{
    

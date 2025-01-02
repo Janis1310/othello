@@ -1,6 +1,7 @@
-package de.htwg.se.othello.model
+package de.htwg.se.othello.model.Playercomponents
 
-import de.htwg.se.othello.model.Interface.StoneComponent
+import de.htwg.se.othello.model.BoardComponents.StoneComponent
+
 
 // Product (interface)
 trait Player {
