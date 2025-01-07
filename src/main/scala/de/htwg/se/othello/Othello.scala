@@ -6,11 +6,14 @@ import scala.io.StdIn.readLine
 import de.htwg.se.othello.aview.GUI.OthelloGUI
 import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Controller
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
+import com.google.inject.Guice
+import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
 
 object Othello {
-  val controller = new Controller(new Board(8, 8))
-  val tui = new TUI(controller)
-  val gui = new OthelloGUI(controller)
+  val injector = Guice.createInjector(new OthelloModule)
+  val controller = injector.getInstance(classOf[ControllerComponent])
+  val tui = TUI(controller)
+  val gui = OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
     gui.start()
