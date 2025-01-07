@@ -2,9 +2,10 @@ package de.htwg.se.othello.model.CommandComponents.CommandBaseImpl
 
 import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.Command
 import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
+import com.google.inject.Inject
 
 
-class UndoManager extends UndoManagerComponent{
+class UndoManager @Inject extends UndoManagerComponent{
   private var undoStack: List[Command]= Nil // Stack of runed commands
   private var redoStack: List[Command]= Nil // Stack der rückgängig gemachten Befehle
 

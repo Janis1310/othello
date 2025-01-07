@@ -1,8 +1,9 @@
 package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
 
 import de.htwg.se.othello.model.BoardComponents.{BoardComponent, MatrixInterface, StoneComponent}
+import com.google.inject.Inject
 
-class Board(private val board: MatrixInterface[StoneComponent]) extends BoardComponent{
+class Board @Inject (private val board: MatrixInterface[StoneComponent]) extends BoardComponent{
 
     def this(row: Int, column: Int) = {
       this({
@@ -27,7 +28,7 @@ class Board(private val board: MatrixInterface[StoneComponent]) extends BoardCom
 
     def placeStone(x: Int, y: Int, stone: StoneComponent): BoardComponent = {
       val newMatrix = board.replaceCell(x, y, stone)
-      new Board(newMatrix)
+      Board(newMatrix)
     }
   
     

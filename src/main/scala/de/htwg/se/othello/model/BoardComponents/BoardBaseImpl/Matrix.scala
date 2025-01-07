@@ -1,11 +1,16 @@
 package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
 
 import de.htwg.se.othello.model.BoardComponents.MatrixInterface
+import com.google.inject.Inject
+import de.htwg.se.othello.Othello.injector
 
-case class Matrix[T](matrix: Vector[Vector[T]]) extends MatrixInterface[T] {
+case class Matrix[T] (matrix: Vector[Vector[T]]) extends MatrixInterface[T] {
   val numRows: Int = matrix.size
   val numCols: Int = if (numRows > 0) matrix(0).size else 0 // Handle empty matrix case
 
+  @Inject
+  def this() = this(Vector.empty[Vector[T]])
+  
   def this(row: Int, column:Int, filling: T) = this(Vector.tabulate(row, column) {
     (_, _) => filling
 })

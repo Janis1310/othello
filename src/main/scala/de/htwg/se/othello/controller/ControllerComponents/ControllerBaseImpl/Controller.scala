@@ -13,13 +13,16 @@ import de.htwg.se.othello.model.Playercomponents.Player
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import scala.util.{Failure, Success, Try}
+import com.google.inject.Guice
+import de.htwg.se.othello.OthelloModule
+import com.google.inject.Inject
 
 
-class Controller(var board: BoardComponent) extends ControllerComponent{
+class Controller @Inject() (var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent{
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
-  private val undoManager = new UndoManager
+  // private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
+  // private val undoManager : UndoManagerComponent = injector.getInstance(classOf[UndoManagerComponent])
 
   // Gibt das Board als Zeichenkette zurück
   def boardToString: String = board.toString
@@ -148,6 +151,8 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
   this.board = board
   notifyObservers // Observer über den neuen Zustand informieren
   }
+
+  def getBoard: BoardComponent = board
 
   /*def getBoard() : BoardComponent = {
     board
