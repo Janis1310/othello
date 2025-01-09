@@ -1,12 +1,21 @@
 package de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl
 
-import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stoneposition}
-import de.htwg.se.othello.model.BoardComponents.{BoardComponent, StonepositionComponent}
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{
+  Board,
+  Stoneposition
+}
+import de.htwg.se.othello.model.BoardComponents.{
+  BoardComponent,
+  StonepositionComponent
+}
 import de.htwg.se.othello.model.HandlerComponents.MoveHandlerTemplateInterface
 
-abstract class MoveHandlerTemplate extends MoveHandlerTemplateInterface{
+abstract class MoveHandlerTemplate extends MoveHandlerTemplateInterface {
 
-  final def processMove(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent = {
+  final def processMove(
+      stonePosition: StonepositionComponent,
+      board: BoardComponent
+  ): BoardComponent = {
     if (!isValidMove(stonePosition, board)) {
       throw new IllegalArgumentException()
     }
@@ -15,6 +24,12 @@ abstract class MoveHandlerTemplate extends MoveHandlerTemplateInterface{
     updatedBoard
   }
 
-  def isValidMove(stonePosition: StonepositionComponent, board: BoardComponent): Boolean
-  protected def flipStones(stonePosition: StonepositionComponent, board: BoardComponent): BoardComponent
+  def isValidMove(
+      stonePosition: StonepositionComponent,
+      board: BoardComponent
+  ): Boolean
+  protected def flipStones(
+      stonePosition: StonepositionComponent,
+      board: BoardComponent
+  ): BoardComponent
 }

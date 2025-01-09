@@ -6,7 +6,4 @@ import org.scalatest.matchers.should.Matchers
 import scala.collection.immutable.Queue
 import de.htwg.se.othello.util.Observer
 
-class ControllerSpec extends AnyWordSpec with Matchers {
-
-}
-
+class ControllerSpec extends AnyWordSpec with Matchers {}

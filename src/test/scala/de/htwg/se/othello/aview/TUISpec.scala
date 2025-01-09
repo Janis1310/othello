@@ -10,6 +10,4 @@ import scala.collection.immutable.Queue
 import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone}
 
-class TUISpec extends AnyWordSpec with Matchers {
-  
-}
+class TUISpec extends AnyWordSpec with Matchers {}

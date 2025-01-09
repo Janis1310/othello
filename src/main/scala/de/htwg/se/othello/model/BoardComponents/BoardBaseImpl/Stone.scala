@@ -5,7 +5,7 @@ import de.htwg.se.othello.model.BoardComponents.StoneComponent
 //   case Black, White, Empty
 
 //   override def toString: String = this match
-//     case Black => "S"    
+//     case Black => "S"
 //     case White => "W"
 //     case Empty => "."
 
@@ -53,10 +53,11 @@ object Stone {
   }
 
   case object Empty extends StoneComponent {
-    override def flip: StoneComponent = throw new UnsupportedOperationException("Empty cannot be flipped")
+    override def flip: StoneComponent = throw new UnsupportedOperationException(
+      "Empty cannot be flipped"
+    )
     override def toString: String = "."
   }
-
 
   type Stone = StoneComponent
 
@@ -64,5 +65,3 @@ object Stone {
   val WhiteStone: Stone = White
   val EmptyStone: Stone = Empty
 }
-
-

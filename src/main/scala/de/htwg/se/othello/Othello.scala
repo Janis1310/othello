@@ -17,16 +17,17 @@ object Othello {
 
   def main(args: Array[String]): Unit = {
     gui.start()
-    tui.inputPlayers()
-    tui.inputBoardSize()
-    println("Das Spiel beginnt!")
-    var input: String = ""
-    while (input != "q") {
-      println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
-      println("q => quit, z => undo, y => redo, n => new game")
-      input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
-      tui.processInputLine(input)  // Eingabe verarbeiten
-    }
-    println("Das Spiel wurde beendet.")
+    tui.start
+    // tui.inputPlayers()
+    // tui.inputBoardSize()
+    // println("Das Spiel beginnt!")
+    // var input: String = ""
+    // while (input != "q") {
+    //   println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
+    //   println("q => quit, z => undo, y => redo, n => new game")
+    //   input = readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
+    //   tui.processInputLine(input)  // Eingabe verarbeiten
+    // }
+    // println("Das Spiel wurde beendet.")
   }
 }
