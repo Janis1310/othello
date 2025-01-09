@@ -105,8 +105,12 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
             listenTo(button)
             reactions += {
               case ButtonClicked(`button`) =>
-                val result = controller.makeMove(row, col)
-                result match {
+                val result = controller.processTurn(row, col)
+                if (result) {
+                  refreshBoard()
+                } else {
+                  Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
+                }
                   case Right(_) =>
                     // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
 
