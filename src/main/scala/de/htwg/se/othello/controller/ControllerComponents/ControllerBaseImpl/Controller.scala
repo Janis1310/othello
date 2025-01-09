@@ -71,7 +71,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
           nextPlayer()
           true // Erfolgreiches Ergebnis, gibt das Board als String zurück
         case Failure(_) => 
-          println("Ungültiger Zug") // Fehler im Zug
+          println("Ungültiger Zug...") // Fehler im Zug
           false
       }
 

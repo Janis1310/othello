@@ -109,15 +109,9 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
                 if (result) {
                   refreshBoard()
                 } else {
-                  Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
+                  Dialog.showMessage(this, "Ungültiger Zug", "Fehlermeldung", Dialog.Message.Error)
                 }
-                  case Right(_) =>
-                    // Spielfeld aktualisieren, ohne das gesamte Panel neu zu erstellen
 
-                  refreshBoard() // Oder setze den Inhalt des GridPanels direkt
-                  case Left(message) =>
-                    Dialog.showMessage(this, message, "Ungültiger Zug", Dialog.Message.Error)
-                }
             }
 
             contents += button
