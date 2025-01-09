@@ -59,8 +59,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
 
         val previousBoard = board.copy()
 
-        val moveresult = Try {
-          
+        val moveresult = Try { // Ich glaube hier entsteht unser Fehler
            // Nach einem gültigen Zug den Spieler wechseln
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           board.toString
