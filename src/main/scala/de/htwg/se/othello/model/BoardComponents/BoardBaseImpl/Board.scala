@@ -7,7 +7,7 @@ import de.htwg.se.othello.model.BoardComponents.{
 }
 import com.google.inject.Inject
 
-class Board @Inject (private val board: MatrixInterface[StoneComponent])
+class Board @Inject() (private val board: MatrixInterface[StoneComponent])
     extends BoardComponent {
 
   def this(row: Int, column: Int) = {

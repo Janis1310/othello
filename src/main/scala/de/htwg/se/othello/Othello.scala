@@ -1,12 +1,12 @@
 package de.htwg.se.othello
 
-import de.htwg.se.othello.aview.TUI
-
-import scala.io.StdIn.readLine
 import de.htwg.se.othello.aview.GUI.OthelloGUI
 import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Controller
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
 import com.google.inject.Guice
+import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl
+
+import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
 
 object Othello {

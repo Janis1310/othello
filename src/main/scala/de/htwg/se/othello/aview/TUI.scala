@@ -13,7 +13,7 @@ import scala.concurrent.{Future, ExecutionContext}
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.google.inject.Inject
 
-class TUI @Inject (controller: ControllerComponent) extends Observer {
+class TUI @Inject()(controller: ControllerComponent) extends Observer {
   controller.add(this)
 
   def inputPlayers(): Unit = {

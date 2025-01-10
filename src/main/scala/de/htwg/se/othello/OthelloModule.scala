@@ -22,16 +22,11 @@ class OthelloModule extends AbstractModule with ScalaModule {
 
   @Provides
   def provideMatrix(): Matrix[StoneComponent] = {
-    new Matrix[StoneComponent](
-      8,
-      8,
-      EmptyStone
-    ) // Beispiel für eine Matrix mit 8x8 Feldern und dem Standardwert Empty
+    new Matrix[StoneComponent](8,8,EmptyStone)
   }
 
   override def configure() = {
-    bind(classOf[MatrixInterface[StoneComponent]])
-      .to(classOf[Matrix[StoneComponent]])
+    bind(classOf[MatrixInterface[StoneComponent]]).to(classOf[Matrix[StoneComponent]])
     bind(classOf[UndoManagerComponent]).to(classOf[UndoManager])
     bind(classOf[MoveHandlerTemplateInterface]).toInstance(MoveHandler)
     bind[BoardComponent].toInstance(new Board(8, 8))

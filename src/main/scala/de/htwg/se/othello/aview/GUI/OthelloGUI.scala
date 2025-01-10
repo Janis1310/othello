@@ -7,8 +7,9 @@ import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 import scala.util.Try
 import javax.swing.ImageIcon
 import de.htwg.se.othello.util.Observer
+import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
 
-class OthelloGUI(controller:Controller) extends MainFrame with Observer{
+class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer{
   controller.add(this)
   title = "Othello"
 
@@ -86,9 +87,9 @@ class OthelloGUI(controller:Controller) extends MainFrame with Observer{
         layout(new Label(s"${controller.getCurrentPlayer.name}'s Turn")) = BorderPanel.Position.North
 
         // Spielfeld als zentrales Element
-        layout(new GridPanel(controller.board.getBoard.numRows, controller.board.getBoard.numCols) {
-          for (row <- 0 until controller.board.getBoard.numRows; col <- 0 until controller.board.getBoard.numCols) {
-            val cellValue = controller.board.getBoard.cell(row, col) // Zelleninhalt abrufen
+        layout(new GridPanel(controller.getBoard.getBoard.numRows, controller.getBoard.getBoard.numCols) {
+          for (row <- 0 until controller.getBoard.getBoard.numRows; col <- 0 until controller.getBoard.getBoard.numCols) {
+            val cellValue = controller.getBoard.getBoard.cell(row, col) // Zelleninhalt abrufen
             val button = new Button {
               text = " " // Text bleibt leer
               preferredSize = new Dimension(50, 50)

@@ -19,5 +19,6 @@ trait ControllerComponent extends Observable{
     def undo: Unit
     def redo: Unit
     def setBoard(board: BoardComponent): Unit
+    def getBoard: BoardComponent
   
 }
