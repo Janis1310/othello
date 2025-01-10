@@ -76,22 +76,16 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
         val previousBoard = board.copy()
 
-        val moveresult = Try { // Ich glaube hier entsteht unser Fehler
+        val moveresult = Try {
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           //board.toString
         }
-
         moveresult match {
           case Success(boardString) =>
             nextPlayer()
-            true
-         /* case Failure(_) =>
+            true 
+          case Failure(_) =>
             println("Ungültiger Zug...")
-            false*/
-          case Failure(exception) =>
-            // Fehlermeldung und Stacktrace ausgeben
-            println(s"Fehler bei der Ausführung des Zuges: ${exception.getMessage}")
-            exception.printStackTrace()
             false
         }
 
