@@ -55,6 +55,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN)
       notifyObservers
+
       board
     } else {
       println("Das Board kann nur im SETUP-Zustand erstellt werden.")
@@ -95,10 +96,10 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
     }
   }
 
-  def processTurn(curRow: Int, curCol: Int): Boolean = { // wird von Tui aufgerufen
+  def processTurn(curRow: Int, curCol: Int): Boolean = {
     val currentPlayer = getCurrentPlayer
     if (currentPlayer.role == "AI") {
-      println("KI ist am ZugTesteawdownjoiawdjipdawdawkoiawdkopwdokawdokpawdokado")
+      println("KI ist am Zug")
       StrategyContext.setPlayers(players)
       val strategy = StrategyContext.strategy
       strategy(board) match {
@@ -138,6 +139,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def setBoard(board: BoardComponent): Unit = {
     this.board = board
-    notifyObservers
+    //notifyObservers
   }
 }

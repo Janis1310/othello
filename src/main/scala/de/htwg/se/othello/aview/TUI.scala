@@ -1,7 +1,5 @@
 package de.htwg.se.othello.aview
 
-import scala.io.StdIn.readLine
-import scala.collection.immutable.Queue
 import de.htwg.se.othello.util.Observer
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.othello.controller.ControllerComponents.{

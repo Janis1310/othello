@@ -136,7 +136,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
   override def update: Unit = {
       println("Das Spielfeld wurde aktualisiert.")
       refreshBoard()
-      println(controller.boardToString)
+      //println(controller.boardToString) // Das brauchen wir nicht, oder?
       
     }
 
