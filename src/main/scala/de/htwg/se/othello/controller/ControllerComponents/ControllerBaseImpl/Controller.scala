@@ -13,13 +13,14 @@ import de.htwg.se.othello.model.Playercomponents.Player
 import scala.collection.immutable.Queue
 import scala.io.StdIn.readLine
 import scala.util.{Failure, Success, Try}
+import com.google.inject.Inject
 
 
-class Controller(var board: BoardComponent) extends ControllerComponent{
+class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent{
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
-  private val undoManager = new UndoManager
+  // private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
+  // private val undoManager = new UndoManager
 
   // Gibt das Board als Zeichenkette zurück
   def boardToString: String = board.toString
@@ -29,7 +30,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
      if (gameState == GameState.SETUP) {
       players = Queue(
         Player(player1Name, Stone.White,"Human" ),
-        Player(player2Name, Stone.Black, "Human" )
+        Player(player2Name, Stone.Black, "AI" )
       )
     } else {
       println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
@@ -50,8 +51,10 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
     notifyObservers
   }
 
+  def getBoard: BoardComponent = board
+
   // Führt einen Zug aus und gibt den neuen Zustand des Spiels zurück
-  def makeMove(x: Int, y: Int): Either[String, String] = {
+  def makeMove(x: Int, y: Int): Boolean = {
      gameState match {
       case GameState.WHITE_TURN | GameState.BLACK_TURN =>
         val stone = getCurrentPlayer.stone
@@ -59,22 +62,24 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
 
         val previousBoard = board.copy()
 
-        val moveresult = Try {
-          
+        val moveresult = Try { // Ich glaube hier entsteht unser Fehler
            // Nach einem gültigen Zug den Spieler wechseln
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
           board.toString
         }
 
         moveresult match {
-        case Success(boardString) => 
+        case Success(boardString) =>
           nextPlayer()
-          Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
-        case Failure(_) => Left("Ungültiger Zug.") // Fehler im Zug
+          true // Erfolgreiches Ergebnis, gibt das Board als String zurück
+        case Failure(_) => 
+          println("Ungültiger Zug...") // Fehler im Zug
+          false
       }
 
       case _ =>
-        Left("Züge sind nur während eines Spielzugs erlaubt.")
+        println("Züge sind nur während eines Spielzugs erlaubt.");
+        false
     }
   }
 
@@ -101,7 +106,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
 
 
   // Verarbeitet den nächsten Zug, entweder vom menschlichen Spieler oder von der KI
-  def processTurn(curRow : Int, curCol : Int): Unit = {
+  def processTurn(curRow : Int, curCol : Int): Boolean = { // wird von Tui aufgerufen
     val currentPlayer = getCurrentPlayer
     if (currentPlayer.role == "AI") {
       println("KI ist am ZugTesteawdownjoiawdjipdawdawkoiawdkopwdokawdokpawdokado")
@@ -110,26 +115,26 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
       strategy(board) match {
         case Some(move) =>
           println(s"Die KI macht den Zug ${move}.")
-          makeMove(move.x, move.y) match  {
-            case Right(updatedBoard) =>
-              println("Zug erfolgreich! Aktuelles Spielfeld:")
-              //println(updatedBoard)
-              println("Test, nächster Spieler Test--------------------")
-              //nextPlayer() // Spieler wechseln
-            case Left(errorMessage) =>
-              println(s"Fehler: $errorMessage")
-              sys.exit(1)
+          if (makeMove(move.x, move.y)) {
+            println("Zug erfolgreich!")
+            true
+          } else {
+            println(s"Fehler")
+            sys.exit(1)  
           }
+          
       case None =>
         println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
         System.exit(0)
+        false
       }
     } else {
-      makeMove(curRow, curCol) match {
-        case Right(updatedBoard) =>
-        case Left(errorMessage) =>
-          println(s"Fehler: $errorMessage")
+      if (makeMove(curRow, curCol)) {
+        true
+      } else {
+        false 
       }
+      
     }
   }
 

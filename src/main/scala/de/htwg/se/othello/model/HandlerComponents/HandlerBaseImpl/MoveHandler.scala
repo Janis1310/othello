@@ -19,7 +19,7 @@ object MoveHandler extends MoveHandlerTemplate{
     override def isValidMove(stoneposition: StonepositionComponent, board: BoardComponent): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
-          printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y)
+          printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y) // Außerhalb vom brett
           return false
         }
         
@@ -42,9 +42,11 @@ object MoveHandler extends MoveHandlerTemplate{
       }
 
       board.getBoard.cell(x, y) match {
-        case `opponent` => 
+        case `opponent` =>
+          // println(s"opponent Found $x, $y")
           checkDirection(dx, dy, x + dx, y + dy, true, opponent, player, board) // Gegnerstein gefunden, weiter in die Richtung
-        case `player` if foundOpponent => 
+        case `player` if foundOpponent =>
+          // println(s"Player Found $x, $y")
           true // Gültiger Zug gefunden
         case Stone.Empty => false // Leeres Feld, keine gültige Reihe
         case _ => false // Eigenes Feld ohne Gegnersteine

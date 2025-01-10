@@ -16,7 +16,9 @@ object GameState extends Enumeration {
   )
 
   private val stateActions = Map[GameState, () => Unit](
-    SETUP -> (() => println("Setup: Spieler hinzufügen und Board konfigurieren.")),
+    SETUP -> (() =>
+      println("Setup: Spieler hinzufügen und Board konfigurieren.")
+    ),
     WHITE_TURN -> (() => println("Weiß macht einen Zug.")),
     BLACK_TURN -> (() => println("Schwarz macht einen Zug.")),
     GAME_OVER -> (() => println("Spielstand anzeigen und beenden.")),
@@ -24,8 +26,10 @@ object GameState extends Enumeration {
   )
 
   // Zugriff auf die Nachricht für einen Zustand
-  def message(state: GameState): String = stateMessages.getOrElse(state, "Unbekannter Zustand.")
+  def message(state: GameState): String =
+    stateMessages.getOrElse(state, "Unbekannter Zustand.")
 
   // Zugriff auf die Aktion für einen Zustand
-  def action(state: GameState): Unit = stateActions.getOrElse(state, () => println("Keine Aktion definiert."))()
+  def action(state: GameState): Unit =
+    stateActions.getOrElse(state, () => println("Keine Aktion definiert."))()
 }

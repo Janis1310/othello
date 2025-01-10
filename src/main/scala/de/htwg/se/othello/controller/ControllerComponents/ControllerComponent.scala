@@ -11,13 +11,14 @@ trait ControllerComponent extends Observable{
     def getPlayers: Queue[Player]
     def getCurrentPlayer: Player
     def nextPlayer(): Unit
-    def makeMove(x: Int, y: Int): Either[String, String]
+    def makeMove(x: Int, y: Int): Boolean
     def createNewBoard(rows: Int, cols: Int): BoardComponent
     def changeState(newState: GameState.GameState): Unit
     def getGameState: GameState.GameState
-    def processTurn(curRow: Int, curCol: Int): Unit
+    def processTurn(curRow: Int, curCol: Int): Boolean
     def undo: Unit
     def redo: Unit
     def setBoard(board: BoardComponent): Unit
+    def getBoard: BoardComponent
   
 }

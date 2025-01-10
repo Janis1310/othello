@@ -5,19 +5,17 @@ import org.scalatest.wordspec.AnyWordSpec
 class ObservableSpec extends AnyWordSpec {
   class TestObserver extends Observer {
     var updated: Boolean = false
-  
+
     override def update: Unit = { updated = true }
   }
-
 
   "An Observable" should {
     val observable = new Observable
     val observer = new TestObserver
     "add an Observer" in {
       observable.add(observer)
-      observable.subscribers should contain (observer)
-    }    
-
+      observable.subscribers should contain(observer)
+    }
 
     "remove an Observer" in {
       observable.remove(observer)
@@ -39,7 +37,6 @@ class ObservableSpec extends AnyWordSpec {
       observer1.updated should be(true)
       observer2.updated should be(true)
     }
-
 
   }
 

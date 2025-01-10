@@ -1,19 +1,22 @@
 package de.htwg.se.othello.model
 
-import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{Command, UndoManager}
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{
+  Command,
+  UndoManager
+}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class UndoManagerSpec extends AnyWordSpec with Matchers {
-    class TestCommand extends Command {
+  class TestCommand extends Command {
     var executed: Boolean = false
 
     override def doStep: Unit = executed = true
     override def undoStep: Unit = executed = false
     override def redoStep: Unit = executed = true
-    }
+  }
 
-    "An UndoManager" should {
+  "An UndoManager" should {
 
     "execute a command and add it to the undo stack on doStep" in {
       val command = new TestCommand
@@ -47,13 +50,15 @@ class UndoManagerSpec extends AnyWordSpec with Matchers {
 
     "do nothing when undo is called on an empty undo stack" in {
       val undoManager = new UndoManager
-      noException should be thrownBy undoManager.undoStep() // Should not throw an exception
+      noException should be thrownBy undoManager
+        .undoStep() // Should not throw an exception
     }
 
     "do nothing when redo is called on an empty redo stack" in {
       val undoManager = new UndoManager
-      noException should be thrownBy undoManager.redoStep() // Should not throw an exception
+      noException should be thrownBy undoManager
+        .redoStep() // Should not throw an exception
     }
   }
-  
+
 }
