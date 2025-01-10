@@ -11,8 +11,9 @@ import de.htwg.se.othello.controller.ControllerComponents.{
 import scala.io.StdIn
 import scala.concurrent.{Future, ExecutionContext}
 import scala.concurrent.ExecutionContext.Implicits.global
+import com.google.inject.Inject
 
-class TUI(controller: ControllerComponent) extends Observer {
+class TUI @Inject (controller: ControllerComponent) extends Observer {
   controller.add(this)
 
   def inputPlayers(): Unit = {
