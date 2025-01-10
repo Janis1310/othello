@@ -29,7 +29,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
      if (gameState == GameState.SETUP) {
       players = Queue(
         Player(player1Name, Stone.White,"Human" ),
-        Player(player2Name, Stone.Black, "Human" )
+        Player(player2Name, Stone.Black, "AI" )
       )
     } else {
       println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
