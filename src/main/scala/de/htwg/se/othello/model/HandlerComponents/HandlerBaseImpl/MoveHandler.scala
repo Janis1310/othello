@@ -16,6 +16,8 @@ object MoveHandler extends MoveHandlerTemplate{
           (-1, 0),
           (-1, 1)
         )
+
+
     override def isValidMove(stoneposition: StonepositionComponent, board: BoardComponent): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
@@ -74,6 +76,9 @@ object MoveHandler extends MoveHandlerTemplate{
 
     board.getBoard.cell(x, y) match {
       case `opponent` =>
+        if (x + dx < 0 || x + dx >= board.getBoard.numRows || y + dy < 0 || y + dy >= board.getBoard.numCols) {
+          return board // Keine gültige Richtung, Rückgabe ohne Änderung
+        }
         // Geh in die Richtung weiter, um das Ende der Reihe zu suchen
         val flipboard = flipDirection(dx, dy, x + dx, y + dy, opponent, player, board)
         
@@ -85,11 +90,9 @@ object MoveHandler extends MoveHandlerTemplate{
         }
 
       case `player` =>
-        // Ende der Kette gefunden, Rückgabe für das Flippen in anderen rekursiven Aufrufen
         return board
 
-      case _ => 
-        // Wenn die Zelle leer ist oder ein anderes Feld gefunden wird, beenden ohne zu flippen
+      case _ =>
         return board
     }
   }
