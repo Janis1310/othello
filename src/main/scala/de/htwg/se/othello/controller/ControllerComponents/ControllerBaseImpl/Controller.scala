@@ -79,7 +79,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
         val moveresult = Try {
           undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
-          //board.toString
         }
         moveresult match {
           case Success(boardString) =>
