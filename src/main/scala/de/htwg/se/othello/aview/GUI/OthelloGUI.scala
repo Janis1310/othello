@@ -2,9 +2,11 @@ package de.htwg.se.othello.aview.GUI
 
 import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Controller
 import scala.swing._
+import scala.swing.Swing._
 import scala.swing.event.ButtonClicked
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 import scala.util.Try
+import java.awt.Font
 import javax.swing.ImageIcon
 import de.htwg.se.othello.util.Observer
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
@@ -14,9 +16,75 @@ import scala.annotation.constructorOnly
 class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer{
   controller.add(this)
   title = "Othello"
+  peer.setLocationRelativeTo(null)
 
   val white_stone = new ImageIcon("src/main/resources/pieces/white.png")
   val black_stone = new ImageIcon("src/main/resources/pieces/black.png")
+
+  def chooseMode: BoxPanel = {
+
+    val titelLabel = new Label("Willkommen zum Spiel Othello") { font = new Font("Arial", Font.BOLD, 24)}
+     val modeLabel = new Label("Wählen Sie den Spielmodus:") {
+      font = new Font("Arial", Font.BOLD, 16)
+      horizontalAlignment = Alignment.Left // Links ausrichten
+    }
+    val playerButton = new RadioButton("Gegen Mensch spielen"){
+      font = new Font("Arial", Font.BOLD, 16)
+    }
+    val aiButton = new RadioButton("Gegen KI spielen") {
+      font = new Font("Arial", Font.BOLD, 16)
+    }
+    val buttonGroup = new ButtonGroup(playerButton, aiButton)
+    val confirmButton = new Button("Weiter"){
+      font = new Font("Arial", Font.BOLD, 16)
+    }
+
+    val radioPanel = new BoxPanel(Orientation.Horizontal) {
+        contents += playerButton
+        contents += HStrut(10) // Horizontaler Abstand zwischen den Radiobuttons
+        contents += aiButton
+      }
+
+    val buttonPanel = new FlowPanel{
+      contents += confirmButton
+    }
+
+
+
+
+  // Reaktion auf den Buttonklick
+    listenTo(confirmButton)
+    reactions += {
+      case ButtonClicked(confirmButton) =>
+        if (playerButton.selected) {
+          println("Spielmodus: Gegen Mensch")
+          createinitboard // Nächsten Schritt anzeigen
+        } else if (aiButton.selected) {
+          println("Spielmodus: Gegen KI")
+          createinitboard // Nächsten Schritt anzeigen
+        } else {
+          Dialog.showMessage(
+            null,
+            "Bitte wählen Sie einen Spielmodus aus!",
+            "Auswahl erforderlich",
+            Dialog.Message.Error
+          )
+        }
+    }
+
+    // Layout
+    new BoxPanel(Orientation.Vertical) {
+      contents += titelLabel
+      contents += VStrut(20) // Vertikaler Abstand zwischen Titel und Radiobuttons
+      contents += new FlowPanel(FlowPanel.Alignment.Left)(modeLabel)
+      contents += VStrut(10) // Vertikaler Abstand
+      contents += radioPanel
+      contents += VStrut(20) // Vertikaler Abstand
+      contents += buttonPanel
+      border = EmptyBorder(20, 20, 20, 20)
+      
+    }
+}
 
    // Die Methode, um das Initialisierungs-Panel zu erstellen
   def createinitboard = new BoxPanel(Orientation.Vertical) {
@@ -138,7 +206,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
   visible = true
 
   def start(): Unit = {
-    contents = createinitboard
+    contents = chooseMode
   }
 
   def refreshBoard(): Unit = { 
