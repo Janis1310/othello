@@ -64,16 +64,15 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
         val rows = Try(rowsField.text.toInt).getOrElse(8)
         val cols = Try(colsField.text.toInt).getOrElse(8)
 
-        controller.getGameState match {
-          case GameState.InputPlayer1 | GameState.InputPlayer2 =>
-            if (controller.getPlayers.isEmpty) {
-              controller.addPlayers(player1)
-              controller.addPlayers(player2)
-            } else{
-              controller.addPlayers(player2)
-            }
-
-          }
+        
+        if (controller.getGameState == GameState.InputPlayer1)
+          controller.addPlayers(player1)
+          
+        if (controller.getGameState == GameState.InputPlayer2) {
+          controller.addPlayers(player2)
+          controller.changeState(GameState.InputBoardSize)
+        }
+        
 
         controller.getGameState match {
           case GameState.InputBoardSize =>
@@ -81,7 +80,8 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
           if (rows > 0 && cols > 0) {
             controller.createNewBoard(rows, cols) // Neues Spielfeld erstellen
             println(s"Spiel gestartet mit $player1 und $player2 auf einem $rows x $cols Feld.")
-            refreshBoard()
+            controller.notifyObservers
+
             
           } else {
             Dialog.showMessage(
@@ -92,47 +92,6 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
             )
           }
         }
-
-        
-
-    //     controller.getGameState match {
-    //       case GameState.InputPlayer1 =>
-    //         // Wenn wir in InputPlayer1 sind, fügen wir den ersten Spieler hinzu
-    //         controller.addPlayers(player1)
-    //         // Wechsel zu InputPlayer2
-    //         controller.changeState(GameState.InputPlayer2)
-    
-    //       case GameState.InputPlayer2 =>
-    //         // Wenn wir in InputPlayer2 sind, fügen wir den zweiten Spieler hinzu
-    //         controller.addPlayers(player2)
-    //         // Wechsel zu InputBoardSize
-    //         controller.changeState(GameState.InputBoardSize)
-    
-    //       case GameState.InputBoardSize =>
-    //         // Wenn wir im InputBoardSize sind, prüfen wir die Spielfeldgröße
-    //         if (rows > 0 && cols > 0) {
-    //           controller.createNewBoard(rows, cols) // Neues Spielfeld erstellen
-    //           println(s"Spiel gestartet mit $player1 und $player2 auf einem $rows x $cols Feld.")
-    //           refreshBoard()
-    //         } else {
-    //           Dialog.showMessage(
-    //             this,
-    //             "Bitte geben Sie gültige Werte für die Anzahl der Zeilen und Spalten ein.",
-    //             "Ungültige Eingabe",
-    //             Dialog.Message.Error
-    //           )
-    //         }
-    
-    //       case _ =>
-    //         // Falls der GameState nicht dem erwarteten Zustand entspricht
-    //         Dialog.showMessage(
-    //           this,
-    //           "Ein unerwarteter Fehler ist aufgetreten.",
-    //           "Fehler",
-    //           Dialog.Message.Error
-    //         )
-    //     }
-    // }
     }
 
   }
@@ -163,7 +122,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
               case ButtonClicked(`button`) =>
                 val result = controller.processTurn(row, col)
                 if (result) {
-                  refreshBoard()
+                  controller.notifyObservers
                 } else {
                   Dialog.showMessage(this, "Ungültiger Zug", "Fehlermeldung", Dialog.Message.Error)
                 }

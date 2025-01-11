@@ -46,7 +46,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
       case Success((rows, cols)) if rows > 0 && cols > 0 =>
         controller.createNewBoard(rows, cols)
         println(s"Spiel gestartet mit ${controller.getPlayers.head} und ${controller.getPlayers.last} auf einem $rows x $cols Feld.")
-        controller.changeState(GameState.WHITE_TURN)
+        //controller.changeState(GameState.WHITE_TURN)
       case Success((_, _)) =>
         println("Die Breite und Länge müssen positive Zahlen sein. Bitte erneut eingeben:")
       case Failure(_: MatchError) =>
@@ -82,7 +82,11 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
   override def update: Unit = {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
-    // println(GameState.message(controller.getGameState))
+    if (controller.getGameState == GameState.BLACK_TURN || controller.getGameState == GameState.WHITE_TURN) {
+      println("q => quit, z => undo, y => redo")
+      println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ")
+      println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
+    }
   }
 
   def start: Unit = {
@@ -90,9 +94,6 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
       println("Willkommen zu Othello!")
       println("q => quit, n => new game")
 
-    } else if (controller.getGameState == GameState.BLACK_TURN || controller.getGameState == GameState.WHITE_TURN) {
-      println("q => quit, z => undo, y => redo")
-      println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
     }
   }
 }

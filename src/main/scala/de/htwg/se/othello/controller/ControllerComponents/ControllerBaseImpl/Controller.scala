@@ -58,9 +58,8 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   def createNewBoard(rows: Int, cols: Int): BoardComponent = {
     if (gameState == GameState.InputBoardSize) {
       board = new Board(rows, cols)
-      
+      changeState(GameState.WHITE_TURN)
       notifyObservers
-      // changeState(GameState.WHITE_TURN)
 
       board
     } else {
@@ -71,9 +70,8 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def changeState(newState: GameState.GameState): Unit = {
     gameState = newState
-    if (gameState == GameState.BLACK_TURN || gameState == GameState.WHITE_TURN)
-      print(s"${getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ")
-    GameState.action(gameState)
+    if (gameState != GameState.WHITE_TURN)
+      GameState.action(gameState)
     //notifyObservers
   }
 
