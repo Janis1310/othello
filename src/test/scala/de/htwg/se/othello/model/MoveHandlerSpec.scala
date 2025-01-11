@@ -66,35 +66,31 @@ class MoveHandlerSpec extends AnyWordSpec {
     "flipStones" should {
       "flip stones horizontally to the left" in {
         val board =
-          new Board(8, 8) // Startzustand wird automatisch initialisiert
+          new Board(8, 8)
         val newBoard =
           MoveHandler.processMove(Stoneposition(3, 2, Stone.Black), board)
-        newBoard.getBoard.cell(3, 2) should be(Stone.Black) // neuer Stein
-        newBoard.getBoard.cell(3, 3) should be(Stone.Black) // umgedrehter Stein
+        newBoard.getBoard.cell(3, 2) should be(Stone.Black)
+        newBoard.getBoard.cell(3, 3) should be(Stone.Black)
       }
       "flip stones vertically upward" in {
         val board =
-          new Board(8, 8) // Startzustand wird automatisch initialisiert
+          new Board(8, 8)
         val newBoard =
           MoveHandler.processMove(Stoneposition(2, 4, Stone.White), board)
-        newBoard.getBoard.cell(2, 4) should be(Stone.White) // neuer Stein
-        newBoard.getBoard.cell(3, 4) should be(Stone.White) // umgedrehter Stein
+        newBoard.getBoard.cell(2, 4) should be(Stone.White)
+        newBoard.getBoard.cell(3, 4) should be(Stone.White)
       }
       "flip stones diagonally bottom-right" in {
         val board =
-          new Board(8, 8) // Startzustand wird automatisch initialisiert
+          new Board(8, 8)
         val newBoard =
           MoveHandler.processMove(Stoneposition(5, 3, Stone.White), board)
-        newBoard.getBoard.cell(5, 3) should be(Stone.White) // neuer Stein
-        newBoard.getBoard.cell(4, 3) should be(Stone.White) // umgedrehter Stein
+        newBoard.getBoard.cell(5, 3) should be(Stone.White)
+        newBoard.getBoard.cell(4, 3) should be(Stone.White)
       }
       "not flip any stones for an invalid move" in {
-
         val board = new Board(8, 8)
-
         val invalidMove = Stoneposition(0, 0, Stone.White)
-
-        // Test, dass eine IllegalArgumentException ausgelöst wird
         an[IllegalArgumentException] shouldBe thrownBy {
           MoveHandler.processMove(invalidMove, board)
         }

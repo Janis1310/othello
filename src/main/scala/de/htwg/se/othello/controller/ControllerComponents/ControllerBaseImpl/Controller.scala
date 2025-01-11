@@ -24,7 +24,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
     if (gameState == GameState.SETUP) {
       players = Queue(
         Player(player1Name, Stone.White, "Human"),
-        Player(player2Name, Stone.Black, "AI")
+        Player(player2Name, Stone.Black, "Human")
       )
     } else {
       println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
