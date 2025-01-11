@@ -39,5 +39,8 @@ trait ControllerComponent extends Observable{
     def redo: Unit
     def setBoard(board: BoardComponent): Unit
     def getBoard: BoardComponent
+
+    def setGameMode(mode: String): Unit
+    def getGameMode: Option[String]
   
 }

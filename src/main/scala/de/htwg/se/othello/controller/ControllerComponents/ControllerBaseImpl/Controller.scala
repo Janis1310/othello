@@ -17,6 +17,7 @@ import com.google.inject.Inject
 class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
+  private var gameMode: Option[String] = None
 
   def boardToString: String = board.toString
 
@@ -35,6 +36,12 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
 
   }
+
+  def setGameMode(mode: String): Unit = {
+    gameMode = Some(mode)
+  }
+  
+  def getGameMode: Option[String] = gameMode
 
   def getPlayers: Queue[Player] = players
 

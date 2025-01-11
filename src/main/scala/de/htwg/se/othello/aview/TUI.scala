@@ -92,7 +92,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
   def start: Unit = {
     if (controller.getGameState == GameState.SETUP){
       println("Willkommen zu Othello!")
-      println("q => quit, n => new game")
+      println("q => quit, p => Gegen Mensch, a = KI")
 
     }
   }

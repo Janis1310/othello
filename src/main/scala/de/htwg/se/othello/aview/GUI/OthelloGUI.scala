@@ -58,9 +58,11 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
       case ButtonClicked(confirmButton) =>
         if (playerButton.selected) {
           println("Spielmodus: Gegen Mensch")
-          createinitboard // Nächsten Schritt anzeigen
+          controller.setGameMode("Mensch")
+          contents = createinitboard // Nächsten Schritt anzeigen
         } else if (aiButton.selected) {
           println("Spielmodus: Gegen KI")
+          controller.setGameMode("KI")
           createinitboard // Nächsten Schritt anzeigen
         } else {
           Dialog.showMessage(
