@@ -20,15 +20,20 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def boardToString: String = board.toString
 
-  def addPlayers(player1Name: String, player2Name: String): Unit = {
-    if (gameState == GameState.SETUP) {
-      players = Queue(
-        Player(player1Name, Stone.White, "Human"),
-        Player(player2Name, Stone.Black, "Human")
-      )
-    } else {
-      println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
-    }
+  def addPlayers(playerName: String): Unit = {
+    if (gameState == GameState.InputPlayer1) {
+    // Spieler 1 hinzufügen (Weiß)
+    players = players :+ Player(playerName, Stone.WhiteStone, "Human")  // Spieler zu Queue hinzufügen
+    changeState(GameState.InputPlayer2)  // Zustand ändern zu InputPlayer2
+  } else if (gameState == GameState.InputPlayer2) {
+    // Spieler 2 hinzufügen (Schwarz)
+    players = players :+ Player(playerName, Stone.BlackStone, "Human")  // Spieler zu Queue hinzufügen
+    println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")  // Spieler 1 und Spieler 2 anzeigen
+  } else {
+    println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
+  }
+
+
   }
 
   def getPlayers: Queue[Player] = players
@@ -51,7 +56,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   def getBoard: BoardComponent = board
 
   def createNewBoard(rows: Int, cols: Int): BoardComponent = {
-    if (gameState == GameState.SETUP) {
+    if (gameState == GameState.InputBoardSize) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN)
       notifyObservers
@@ -65,7 +70,8 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def changeState(newState: GameState.GameState): Unit = {
     gameState = newState
-    GameState.action(gameState)
+    if (gameState != GameState.WHITE_TURN)
+      GameState.action(gameState)
     //notifyObservers
   }
 
