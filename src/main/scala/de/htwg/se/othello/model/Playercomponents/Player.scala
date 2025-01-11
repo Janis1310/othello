@@ -11,14 +11,14 @@ trait Player {
 }
 
 // concreteProduct: HumanPlayer
-private class HumanPlayer(val name: String, val stone: StoneComponent)
+class HumanPlayer(val name: String, val stone: StoneComponent)
     extends Player {
   val role: String = "Human" // Define the role for HumanPlayer
   override def toString: String = s"$name: $stone"
 }
 
 // concreteProduct: AIPlayer
-private class AIPlayer(val name: String, val stone: StoneComponent)
+class AIPlayer(val name: String, val stone: StoneComponent)
     extends Player {
   val role: String = "AI" // Define the role for AIPlayer
   override def toString: String = s"$name (AI): $stone"

@@ -11,11 +11,30 @@ trait ControllerComponent extends Observable{
     def getPlayers: Queue[Player]
     def getCurrentPlayer: Player
     def nextPlayer(): Unit
+
+    /**
+     * Führt einen Zug aus.
+     * Prüft die Gültigkeit des Zuges und aktualisiert das Spielfeld und den Zustand entsprechend.
+     *
+     * @param x Zeilenposition des Zuges
+     * @param y Spaltenposition des Zuges
+     * @return True, wenn der Zug erfolgreich war, andernfalls False
+     */
     def makeMove(x: Int, y: Int): Boolean
     def createNewBoard(rows: Int, cols: Int): BoardComponent
     def changeState(newState: GameState.GameState): Unit
     def getGameState: GameState.GameState
+
+    /**
+     * Verarbeitet den Zug eines Spielers (Mensch oder KI).
+     * Entscheidet, ob der nächste Zug durch den Spieler oder durch die KI erfolgt. Ruft dann MakeMove(x, y) auf.
+     *
+     * @param curRow Zeilenposition des Zuges
+     * @param curCol Spaltenposition des Zuges
+     * @return True, wenn der Zug erfolgreich war, andernfalls False
+     */
     def processTurn(curRow: Int, curCol: Int): Boolean
+    
     def undo: Unit
     def redo: Unit
     def setBoard(board: BoardComponent): Unit

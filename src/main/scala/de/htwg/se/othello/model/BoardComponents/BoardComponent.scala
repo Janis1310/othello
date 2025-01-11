@@ -1,7 +1,5 @@
 package de.htwg.se.othello.model.BoardComponents
 
-import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
-
 /**
  * Das `BoardComponent`-Trait definiert die Schnittstelle für ein Spielfeld.
  *
@@ -46,11 +44,5 @@ trait BoardComponent {
    * @return Eine Kopie des Spielfelds.
    */
   def copy(): BoardComponent
-
-  /**
-   * Gibt eine String-Darstellung des Spielfelds zurück.
-   *
-   * @return Eine String-Darstellung des Spielfelds.
-   */
   override def toString: String
 }

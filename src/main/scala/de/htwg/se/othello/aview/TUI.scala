@@ -1,7 +1,5 @@
 package de.htwg.se.othello.aview
 
-import scala.io.StdIn.readLine
-import scala.collection.immutable.Queue
 import de.htwg.se.othello.util.Observer
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.othello.controller.ControllerComponents.{
@@ -88,17 +86,15 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
       println("Das Spiel beginnt!")
       var input: String = "n"
       while (input != "q")
-        {
+      {
 
-          if (controller.getGameState != GameState.SETUP)
-            println("q => quit, z => undo, y => redo, n => new game")
-          processInputLine(input)
-          input = StdIn.readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
-          println(
-            controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone
-          )
-        }
-        println("Das Spiel wurde beendet.")
+        if (controller.getGameState != GameState.SETUP)
+          println("q => quit, z => undo, y => redo, n => new game")
+        processInputLine(input)
+        input = StdIn.readLine("Geben Sie die Koordinaten in Zeile,Spalte: ")
+        println(controller.getCurrentPlayer.name + " ist am Zug. Deine Farbe ist " + controller.getCurrentPlayer.stone)
+      }
+      println("Das Spiel wurde beendet.")
     }
   }
 }
