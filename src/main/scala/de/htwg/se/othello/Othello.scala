@@ -8,6 +8,9 @@ import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl
 
 import de.htwg.se.othello.aview.TUI
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
+import scala.io.StdIn
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Othello {
   val injector = Guice.createInjector(new OthelloModule)
@@ -16,8 +19,9 @@ object Othello {
   val gui = OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
-    gui.start()
-    tui.start
+    Future{gui.start()}
+    // gui.start()
+    // tui.start
     // tui.inputPlayers()
     // tui.inputBoardSize()
     // println("Das Spiel beginnt!")
@@ -29,5 +33,15 @@ object Othello {
     //   tui.processInputLine(input)  // Eingabe verarbeiten
     // }
     // println("Das Spiel wurde beendet.")
+    Future {
+    var input = ""
+    
+    while (input != "q") {
+      tui.start
+      input = StdIn.readLine() // Warten auf die Eingabe im TUI
+      tui.processInputLine(input) // Verarbeite die Eingabe
+    }
+  }
+    
   }
 }

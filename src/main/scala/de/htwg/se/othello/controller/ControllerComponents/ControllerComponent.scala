@@ -7,7 +7,7 @@ import de.htwg.se.othello.util.Observable
 
 trait ControllerComponent extends Observable{
     def boardToString: String
-    def addPlayers(player1Name: String, player2Name: String): Unit
+    def addPlayers(playerName: String): Unit
     def getPlayers: Queue[Player]
     def getCurrentPlayer: Player
     def nextPlayer(): Unit

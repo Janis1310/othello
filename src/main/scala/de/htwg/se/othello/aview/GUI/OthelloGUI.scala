@@ -8,6 +8,8 @@ import scala.util.Try
 import javax.swing.ImageIcon
 import de.htwg.se.othello.util.Observer
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
+import de.htwg.se.othello.controller.ControllerComponents.GameState
+import scala.annotation.constructorOnly
 
 class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer{
   controller.add(this)
@@ -62,22 +64,75 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
         val rows = Try(rowsField.text.toInt).getOrElse(8)
         val cols = Try(colsField.text.toInt).getOrElse(8)
 
-        if (rows > 0 && cols > 0) {
-          controller.addPlayers(player1, player2) // Spieler zum Controller hinzufügen
-          controller.createNewBoard(rows, cols) // Neues Spielfeld erstellen
-          println(s"Spiel gestartet mit $player1 und $player2 auf einem $rows x $cols Feld.")
-          refreshBoard()
-          
-          // Hier könntest du das Spielfeld anzeigen lassen
-        } else {
-          Dialog.showMessage(
-            this,
-            "Bitte geben Sie gültige Werte für die Anzahl der Zeilen und Spalten ein.",
-            "Ungültige Eingabe",
-            Dialog.Message.Error
-          )
+        controller.getGameState match {
+          case GameState.InputPlayer1 | GameState.InputPlayer2 =>
+            if (controller.getPlayers.isEmpty) {
+              controller.addPlayers(player1)
+              controller.addPlayers(player2)
+            } else{
+              controller.addPlayers(player2)
+            }
+
+          }
+
+        controller.getGameState match {
+          case GameState.InputBoardSize =>
+
+          if (rows > 0 && cols > 0) {
+            controller.createNewBoard(rows, cols) // Neues Spielfeld erstellen
+            println(s"Spiel gestartet mit $player1 und $player2 auf einem $rows x $cols Feld.")
+            refreshBoard()
+            
+          } else {
+            Dialog.showMessage(
+              this,
+              "Bitte geben Sie gültige Werte für die Anzahl der Zeilen und Spalten ein.",
+              "Ungültige Eingabe",
+              Dialog.Message.Error
+            )
+          }
         }
+
         
+
+    //     controller.getGameState match {
+    //       case GameState.InputPlayer1 =>
+    //         // Wenn wir in InputPlayer1 sind, fügen wir den ersten Spieler hinzu
+    //         controller.addPlayers(player1)
+    //         // Wechsel zu InputPlayer2
+    //         controller.changeState(GameState.InputPlayer2)
+    
+    //       case GameState.InputPlayer2 =>
+    //         // Wenn wir in InputPlayer2 sind, fügen wir den zweiten Spieler hinzu
+    //         controller.addPlayers(player2)
+    //         // Wechsel zu InputBoardSize
+    //         controller.changeState(GameState.InputBoardSize)
+    
+    //       case GameState.InputBoardSize =>
+    //         // Wenn wir im InputBoardSize sind, prüfen wir die Spielfeldgröße
+    //         if (rows > 0 && cols > 0) {
+    //           controller.createNewBoard(rows, cols) // Neues Spielfeld erstellen
+    //           println(s"Spiel gestartet mit $player1 und $player2 auf einem $rows x $cols Feld.")
+    //           refreshBoard()
+    //         } else {
+    //           Dialog.showMessage(
+    //             this,
+    //             "Bitte geben Sie gültige Werte für die Anzahl der Zeilen und Spalten ein.",
+    //             "Ungültige Eingabe",
+    //             Dialog.Message.Error
+    //           )
+    //         }
+    
+    //       case _ =>
+    //         // Falls der GameState nicht dem erwarteten Zustand entspricht
+    //         Dialog.showMessage(
+    //           this,
+    //           "Ein unerwarteter Fehler ist aufgetreten.",
+    //           "Fehler",
+    //           Dialog.Message.Error
+    //         )
+    //     }
+    // }
     }
 
   }
@@ -134,7 +189,6 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 }
 
   override def update: Unit = {
-      println("Das Spielfeld wurde aktualisiert.")
       refreshBoard()
       //println(controller.boardToString) // Das brauchen wir nicht, oder?
       
