@@ -17,19 +17,35 @@ import com.google.inject.Inject
 class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
+  private var gameMode: String = ""
 
   def boardToString: String = board.toString
 
-  def addPlayers(player1Name: String, player2Name: String): Unit = {
-    if (gameState == GameState.SETUP) {
-      players = Queue(
-        Player(player1Name, Stone.White, "Human"),
-        Player(player2Name, Stone.Black, "Human")
-      )
-    } else {
-      println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
+  def addPlayers(playerName: String): Unit = {
+    if (gameState == GameState.InputPlayer1) {
+    players = players :+ Player(playerName, Stone.WhiteStone, "Human")
+    if (gameMode == "Human") {
+      changeState(GameState.InputPlayer2)
     }
+      else{
+        players = players :+ Player("AI", Stone.BlackStone, "AI")
+        println(s"${players.head.name} wurde hinzugefügt!")
+      }
+  } else if (gameState == GameState.InputPlayer2) {
+    players = players :+ Player(playerName, Stone.BlackStone, "Human")
+    println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")
+  } else {
+    println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
   }
+
+
+  }
+
+  def setGameMode(mode: String): Unit = {
+    gameMode = mode
+  }
+  
+  def getGameMode: String = gameMode
 
   def getPlayers: Queue[Player] = players
 
@@ -51,10 +67,9 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   def getBoard: BoardComponent = board
 
   def createNewBoard(rows: Int, cols: Int): BoardComponent = {
-    if (gameState == GameState.SETUP) {
+    if (gameState == GameState.InputBoardSize) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN)
-      notifyObservers
 
       board
     } else {
@@ -65,7 +80,8 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def changeState(newState: GameState.GameState): Unit = {
     gameState = newState
-    GameState.action(gameState)
+    if (gameState != GameState.WHITE_TURN)
+      GameState.action(gameState)
     //notifyObservers
   }
 
@@ -85,7 +101,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
             nextPlayer()
             true 
           case Failure(_) =>
-            println("Ungültiger Zug...")
             false
         }
 
@@ -96,35 +111,36 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   }
 
   def processTurn(curRow: Int, curCol: Int): Boolean = {
-    val currentPlayer = getCurrentPlayer
-    if (currentPlayer.role == "AI") {
-      println("KI ist am Zug")
-      StrategyContext.setPlayers(players)
-      val strategy = StrategyContext.strategy
-      strategy(board) match {
-        case Some(move) =>
-          println(s"Die KI macht den Zug ${move}.")
-          if (makeMove(move.x, move.y)) {
-            println("Zug erfolgreich!")
-            true
-          } else {
-            println(s"Fehler")
-            sys.exit(1)
-          }
+    if (makeMove(curRow, curCol)) {
+    println("Zug erfolgreich!")
+    true
+  } else {
+    println(s"Ungültiger Zug: ($curRow, $curCol)")
+    false
+  }
+  }
 
-        case None =>
-          println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
-          System.exit(0)
-          false
-      }
-    } else {
-      if (makeMove(curRow, curCol)) {
+  def processAITurn(): Boolean = {
+  println("KI ist am Zug... denkt nach...")
+  StrategyContext.setPlayers(players)
+  val strategy = StrategyContext.strategy
+
+  strategy(board) match {
+    case Some(move) =>
+      println(s"Die KI macht den Zug (${move.x}, ${move.y}).")
+      if (makeMove(move.x, move.y)) {
+        println("Zug erfolgreich!")
         true
       } else {
+        println("Fehler: Der KI-Zug war ungültig.")
         false
       }
-    }
+
+    case None =>
+      println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+      false
   }
+}
 
   def undo: Unit = {
     undoManager.undoStep()
