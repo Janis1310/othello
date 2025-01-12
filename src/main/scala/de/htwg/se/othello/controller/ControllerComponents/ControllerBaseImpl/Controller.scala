@@ -17,19 +17,22 @@ import com.google.inject.Inject
 class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private var gameMode: Option[String] = None
+  private var gameMode: String = ""
 
   def boardToString: String = board.toString
 
   def addPlayers(playerName: String): Unit = {
     if (gameState == GameState.InputPlayer1) {
-    // Spieler 1 hinzufügen (Weiß)
-    players = players :+ Player(playerName, Stone.WhiteStone, "Human")  // Spieler zu Queue hinzufügen
-    changeState(GameState.InputPlayer2)  // Zustand ändern zu InputPlayer2
+    players = players :+ Player(playerName, Stone.WhiteStone, "Human")
+    if (gameMode == "Human")
+      changeState(GameState.InputPlayer2)
+      else{
+        players = players :+ Player(playerName, Stone.BlackStone, "AI")
+        println(s"${players.head.name} wurde hinzugefügt!")
+      }
   } else if (gameState == GameState.InputPlayer2) {
-    // Spieler 2 hinzufügen (Schwarz)
-    players = players :+ Player(playerName, Stone.BlackStone, "Human")  // Spieler zu Queue hinzufügen
-    println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")  // Spieler 1 und Spieler 2 anzeigen
+    players = players :+ Player(playerName, Stone.BlackStone, "Human")
+    println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")
   } else {
     println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
   }
@@ -38,10 +41,10 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   }
 
   def setGameMode(mode: String): Unit = {
-    gameMode = Some(mode)
+    gameMode = mode
   }
   
-  def getGameMode: Option[String] = gameMode
+  def getGameMode: String = gameMode
 
   def getPlayers: Queue[Player] = players
 
@@ -109,35 +112,34 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   }
 
   def processTurn(curRow: Int, curCol: Int): Boolean = {
-    val currentPlayer = getCurrentPlayer
-    if (currentPlayer.role == "AI") {
-      println("KI ist am Zug")
-      StrategyContext.setPlayers(players)
-      val strategy = StrategyContext.strategy
-      strategy(board) match {
-        case Some(move) =>
-          println(s"Die KI macht den Zug ${move}.")
-          if (makeMove(move.x, move.y)) {
-            println("Zug erfolgreich!")
-            true
-          } else {
-            println(s"Fehler")
-            sys.exit(1)
-          }
-
-        case None =>
-          println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
-          System.exit(0)
-          false
-      }
-    } else {
-      if (makeMove(curRow, curCol)) {
-        true
-      } else {
-        false
-      }
-    }
+    if (makeMove(curRow, curCol)) {
+    println("Zug erfolgreich!")
+    true
+  } else {
+    println(s"Ungültiger Zug: ($curRow, $curCol)")
+    false
   }
+  }
+
+  def processAITurn(): Unit = {
+  println("KI ist am Zug... denkt nach...")
+  Thread.sleep(10000) // Wartezeit von 1 Sekunde (1000 Millisekunden)
+  StrategyContext.setPlayers(players)
+  val strategy = StrategyContext.strategy
+
+  strategy(board) match {
+    case Some(move) =>
+      println(s"Die KI macht den Zug (${move.x}, ${move.y}).")
+      if (makeMove(move.x, move.y)) {
+        println("Zug erfolgreich!")
+      } else {
+        println("Fehler: Der KI-Zug war ungültig.")
+      }
+
+    case None =>
+      println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+  }
+}
 
   def undo: Unit = {
     undoManager.undoStep()
