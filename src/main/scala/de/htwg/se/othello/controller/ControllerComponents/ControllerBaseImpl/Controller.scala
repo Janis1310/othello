@@ -4,40 +4,54 @@ import de.htwg.se.othello.ai.StrategyContext
 import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Stoneposition}
 import de.htwg.se.othello.model.BoardComponents.BoardComponent
-import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.{SetCommand, UndoManager}
+import de.htwg.se.othello.model.CommandComponents.CommandBaseImpl.SetCommand
 import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
-import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 import de.htwg.se.othello.model.HandlerComponents.MoveHandlerTemplateInterface
 import de.htwg.se.othello.model.Playercomponents.Player
 
 import scala.collection.immutable.Queue
-import scala.io.StdIn.readLine
 import scala.util.{Failure, Success, Try}
+import com.google.inject.Inject
 
 
-class Controller(var board: BoardComponent) extends ControllerComponent{
+class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
-  private val moveHandler: MoveHandlerTemplateInterface = MoveHandler
-  private val undoManager = new UndoManager
+  private var gameMode: String = ""
 
-  // Gibt das Board als Zeichenkette zurück
   def boardToString: String = board.toString
 
-  // Spieler hinzufügen und den aktuellen Zustand zurückgeben
-  def addPlayers(player1Name: String,player2Name: String): Unit = {
-     if (gameState == GameState.SETUP) {
-      players = Queue(
-        Player(player1Name, Stone.White,"Human" ),
-        Player(player2Name, Stone.Black, "Human" )
-      )
-    } else {
-      println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
+  def addPlayers(playerName: String): Unit = {
+    if (gameState == GameState.InputPlayer1) {
+    players = players :+ Player(playerName, Stone.WhiteStone, "Human")
+    if (gameMode == "Human") {
+      changeState(GameState.InputPlayer2)
     }
+      else{
+        players = players :+ Player("AI", Stone.BlackStone, "AI")
+        println(s"${players.head.name} wurde hinzugefügt!")
+      }
+  } else if (gameState == GameState.InputPlayer2) {
+    players = players :+ Player(playerName, Stone.BlackStone, "Human")
+    println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")
+  } else {
+    println("Spieler können nur im SETUP-Zustand hinzugefügt werden.")
   }
+
+
+  }
+
+  def setGameMode(mode: String): Unit = {
+    gameMode = mode
+  }
+  
+  def getGameMode: String = gameMode
+
   def getPlayers: Queue[Player] = players
 
   def getCurrentPlayer: Player = players.head
+
+  def getGameState: GameState.GameState = gameState
 
   def nextPlayer(): Unit = {
     val (currentPlayer, updatedQueue) = players.dequeue
@@ -50,40 +64,13 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
     notifyObservers
   }
 
-  // Führt einen Zug aus und gibt den neuen Zustand des Spiels zurück
-  def makeMove(x: Int, y: Int): Either[String, String] = {
-     gameState match {
-      case GameState.WHITE_TURN | GameState.BLACK_TURN =>
-        val stone = getCurrentPlayer.stone
-        val stonePosition = Stoneposition(x, y, stone)
+  def getBoard: BoardComponent = board
 
-        val previousBoard = board.copy()
-
-        val moveresult = Try {
-          
-           // Nach einem gültigen Zug den Spieler wechseln
-          undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
-          board.toString
-        }
-
-        moveresult match {
-        case Success(boardString) => 
-          nextPlayer()
-          Right(boardString) // Erfolgreiches Ergebnis, gibt das Board als String zurück
-        case Failure(_) => Left("Ungültiger Zug.") // Fehler im Zug
-      }
-
-      case _ =>
-        Left("Züge sind nur während eines Spielzugs erlaubt.")
-    }
-  }
-
-  // Erstellt ein neues Board und gibt es zurück
   def createNewBoard(rows: Int, cols: Int): BoardComponent = {
-    if (gameState == GameState.SETUP) {
+    if (gameState == GameState.InputBoardSize) {
       board = new Board(rows, cols)
-      changeState(GameState.WHITE_TURN) // Erst nach Erstellung des Boards den Zustand ändern
-      notifyObservers
+      changeState(GameState.WHITE_TURN)
+
       board
     } else {
       println("Das Board kann nur im SETUP-Zustand erstellt werden.")
@@ -91,49 +78,70 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
     }
   }
 
-   def changeState(newState: GameState.GameState): Unit = {
+  def changeState(newState: GameState.GameState): Unit = {
     gameState = newState
-    GameState.action(gameState)
+    if (gameState != GameState.WHITE_TURN)
+      GameState.action(gameState)
     //notifyObservers
   }
 
-  def getGameState: GameState.GameState = gameState
+  def makeMove(x: Int, y: Int): Boolean = {
+    gameState match {
+      case GameState.WHITE_TURN | GameState.BLACK_TURN =>
+        val stone = getCurrentPlayer.stone
+        val stonePosition = Stoneposition(x, y, stone)
 
+        val previousBoard = board.copy()
 
-  // Verarbeitet den nächsten Zug, entweder vom menschlichen Spieler oder von der KI
-  def processTurn(curRow : Int, curCol : Int): Unit = {
-    val currentPlayer = getCurrentPlayer
-    if (currentPlayer.role == "AI") {
-      println("KI ist am ZugTesteawdownjoiawdjipdawdawkoiawdkopwdokawdokpawdokado")
-      StrategyContext.setPlayers(players)
-      val strategy = StrategyContext.strategy // Hole die Strategie der KI
-      strategy(board) match {
-        case Some(move) =>
-          println(s"Die KI macht den Zug ${move}.")
-          makeMove(move.x, move.y) match  {
-            case Right(updatedBoard) =>
-              println("Zug erfolgreich! Aktuelles Spielfeld:")
-              //println(updatedBoard)
-              println("Test, nächster Spieler Test--------------------")
-              //nextPlayer() // Spieler wechseln
-            case Left(errorMessage) =>
-              println(s"Fehler: $errorMessage")
-              sys.exit(1)
-          }
-      case None =>
-        println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
-        System.exit(0)
-      }
-    } else {
-      makeMove(curRow, curCol) match {
-        case Right(updatedBoard) =>
-        case Left(errorMessage) =>
-          println(s"Fehler: $errorMessage")
-      }
+        val moveresult = Try {
+          undoManager.doStep(new SetCommand(previousBoard, moveHandler.processMove(stonePosition, board), this))
+        }
+        moveresult match {
+          case Success(boardString) =>
+            nextPlayer()
+            true 
+          case Failure(_) =>
+            false
+        }
+
+      case _ =>
+        println("Züge sind nur während eines Spielzugs erlaubt.");
+        false
     }
   }
 
-  // ab hier für Command Pattern
+  def processTurn(curRow: Int, curCol: Int): Boolean = {
+    if (makeMove(curRow, curCol)) {
+    println("Zug erfolgreich!")
+    true
+  } else {
+    println(s"Ungültiger Zug: ($curRow, $curCol)")
+    false
+  }
+  }
+
+  def processAITurn(): Boolean = {
+  println("KI ist am Zug... denkt nach...")
+  StrategyContext.setPlayers(players)
+  val strategy = StrategyContext.strategy
+
+  strategy(board) match {
+    case Some(move) =>
+      println(s"Die KI macht den Zug (${move.x}, ${move.y}).")
+      if (makeMove(move.x, move.y)) {
+        println("Zug erfolgreich!")
+        true
+      } else {
+        println("Fehler: Der KI-Zug war ungültig.")
+        false
+      }
+
+    case None =>
+      println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+      false
+  }
+}
+
   def undo: Unit = {
     undoManager.undoStep()
     notifyObservers
@@ -145,11 +153,7 @@ class Controller(var board: BoardComponent) extends ControllerComponent{
   }
 
   def setBoard(board: BoardComponent): Unit = {
-  this.board = board
-  notifyObservers // Observer über den neuen Zustand informieren
+    this.board = board
+    //notifyObservers
   }
-
-  /*def getBoard() : BoardComponent = {
-    board
-  }*/
 }

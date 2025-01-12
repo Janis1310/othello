@@ -4,6 +4,4 @@ import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl.Con
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class SetCommandSpec extends AnyWordSpec with Matchers {
-
-}
+class SetCommandSpec extends AnyWordSpec with Matchers {}

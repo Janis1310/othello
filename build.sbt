@@ -11,9 +11,8 @@ lazy val root = (project in file("."))
         libraryDependencies ++= Seq(
             "org.scalactic" %% "scalactic" % "3.2.14",
             "org.scalatest" %% "scalatest" % "3.2.14" % Test,
-
-            "org.scalafx" %% "scalafx" % "20.0.0-R31",
-            "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
+            "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
+            "net.codingwell" %% "scala-guice" % "7.0.0"
         ),
 
         coverageExcludedPackages := ".*Othello.*" ,

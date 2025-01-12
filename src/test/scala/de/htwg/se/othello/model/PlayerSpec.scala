@@ -2,7 +2,6 @@ package de.htwg.se.othello.model
 
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 import de.htwg.se.othello.model.Playercomponents.{AIPlayer, HumanPlayer, Player}
-// import board and stone
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
