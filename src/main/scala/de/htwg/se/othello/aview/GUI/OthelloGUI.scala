@@ -12,6 +12,8 @@ import de.htwg.se.othello.util.Observer
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
 import de.htwg.se.othello.controller.ControllerComponents.GameState
 import scala.annotation.constructorOnly
+import javax.swing.SwingUtilities
+import scala.util.Success
 
 class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer{
   controller.add(this)
@@ -188,7 +190,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 
     def createboard: BorderPanel = new BorderPanel {
         // Obere Statusanzeige
-        layout(new Label(s"${controller.getCurrentPlayer.name}'s Turn")) = BorderPanel.Position.North
+        layout(new Label(s"${controller.getCurrentPlayer.name} ist dran, Deine Farbe ist: ${controller.getCurrentPlayer.stone}")) = BorderPanel.Position.North
 
         // Spielfeld als zentrales Element
         layout(new GridPanel(controller.getBoard.getBoard.numRows, controller.getBoard.getBoard.numCols) {
@@ -205,18 +207,23 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
                 case Stone.White => icon = white_stone; background = new Color(65,100,40) // Weißer Stein
               }
             }
-
             listenTo(`button`)
             reactions += {
               case ButtonClicked(`button`) =>
-                val result = if (controller.getCurrentPlayer.role== "AI") {
-                  controller.processAITurn()
-                } else {
-                  controller.processTurn(row, col)
-                }
+                val result = controller.processTurn(row, col)
 
                 if (result) {
                   controller.notifyObservers
+                  if (controller.getCurrentPlayer.role == "AI")
+                    SwingUtilities.invokeLater(new Runnable {
+                      override def run(): Unit = {
+
+                        Thread.sleep(1000)
+                        controller.processAITurn()
+                      }
+                    })
+
+                
                 } else {
                   Dialog.showMessage(this, "Ungültiger Zug", "Fehlermeldung", Dialog.Message.Error)
                 }
@@ -226,7 +233,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
             contents += button
           }
         }) = BorderPanel.Position.Center
-      }
+  }
   
   centerOnScreen()  // Das Fenster wird zentriert
   visible = true
@@ -243,6 +250,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 
   override def update: Unit = {
       refreshBoard()
+        
       //println(controller.boardToString) // Das brauchen wir nicht, oder?
       
     }

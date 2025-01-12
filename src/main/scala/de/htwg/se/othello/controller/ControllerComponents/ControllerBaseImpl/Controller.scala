@@ -28,7 +28,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
       changeState(GameState.InputPlayer2)
     }
       else{
-        players = players :+ Player(playerName, Stone.BlackStone, "AI")
+        players = players :+ Player("AI", Stone.BlackStone, "AI")
         println(s"${players.head.name} wurde hinzugefügt!")
       }
   } else if (gameState == GameState.InputPlayer2) {
@@ -122,7 +122,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def processAITurn(): Boolean = {
   println("KI ist am Zug... denkt nach...")
-  Thread.sleep(10000) // Wartezeit von 1 Sekunde (1000 Millisekunden)
   StrategyContext.setPlayers(players)
   val strategy = StrategyContext.strategy
 
