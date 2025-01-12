@@ -43,6 +43,6 @@ trait ControllerComponent extends Observable{
     def setGameMode(mode: String): Unit
     def getGameMode: String
 
-    def processAITurn() : Unit
+    def processAITurn() : Boolean
   
 }

@@ -58,12 +58,14 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
       case ButtonClicked(confirmButton) =>
         if (playerButton.selected) {
           println("Spielmodus: Gegen Mensch")
-          controller.setGameMode("Mensch")
-          contents = createinitboard // Nächsten Schritt anzeigen
+          controller.setGameMode("Human")
+          controller.changeState(GameState.InputPlayer1)
+          contents = initBoard
         } else if (aiButton.selected) {
           println("Spielmodus: Gegen KI")
-          controller.setGameMode("KI")
-          createinitboard // Nächsten Schritt anzeigen
+          controller.setGameMode("AI")
+          controller.changeState(GameState.InputPlayer1)
+          contents = initBoard
         } else {
           Dialog.showMessage(
             null,
@@ -88,12 +90,16 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
     }
 }
 
+
+
    // Die Methode, um das Initialisierungs-Panel zu erstellen
-  def createinitboard = new BoxPanel(Orientation.Vertical) {
+  def initBoard = new BoxPanel(Orientation.Vertical) {
     val player1Field = new TextField { columns = 15 }
     val player2Field = new TextField { columns = 15 }
 
-    contents += new BoxPanel(Orientation.Horizontal) {
+    if (controller.getGameMode == "Human") {
+
+      contents += new BoxPanel(Orientation.Horizontal) {
       
       contents += new Label("Player 1:")
       contents += player1Field
@@ -101,6 +107,14 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
       contents += player2Field
     
     }
+
+    } else {
+      contents += new BoxPanel(Orientation.Horizontal) {
+      contents += new Label("Player Name:")
+      contents += player1Field
+    }
+    }
+
 
     contents += new BoxPanel(Orientation.Vertical){
        preferredSize = new Dimension(300,20)
@@ -131,12 +145,18 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
       case ButtonClicked(button) =>
         val player1 = if(player1Field.text.nonEmpty) player1Field.text else "Player 1"
         val player2 = if(player2Field.text.nonEmpty) player2Field.text else "Player 2"
+        
         val rows = Try(rowsField.text.toInt).getOrElse(8)
         val cols = Try(colsField.text.toInt).getOrElse(8)
 
         
-        if (controller.getGameState == GameState.InputPlayer1)
+        if (controller.getGameState == GameState.InputPlayer1) {
           controller.addPlayers(player1)
+          if (controller.getGameMode == "AI") {
+            controller.changeState(GameState.InputBoardSize)
+          }
+        }
+          
           
         if (controller.getGameState == GameState.InputPlayer2) {
           controller.addPlayers(player2)
@@ -186,11 +206,15 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
               }
             }
 
-            // Button-Event für einen Zug
-            listenTo(button)
+            listenTo(`button`)
             reactions += {
               case ButtonClicked(`button`) =>
-                val result = controller.processTurn(row, col)
+                val result = if (controller.getCurrentPlayer.role== "AI") {
+                  controller.processAITurn()
+                } else {
+                  controller.processTurn(row, col)
+                }
+
                 if (result) {
                   controller.notifyObservers
                 } else {

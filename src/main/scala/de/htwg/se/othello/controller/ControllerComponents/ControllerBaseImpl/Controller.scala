@@ -24,8 +24,9 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   def addPlayers(playerName: String): Unit = {
     if (gameState == GameState.InputPlayer1) {
     players = players :+ Player(playerName, Stone.WhiteStone, "Human")
-    if (gameMode == "Human")
+    if (gameMode == "Human") {
       changeState(GameState.InputPlayer2)
+    }
       else{
         players = players :+ Player(playerName, Stone.BlackStone, "AI")
         println(s"${players.head.name} wurde hinzugefügt!")
@@ -69,7 +70,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
     if (gameState == GameState.InputBoardSize) {
       board = new Board(rows, cols)
       changeState(GameState.WHITE_TURN)
-      notifyObservers
 
       board
     } else {
@@ -101,7 +101,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
             nextPlayer()
             true 
           case Failure(_) =>
-            println("Ungültiger Zug...")
             false
         }
 
@@ -121,7 +120,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   }
   }
 
-  def processAITurn(): Unit = {
+  def processAITurn(): Boolean = {
   println("KI ist am Zug... denkt nach...")
   Thread.sleep(10000) // Wartezeit von 1 Sekunde (1000 Millisekunden)
   StrategyContext.setPlayers(players)
@@ -132,12 +131,15 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
       println(s"Die KI macht den Zug (${move.x}, ${move.y}).")
       if (makeMove(move.x, move.y)) {
         println("Zug erfolgreich!")
+        true
       } else {
         println("Fehler: Der KI-Zug war ungültig.")
+        false
       }
 
     case None =>
       println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+      false
   }
 }
 

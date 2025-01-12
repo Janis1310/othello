@@ -52,6 +52,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
       case Success((rows, cols)) if rows > 0 && cols > 0 =>
         controller.createNewBoard(rows, cols)
         println(s"Spiel gestartet mit ${controller.getPlayers.head} und ${controller.getPlayers.last} auf einem $rows x $cols Feld.")
+        controller.notifyObservers
         //controller.changeState(GameState.WHITE_TURN)
       case Success((_, _)) =>
         println("Die Breite und Länge müssen positive Zahlen sein. Bitte erneut eingeben:")
