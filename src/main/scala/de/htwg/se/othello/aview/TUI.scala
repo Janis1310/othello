@@ -17,15 +17,21 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
   def processInputLine(input: String): Unit = {
     if (input == "q"){
-      println("Spiel wird beendet."); System.exit(0)
+      println("Spiel wird beendet.")
+      System.exit(0)
     }
     controller.getGameState match {
     case GameState.SETUP =>
       input match {
-        case "n" =>
+        case "p" =>
           println("Neues Spiel gestartet!")
+          controller.setGameMode("Human")
           controller.changeState(GameState.InputPlayer1)
-        case _ => println("Ungültige Eingabe. 'n' für neues Spiel, 'q' zum Beenden.")
+        case "k" =>
+          println("Neues Spiel gestartet!")
+          controller.setGameMode("AI")
+          controller.changeState(GameState.InputPlayer1)
+        case _ => println("Ungültige Eingabe. 'p' für zum Spielen gegen ein Mensch, 'k' zum Spielen gegen KI, 'q' zum Beenden.")
       }
 
     case GameState.InputPlayer1 | GameState.InputPlayer2 =>
@@ -59,6 +65,11 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
 
     case GameState.WHITE_TURN | GameState.BLACK_TURN =>
+      if (controller.getGameMode == "AI") {
+        controller.processAITurn()
+        return
+  }
+
       val result = for {
         Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
       } yield (x, y)
@@ -92,7 +103,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
   def start: Unit = {
     if (controller.getGameState == GameState.SETUP){
       println("Willkommen zu Othello!")
-      println("q => quit, p => Gegen Mensch, a = KI")
+      println("q => quit, p => Gegen Mensch spielen, k = Gegen KI spielen")
 
     }
   }
