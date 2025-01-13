@@ -140,11 +140,13 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
 
   def undo: Unit = {
     undoManager.undoStep()
+    nextPlayer()
     notifyObservers
   }
 
   def redo: Unit = {
     undoManager.redoStep()
+    nextPlayer()
     notifyObservers
   }
 
