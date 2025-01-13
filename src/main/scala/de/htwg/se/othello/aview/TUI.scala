@@ -85,7 +85,11 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
           result match {
             case Success((x, y)) =>
-              controller.processTurn(x, y)
+              if(controller.makeMove(x, y)) {
+                println("Zug erfolgreich")
+              } else {
+                println(s"Ungültiger Zug: ($x, $y)")
+              }
             case Failure(_: MatchError) =>
               println("Eingabe muss im Format 'x,y' sein.")
             case Failure(_: NumberFormatException) =>

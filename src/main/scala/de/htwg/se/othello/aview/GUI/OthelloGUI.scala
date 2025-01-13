@@ -210,7 +210,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
             listenTo(`button`)
             reactions += {
               case ButtonClicked(`button`) =>
-                val result = controller.processTurn(row, col)
+                val result = controller.makeMove(row, col)
 
                 if (result) {
                   controller.notifyObservers

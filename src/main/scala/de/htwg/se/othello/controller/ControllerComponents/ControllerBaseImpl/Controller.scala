@@ -105,15 +105,14 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
     }
   }
 
-  def processTurn(curRow: Int, curCol: Int): Boolean = {
-    if (makeMove(curRow, curCol)) {
-      println("Zug erfolgreich!")
-      true
-    } else {
-      println(s"Ungültiger Zug: ($curRow, $curCol)")
-      false
-    }
-  }
+//  def processTurn(curRow: Int, curCol: Int): Boolean = {
+//    if (makeMove(curRow, curCol)) {
+//      true
+//    } else {
+//      
+//      false
+//    }
+//  }
 
   def processAITurn(): Boolean = {
     println("KI ist am Zug... denkt nach...")

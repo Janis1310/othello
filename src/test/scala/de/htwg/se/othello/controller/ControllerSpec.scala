@@ -47,8 +47,8 @@ class ControllerSpec extends AnyWordSpec with Matchers {
     "Create and get new Board" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.changeState(GameState.InputBoardSize)
-      controller.createNewBoard(8,8)
-      controller.getBoard shouldBe new Board(8,8)
+      controller.createNewBoard(8, 8)
+      controller.getBoard shouldBe new Board(8, 8)
     }
     "Create board in wrong state" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
@@ -58,18 +58,40 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       }.getMessage should include("Das Board kann nur im InputBoardSize-Zustand erstellt werden.")
     }
 
-    "makeMove sucessful" in {
+    "processTurn, makeMove sucessful" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.changeState(GameState.InputBoardSize)
-      controller.createNewBoard(8,8)
+      controller.createNewBoard(8, 8)
       controller.setGameMode("Ai")
       controller.changeState(GameState.InputPlayer1)
       controller.addPlayers("Imran")
       controller.changeState(GameState.WHITE_TURN)
-      controller.processTurn(5,3)
+      controller.makeMove(5, 3)
+      controller.makeMove(5,4)
 
-      controller.getBoard.getStoneAt(5,3) should be (Stone.White)
-      controller.getBoard.getStoneAt(4,3) should be (Stone.White)
+      controller.getBoard.getStoneAt(5, 3) should be(Stone.White)
+      controller.getBoard.getStoneAt(4, 3) should be(Stone.White)
+      controller.getBoard.getStoneAt(5, 4) should be(Stone.Black)
+    }
+    "next player only in right state" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.setGameMode("Human")
+
+
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Alex")
+      controller.changeState(GameState.InputPlayer2)
+      controller.addPlayers("Pascal")
+      controller.changeState(GameState.InputBoardSize)
+      intercept[IllegalStateException] {
+        controller.nextPlayer()
+
+      }.getMessage should include("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
+    }
+    "getGameMode" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.setGameMode("Human")
+      controller.getGameMode shouldBe ("Human")
     }
   }
 }
