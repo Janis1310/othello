@@ -77,4 +77,20 @@ class Board @Inject() (private val board: MatrixInterface[StoneComponent])
         )
     }
   }
+
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case that: Board =>
+        // Überprüfe Anzahl der Zeilen und Spalten
+        this.numRows == that.numRows &&
+          this.numCols == that.numCols &&
+          // Vergleiche Inhalte der Matrix
+          (0 until numRows).forall(row =>
+            (0 until numCols).forall(col =>
+              this.getStoneAt(row, col) == that.getStoneAt(row, col)
+            )
+          )
+      case _ => false
+    }
+  }
 }

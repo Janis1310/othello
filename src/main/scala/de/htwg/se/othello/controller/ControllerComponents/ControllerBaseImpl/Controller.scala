@@ -55,7 +55,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
     gameState match {
       case GameState.WHITE_TURN => changeState(GameState.BLACK_TURN)
       case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
-      case _ => println("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
+      case _ => throw new IllegalStateException("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
     notifyObservers
   }
@@ -69,8 +69,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
 
       board
     } else {
-      println("Das Board kann nur im SETUP-Zustand erstellt werden.")
-      board
+      throw new IllegalStateException("Das Board kann nur im InputBoardSize-Zustand erstellt werden.")
     }
   }
 

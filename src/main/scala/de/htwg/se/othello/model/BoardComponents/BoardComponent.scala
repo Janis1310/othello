@@ -43,6 +43,7 @@ trait BoardComponent {
    *
    * @return Eine Kopie des Spielfelds.
    */
+  def getStoneAt(x: Int, y: Int): StoneComponent
   def copy(): BoardComponent
   override def toString: String
 }
