@@ -1,11 +1,8 @@
 package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
 
-import de.htwg.se.othello.model.BoardComponents.{
-  BoardComponent,
-  MatrixInterface,
-  StoneComponent
-}
+import de.htwg.se.othello.model.BoardComponents.{BoardComponent, MatrixInterface, StoneComponent}
 import com.google.inject.Inject
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone.Stone
 
 class Board @Inject() (private val board: MatrixInterface[StoneComponent])
     extends BoardComponent {
@@ -34,6 +31,12 @@ class Board @Inject() (private val board: MatrixInterface[StoneComponent])
   def placeStone(x: Int, y: Int, stone: StoneComponent): BoardComponent = {
     val newMatrix = board.replaceCell(x, y, stone)
     Board(newMatrix)
+  }
+  def getStoneAt(x: Int, y: Int): Stone = {
+    if (x < 0 || x >= board.numRows || y < 0 || y >= board.numCols) {
+      throw new IllegalArgumentException(s"Position ($x, $y) liegt außerhalb des Boards.")
+    }
+    board.cell(x,y)
   }
 
   override def toString: String = {

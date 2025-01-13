@@ -24,10 +24,12 @@ object StrategyContext {
 
   def getPlayers: Queue[Player] = players
   def getCurrentPlayer: Player = players.head
-  println(players)
+  //println(players)
+  println("Test--Test--Strategy")
   // if(players.nonEmpty)
-  var strategy = if (Random.nextInt() % 2 == 0) strategy1 else strategy2
-
+  def strategy: BoardComponent => Option[Stoneposition] = {
+    if (Random.nextInt() % 2 == 0) strategy1 else strategy2
+  }
   // Strategie 1: Iteriert vorwärts
   def strategy1(board: BoardComponent): Option[Stoneposition] = {
     println("Strategie 1:")

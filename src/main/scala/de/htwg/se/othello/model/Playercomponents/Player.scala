@@ -7,7 +7,14 @@ trait Player {
   def name: String
   def stone: StoneComponent
   def role: String // Add this method to define the player's role
-  // override def toString: String = s"$name: $stone"
+
+  override def equals(obj: Any): Boolean = obj match {
+    case that: Player =>
+      this.name == that.name &&
+        this.stone == that.stone &&
+        this.role == that.role
+    case _ => false
+  }
 }
 
 // concreteProduct: HumanPlayer
