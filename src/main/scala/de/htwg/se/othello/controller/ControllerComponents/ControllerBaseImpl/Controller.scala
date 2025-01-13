@@ -112,7 +112,6 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def processTurn(curRow: Int, curCol: Int): Boolean = {
     if (makeMove(curRow, curCol)) {
-    println("Zug erfolgreich!")
     true
   } else {
     println(s"Ungültiger Zug: ($curRow, $curCol)")
@@ -144,11 +143,13 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
 
   def undo: Unit = {
     undoManager.undoStep()
+    nextPlayer()
     notifyObservers
   }
 
   def redo: Unit = {
     undoManager.redoStep()
+    nextPlayer()
     notifyObservers
   }
 

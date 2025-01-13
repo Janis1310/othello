@@ -66,25 +66,35 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
 
     case GameState.WHITE_TURN | GameState.BLACK_TURN =>
-      if (controller.getGameMode == "AI") {
+      if (controller.getGameMode == "AI" && controller.getCurrentPlayer.role == "AI") {
         controller.processAITurn()
         return
-  }
+          }
 
-      val result = for {
-        Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
-      } yield (x, y)
+      input match {
+        case "z" =>
+          controller.undo
+          println("Undo")
+        case "d" =>
+          controller.redo
+          println("Redo")
+        case _ =>
+          val result = for {
+            Array(x, y) <- Try(input.split(",").map(_.trim.toInt))
+          } yield (x, y)
 
-      result match {
-        case Success((x, y)) =>
-          controller.processTurn(x, y)
-        case Failure(_: MatchError) =>
-          println("Eingabe muss im Format 'x,y' sein.")
-        case Failure(_: NumberFormatException) =>
-          println("Eingabe enthält ungültige Zahlen.")
-        case Failure(e) =>
-          println(s"Ein unerwarteter Fehler ist aufgetreten: ${e.getMessage}")
+          result match {
+            case Success((x, y)) =>
+              controller.processTurn(x, y)
+            case Failure(_: MatchError) =>
+              println("Eingabe muss im Format 'x,y' sein.")
+            case Failure(_: NumberFormatException) =>
+              println("Eingabe enthält ungültige Zahlen.")
+            case Failure(e) =>
+              println(s"Ein unerwarteter Fehler ist aufgetreten: ${e.getMessage}")
+          }
       }
+
 
     case _ => println("Unbekannter Zustand. Bitte Spiel neu starten.")
   }
@@ -95,8 +105,8 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
     if (controller.getGameState == GameState.BLACK_TURN || controller.getGameState == GameState.WHITE_TURN) {
-      println("q => quit, z => undo, y => redo")
-      println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ")
+      println("q => quit, z => undo, d => redo")
+      println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ${controller.getCurrentPlayer.stone} ")
       println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
     }
   }
