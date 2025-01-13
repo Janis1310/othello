@@ -100,22 +100,10 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
         }
 
       case _ =>
-        println("Züge sind nur während eines Spielzugs erlaubt.");
-        false
+        throw new IllegalStateException("Züge sind nur während eines Spielzugs erlaubt.");
     }
   }
-
-//  def processTurn(curRow: Int, curCol: Int): Boolean = {
-//    if (makeMove(curRow, curCol)) {
-//      true
-//    } else {
-//      
-//      false
-//    }
-//  }
-
   def processAITurn(): Boolean = {
-    println("KI ist am Zug... denkt nach...")
     StrategyContext.setPlayers(players)
     val strategy = StrategyContext.strategy
 
@@ -126,12 +114,10 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
           println("Zug erfolgreich!")
           true
         } else {
-          println("Fehler: Der KI-Zug war ungültig.")
-          false
+          throw new IllegalArgumentException("Fehler: Der KI-Zug war ungültig.") // Das sollte niemals eintreten
         }
 
       case None =>
-        println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
         false
     }
   }

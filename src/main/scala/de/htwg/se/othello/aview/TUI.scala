@@ -67,8 +67,13 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
     case GameState.WHITE_TURN | GameState.BLACK_TURN =>
       if (controller.getGameMode == "AI" && controller.getCurrentPlayer.role == "AI") {
-        controller.processAITurn()
-        return
+        println("KI ist am Zug... denkt nach...")
+        if(controller.processAITurn()) {
+          return
+        } else {
+          println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+        }
+        
           }
 
       input match {

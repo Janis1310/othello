@@ -58,7 +58,7 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       }.getMessage should include("Das Board kann nur im InputBoardSize-Zustand erstellt werden.")
     }
 
-    "processTurn, makeMove sucessful" in {
+    "makeMove sucessful" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.changeState(GameState.InputBoardSize)
       controller.createNewBoard(8, 8)
@@ -73,6 +73,22 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       controller.getBoard.getStoneAt(4, 3) should be(Stone.White)
       controller.getBoard.getStoneAt(5, 4) should be(Stone.Black)
     }
+    "makeMove fail" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.changeState(GameState.InputBoardSize)
+      controller.createNewBoard(8, 8)
+      controller.setGameMode("Ai")
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Imran")
+      controller.changeState(GameState.WHITE_TURN)
+      controller.makeMove(9, 3) shouldBe false
+
+      controller.changeState(GameState.SETUP)
+      intercept[IllegalStateException] {
+        controller.makeMove(5, 3)
+      }.getMessage should include {"Züge sind nur während eines Spielzugs erlaubt."}
+    }
+
     "next player only in right state" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.setGameMode("Human")
@@ -85,13 +101,93 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       controller.changeState(GameState.InputBoardSize)
       intercept[IllegalStateException] {
         controller.nextPlayer()
-
       }.getMessage should include("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
+
+    "processAiTurn" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.changeState(GameState.InputBoardSize)
+      controller.createNewBoard(8, 8)
+      controller.setGameMode("Ai")
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Dominik")
+      controller.changeState(GameState.BLACK_TURN)
+      controller.processAITurn() shouldBe true
+
+    }
+    "processAiTurn = false, full board" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.changeState(GameState.InputBoardSize)
+      controller.createNewBoard(8, 8)
+      controller.setGameMode("Ai")
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Jake")
+      controller.changeState(GameState.WHITE_TURN)
+      controller.makeMove(5,3)
+      controller.nextPlayer()
+      controller.makeMove(2,4)
+      controller.processAITurn() shouldBe false
+
+
+    }
+
+
     "getGameMode" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.setGameMode("Human")
       controller.getGameMode shouldBe ("Human")
     }
+  }
+  "undo and redo" in {
+    val controller = injector.getInstance(classOf[ControllerComponent])
+    controller.changeState(GameState.InputBoardSize)
+    controller.createNewBoard(8, 8)
+    controller.setGameMode("Ai")
+    controller.changeState(GameState.InputPlayer1)
+    controller.addPlayers("Philippe")
+    controller.changeState(GameState.WHITE_TURN)
+    val initialBoard = controller.getBoard.copy()
+
+    controller.makeMove(5, 3)
+    val boardAfterMove = controller.getBoard.copy()
+    controller.undo
+    controller.getBoard should equal(initialBoard)
+    controller.getGameState shouldBe(GameState.WHITE_TURN)
+    controller.redo
+    controller.getGameState shouldBe (GameState.BLACK_TURN)
+    controller.getBoard should equal(boardAfterMove)
+  }
+  "boardToString" in {
+    val controller = injector.getInstance(classOf[ControllerComponent])
+    val initialBoardStr =
+      """
+          0   1   2   3   4   5   6   7
+        +---+---+---+---+---+---+---+---+
+      0 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      1 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      2 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      3 | . | . | . | W | S | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      4 | . | . | . | S | W | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      5 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      6 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+
+      7 | . | . | . | . | . | . | . | . |
+        +---+---+---+---+---+---+---+---+ """
+
+    controller.changeState(GameState.InputBoardSize)
+    controller.createNewBoard(8, 8)
+    controller.setGameMode("Ai")
+    controller.changeState(GameState.InputPlayer1)
+    controller.addPlayers("Miréio")
+    controller.changeState(GameState.WHITE_TURN)
+
+    controller.boardToString.replaceAll("\\s+", "") shouldBe initialBoardStr
+      .replaceAll("\\s+", "")
   }
 }

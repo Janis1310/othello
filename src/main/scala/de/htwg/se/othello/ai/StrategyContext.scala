@@ -24,15 +24,11 @@ object StrategyContext {
 
   def getPlayers: Queue[Player] = players
   def getCurrentPlayer: Player = players.head
-  //println(players)
-  println("Test--Test--Strategy")
-  // if(players.nonEmpty)
   def strategy: BoardComponent => Option[Stoneposition] = {
     if (Random.nextInt() % 2 == 0) strategy1 else strategy2
   }
   // Strategie 1: Iteriert vorwärts
   def strategy1(board: BoardComponent): Option[Stoneposition] = {
-    println("Strategie 1:")
     val stone = getCurrentPlayer.stone
     var result: Option[Stoneposition] = None
     breakable {
@@ -50,7 +46,6 @@ object StrategyContext {
 
   // Strategie 2: Iteriert rückwärts
   def strategy2(board: BoardComponent): Option[Stoneposition] = {
-    println("Strategie 2:")
     val stone = getCurrentPlayer.stone
     var result: Option[Stoneposition] = None
     breakable {
