@@ -12,6 +12,8 @@ import de.htwg.se.othello.model.Playercomponents.Player
 import scala.collection.immutable.Queue
 import scala.util.{Failure, Success, Try}
 import com.google.inject.Inject
+import de.htwg.se.othello.model.BoardComponents.MatrixInterface
+import de.htwg.se.othello.model.BoardComponents.StoneComponent
 
 
 class Controller @Inject()(var board: BoardComponent, val undoManager : UndoManagerComponent, val moveHandler : MoveHandlerTemplateInterface) extends ControllerComponent {
@@ -156,5 +158,23 @@ class Controller @Inject()(var board: BoardComponent, val undoManager : UndoMana
   def setBoard(board: BoardComponent): Unit = {
     this.board = board
     //notifyObservers
+  }
+
+  def countStone():(Int, Int) = {
+
+  var blackCount = 0
+  var whiteCount = 0
+
+  for (row <- 0 until board.numRows) {
+        for (col <- 0 until board.numCols) {
+          board.getBoard.cell(row, col) match {
+            case Stone.Black => blackCount += 1
+            case Stone.White => whiteCount += 1
+            case _ =>
+          }
+        }
+      }
+
+    (whiteCount,blackCount)
   }
 }

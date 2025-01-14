@@ -44,5 +44,7 @@ trait ControllerComponent extends Observable{
     def getGameMode: String
 
     def processAITurn() : Boolean
+
+    def countStone() : (Int, Int)
   
 }
