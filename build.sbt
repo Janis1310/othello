@@ -16,6 +16,7 @@ lazy val root = (project in file("."))
         ),
 
         coverageExcludedPackages := ".*Othello.*" ,
+
     )
 
 /*val scala3Version = "3.5.1"
