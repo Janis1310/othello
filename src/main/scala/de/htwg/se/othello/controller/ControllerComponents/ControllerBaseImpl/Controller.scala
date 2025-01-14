@@ -125,15 +125,21 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
   }
 
   def undo: Unit = {
+    val board = this.getBoard
     undoManager.undoStep()
-    nextPlayer()
-    notifyObservers
+    if(!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
+      nextPlayer()
+      notifyObservers
+    }
   }
 
   def redo: Unit = {
+    val board = this.getBoard
     undoManager.redoStep()
-    nextPlayer()
-    notifyObservers
+    if(!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
+      nextPlayer()
+      notifyObservers
+    }
   }
 
   def setBoard(board: BoardComponent): Unit = {
