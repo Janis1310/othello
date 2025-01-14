@@ -1,5 +1,7 @@
 package de.htwg.se.othello.model.BoardComponents.BoardBaseImpl
+
 import de.htwg.se.othello.model.BoardComponents.StoneComponent
+import play.api.libs.json._
 
 object Stone {
   case object Black extends StoneComponent {
@@ -24,4 +26,11 @@ object Stone {
   val BlackStone: Stone = Black
   val WhiteStone: Stone = White
   val EmptyStone: Stone = Empty
+
+  // implicit val stoneWrites: Writes[StoneComponent] = Writes {
+  //   case Stone.Empty => JsString("Empty")
+  //   case Stone.White => JsString("White")
+  //   case Stone.Black => JsString("Black")
+  // }
 }
+
