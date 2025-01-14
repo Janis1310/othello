@@ -12,7 +12,9 @@ lazy val root = (project in file("."))
             "org.scalactic" %% "scalactic" % "3.2.14",
             "org.scalatest" %% "scalatest" % "3.2.14" % Test,
             "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
-            "net.codingwell" %% "scala-guice" % "7.0.0"
+            "net.codingwell" %% "scala-guice" % "7.0.0",
+            "org.playframework" %% "play-json" % "3.0.4",
+            "org.scala-lang.modules" %% "scala-xml" % "2.3.0"
         ),
 
         coverageExcludedPackages := ".*Othello.*" ,
