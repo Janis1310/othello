@@ -142,20 +142,13 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
   }
 
   def countStone():(Int, Int) = {
+    val stones = for {
+    row <- 0 until board.numRows
+    col <- 0 until board.numCols
+  } yield board.getBoard.cell(row, col)
 
-  var blackCount = 0
-  var whiteCount = 0
-
-  for (row <- 0 until board.numRows) {
-        for (col <- 0 until board.numCols) {
-          board.getBoard.cell(row, col) match {
-            case Stone.Black => blackCount += 1
-            case Stone.White => whiteCount += 1
-            case _ =>
-          }
-        }
-      }
-
-    (whiteCount,blackCount)
+    val blackCount = stones.count(_ == Stone.Black)
+    val whiteCount = stones.count(_ == Stone.White)
+    (whiteCount, blackCount)
   }
 }

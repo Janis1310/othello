@@ -114,6 +114,8 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
     println("Das Spielfeld wurde aktualisiert.")
     println(controller.boardToString)
     if (controller.getGameState == GameState.BLACK_TURN || controller.getGameState == GameState.WHITE_TURN) {
+      val (w, s) = controller.countStone()
+      println(s"Weißen Steine: $w | Schwarze Steine: $s")
       println("q => quit, z => undo, d => redo")
       println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ${controller.getCurrentPlayer.stone} ")
       println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
