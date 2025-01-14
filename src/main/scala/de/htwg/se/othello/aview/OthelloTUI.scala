@@ -67,8 +67,13 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
     case GameState.WHITE_TURN | GameState.BLACK_TURN =>
       if (controller.getGameMode == "AI" && controller.getCurrentPlayer.role == "AI") {
-        controller.processAITurn()
-        return
+        println("KI ist am Zug... denkt nach...")
+        if(controller.processAITurn()) {
+          return
+        } else {
+          println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
+        }
+        
           }
 
       input match {
@@ -85,7 +90,11 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
 
           result match {
             case Success((x, y)) =>
-              controller.processTurn(x, y)
+              if(controller.makeMove(x, y)) {
+                println("Zug erfolgreich")
+              } else {
+                println(s"Ungültiger Zug: ($x, $y)")
+              }
             case Failure(_: MatchError) =>
               println("Eingabe muss im Format 'x,y' sein.")
             case Failure(_: NumberFormatException) =>

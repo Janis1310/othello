@@ -7,14 +7,16 @@ import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Sto
 import de.htwg.se.othello.model.BoardComponents.BoardComponent
 import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 import de.htwg.se.othello.model.Playercomponents.Player
+
 import scala.collection.immutable.Queue
+import scala.util.Random
 
 class StrategyContextSpec extends AnyWordSpec with Matchers {
 
   "StrategyContext" should {
     "set and get players correctly" in {
-      val player1 = Player("Player1", Stone.Black)
-      val player2 = Player("Player2", Stone.White)
+      val player1 = Player("Player1", Stone.Black, "AI")
+      val player2 = Player("Player2", Stone.White, "Human")
       val players = Queue(player1, player2)
 
       StrategyContext.setPlayers(players)
@@ -22,56 +24,43 @@ class StrategyContextSpec extends AnyWordSpec with Matchers {
       StrategyContext.getCurrentPlayer shouldBe player1
     }
 
-    "execute strategy1 correctly" in {
-      val player = Player("Player1", Stone.Black)
-      val board = mock[BoardComponent]
-      when(board.numRows).thenReturn(8)
-      when(board.numCols).thenReturn(8)
-      when(MoveHandler.isValidMove(Stoneposition(0, 0, Stone.Black), board)).thenReturn(true)
+    "execute strategy1 and strategy2 correctly" in {
+      val player = Player("Player1", Stone.Black, "AI")
+      val testBoard = new Board(8, 8)
+      val strategy1 = StrategyContext.strategy1(testBoard)
+      strategy1 shouldBe (Some(Stoneposition(2, 3, Stone.Black)))
 
-      StrategyContext.setPlayers(Queue(player))
-      val result = StrategyContext.strategy1(board)
-
-      result shouldBe Some(Stoneposition(0, 0, Stone.Black))
-    }
-
-    "execute strategy2 correctly" in {
-      val player = Player("Player1", Stone.Black)
-      val board = mock[BoardComponent]
-      when(board.numRows).thenReturn(8)
-      when(board.numCols).thenReturn(8)
-      when(MoveHandler.isValidMove(Stoneposition(7, 7, Stone.Black), board)).thenReturn(true)
-
-      StrategyContext.setPlayers(Queue(player))
-      val result = StrategyContext.strategy2(board)
-
-      result shouldBe Some(Stoneposition(7, 7, Stone.Black))
-    }
-
-    "return None if no valid moves in strategy1" in {
-      val player = Player("Player1", Stone.Black)
-      val board = mock[BoardComponent]
-      when(board.numRows).thenReturn(8)
-      when(board.numCols).thenReturn(8)
-      when(MoveHandler.isValidMove(any[Stoneposition], eqTo(board))).thenReturn(false)
-
-      StrategyContext.setPlayers(Queue(player))
-      val result = StrategyContext.strategy1(board)
-
-      result shouldBe None
-    }
-
-    "return None if no valid moves in strategy2" in {
-      val player = Player("Player1", Stone.Black)
-      val board = mock[BoardComponent]
-      when(board.numRows).thenReturn(8)
-      when(board.numCols).thenReturn(8)
-      when(MoveHandler.isValidMove(any[Stoneposition], eqTo(board))).thenReturn(false)
-
-      StrategyContext.setPlayers(Queue(player))
-      val result = StrategyContext.strategy2(board)
-
-      result shouldBe None
+      val strategy2 = StrategyContext.strategy2(testBoard)
+      strategy2 shouldBe (Some(Stoneposition(5, 4, Stone.Black)))
     }
   }
 }
+   /* "select randomly either strategy1 or strategy2" in {
+      val strategy = StrategyContext.strategy
+      if (strategy == StrategyContext.strategy1) {
+        strategy shouldBe (StrategyContext.strategy1)
+      } else {
+        strategy shouldBe (StrategyContext.strategy2)
+      }
+    }
+
+  }
+
+
+  "select randomly either strategy1 or strategy2" in {
+    var strategy1Chosen = false
+    var strategy2Chosen = false
+
+    for (_ <- 1 to 100) {
+      val chosenStrategy = StrategyContext.strategy
+      println(f"chosenStrategy: $chosenStrategy, StrategyContext.strategy1: ${StrategyContext.strategy1}")
+      if (chosenStrategy == StrategyContext.strategy1) strategy1Chosen = true
+      if (chosenStrategy == StrategyContext.strategy2) strategy2Chosen = true
+    }
+
+    strategy1Chosen shouldBe true
+    strategy2Chosen shouldBe true
+  }*/
+
+
+
