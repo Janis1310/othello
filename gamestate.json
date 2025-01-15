@@ -1,17 +1,17 @@
 {
   "currentplayer" : {
-    "name" : "BBB",
-    "stone" : "Black",
-    "role" : "Human"
-  },
-  "nextplayer" : {
-    "name" : "AAA",
+    "name" : "A",
     "stone" : "White",
     "role" : "Human"
   },
+  "nextplayer" : {
+    "name" : "B",
+    "stone" : "Black",
+    "role" : "Human"
+  },
   "mode" : "Human",
-  "numrows" : 6,
-  "numcols" : 6,
+  "numrows" : 10,
+  "numcols" : 10,
   "matrix" : [ {
     "row" : 0,
     "col" : 0,
@@ -37,6 +37,22 @@
     "col" : 5,
     "color" : "Empty"
   }, {
+    "row" : 0,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
     "row" : 1,
     "col" : 0,
     "color" : "Empty"
@@ -51,7 +67,7 @@
   }, {
     "row" : 1,
     "col" : 3,
-    "color" : "White"
+    "color" : "Empty"
   }, {
     "row" : 1,
     "col" : 4,
@@ -59,6 +75,22 @@
   }, {
     "row" : 1,
     "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 9,
     "color" : "Empty"
   }, {
     "row" : 2,
@@ -71,11 +103,11 @@
   }, {
     "row" : 2,
     "col" : 2,
-    "color" : "White"
+    "color" : "Empty"
   }, {
     "row" : 2,
     "col" : 3,
-    "color" : "White"
+    "color" : "Empty"
   }, {
     "row" : 2,
     "col" : 4,
@@ -83,6 +115,22 @@
   }, {
     "row" : 2,
     "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 9,
     "color" : "Empty"
   }, {
     "row" : 3,
@@ -95,66 +143,274 @@
   }, {
     "row" : 3,
     "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 4,
+    "color" : "White"
+  }, {
+    "row" : 4,
+    "col" : 5,
     "color" : "Black"
   }, {
-    "row" : 3,
+    "row" : 4,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
     "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 4,
+    "color" : "Black"
+  }, {
+    "row" : 5,
+    "col" : 5,
     "color" : "White"
   }, {
-    "row" : 3,
-    "col" : 4,
+    "row" : 5,
+    "col" : 6,
     "color" : "Empty"
   }, {
-    "row" : 3,
-    "col" : 5,
+    "row" : 5,
+    "col" : 7,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 5,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
     "col" : 0,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 6,
     "col" : 1,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 6,
     "col" : 2,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 6,
     "col" : 3,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 6,
     "col" : 4,
     "color" : "Empty"
   }, {
-    "row" : 4,
+    "row" : 6,
     "col" : 5,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 6,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
     "col" : 0,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 7,
     "col" : 1,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 7,
     "col" : 2,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 7,
     "col" : 3,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 7,
     "col" : 4,
     "color" : "Empty"
   }, {
-    "row" : 5,
+    "row" : 7,
     "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 8,
+    "col" : 9,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 8,
+    "color" : "Empty"
+  }, {
+    "row" : 9,
+    "col" : 9,
     "color" : "Empty"
   } ]
 }

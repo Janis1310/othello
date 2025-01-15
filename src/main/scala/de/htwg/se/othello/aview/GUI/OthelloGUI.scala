@@ -267,6 +267,18 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
                 controller.redo
               }
             }
+          contents += Swing.VStrut(10)
+
+          contents += new Button("Save and Quit") {
+            maximumSize = new Dimension(200, 30)
+            reactions += {
+              case ButtonClicked(_) =>
+                controller.save()
+                System.exit(0)
+              }
+            }
+
+
           }) = BorderPanel.Position.East
         }
   
