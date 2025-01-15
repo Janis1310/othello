@@ -210,7 +210,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
             listenTo(`button`)
             reactions += {
               case ButtonClicked(`button`) =>
-                val result = controller.processTurn(row, col)
+                val result = controller.makeMove(row, col)
 
                 if (result) {
                   controller.notifyObservers
@@ -233,7 +233,35 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
             contents += button
           }
         }) = BorderPanel.Position.Center
-  }
+
+        layout(new BoxPanel(Orientation.Vertical) {
+          val (w, s) = controller.countStone()
+          preferredSize = new Dimension(210, 200)
+
+          contents += Swing.VStrut(80)
+           contents += new Label {
+            text = s"Punktestand => W: $w | S: $s"
+            font = new Font("Arial", Font.BOLD, 14)
+          }
+          contents += Swing.VStrut(20)
+           contents += new Button("Undo") {
+            maximumSize = new Dimension(200, 30)
+            reactions += {
+               case ButtonClicked(_) =>
+                controller.undo
+              }
+            }
+          contents += Swing.VStrut(10)
+
+          contents += new Button("Redo") {
+            maximumSize = new Dimension(200, 30)
+            reactions += {
+              case ButtonClicked(_) =>
+                controller.redo
+              }
+            }
+          }) = BorderPanel.Position.East
+        }
   
   centerOnScreen()  // Das Fenster wird zentriert
   visible = true

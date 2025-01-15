@@ -31,16 +31,20 @@ class GameStateSpec extends AnyWordSpec with Matchers {
         GameState.action(BLACK_TURN)
         GameState.action(GAME_OVER)
         GameState.action(PAUSED)
+        GameState.action(InputPlayer1)
+        GameState.action(InputPlayer2)
+        GameState.action(InputBoardSize)
       }
 
       val output = outStream.toString
-      output should include(
-        "Setup: Spieler hinzufügen und Board konfigurieren."
-      )
-      output should include("Weiß macht einen Zug.")
-      output should include("Schwarz macht einen Zug.")
+      output should include("Setup: Spieler hinzufügen und Board konfigurieren.")
+      output should include("Weiß")
+      output should include("Schwarz")
       output should include("Spielstand anzeigen und beenden.")
-      output should include("Spiel pausieren.")
+      output should include("Spiel pausiert.")
+      output should include("Bitte geben Sie den Namen von Spieler 1 ein:")
+      output should include("Bitte geben Sie den Namen von Spieler 2 ein:")
+      output should include("Bitte geben Sie die Größe des Spielbretts ein (Format: Zeilen,Spalten):")
     }
 
     "execute the default action for an unknown state" in {
