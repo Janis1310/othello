@@ -32,7 +32,7 @@ class OthelloModule extends AbstractModule with ScalaModule {
     bind(classOf[MoveHandlerTemplateInterface]).toInstance(MoveHandler)
     bind[BoardComponent].toInstance(new Board(8, 8))
     bind(classOf[ControllerComponent]).to(classOf[Controller])
-    bind[FileIOInterface].to[FileIoJSON.FileIO]
+    bind[FileIOInterface].to[FileIoXML.FileIO]
 
   }
 
