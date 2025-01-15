@@ -26,11 +26,5 @@ object Stone {
   val BlackStone: Stone = Black
   val WhiteStone: Stone = White
   val EmptyStone: Stone = Empty
-
-  // implicit val stoneWrites: Writes[StoneComponent] = Writes {
-  //   case Stone.Empty => JsString("Empty")
-  //   case Stone.White => JsString("White")
-  //   case Stone.Black => JsString("Black")
-  // }
 }
 
