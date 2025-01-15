@@ -54,5 +54,7 @@ object Player {
         "role" -> ai.role
       )
   }
+
+  
 }
 }
