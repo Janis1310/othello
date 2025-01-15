@@ -9,6 +9,10 @@ import de.htwg.se.othello.model.Playercomponents.Player
 import de.htwg.se.othello.model.Playercomponents.HumanPlayer
 import de.htwg.se.othello.model.Playercomponents.AIPlayer
 import scala.collection.immutable.Queue
+import scala.io.Source
+import com.google.inject.Guice
+import de.htwg.se.othello.OthelloModule
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
 
 class FileIO extends FileIOInterface{
 
@@ -20,7 +24,57 @@ class FileIO extends FileIOInterface{
 
   }
 
-  override def load(): BoardComponent = ???
+  override def load(): (BoardComponent, Player, Player, String) = {
+    
+    val source: String = Source.fromFile("gameState.json").getLines.mkString
+    val json: JsValue = Json.parse(source)
+    val injector = Guice.createInjector(new OthelloModule)
+
+    val currentplayer = (json \ "currentplayer").validate[Player] match {
+    case JsSuccess(player, _) => player // Erfolgreiche Deserialisierung
+    case JsError(errors) =>
+      println(s"Fehler bei der Deserialisierung von currentplayer: $errors")
+      throw new RuntimeException("Fehler bei der Deserialisierung von currentplayer") // Fehler werfen, falls deserialization scheitert
+  }
+
+  // Deserialisierung des nextplayer
+    val nextplayer = (json \ "nextplayer").validate[Player] match {
+      case JsSuccess(player, _) => player // Erfolgreiche Deserialisierung
+      case JsError(errors) =>
+        println(s"Fehler bei der Deserialisierung von nextplayer: $errors")
+        throw new RuntimeException("Fehler bei der Deserialisierung von nextplayer") // Fehler werfen, falls deserialization scheitert
+    }
+    
+    val mode = (json \ "mode").as[String]
+
+    val board = loadBoardFromJson(json)
+
+    (board, currentplayer, nextplayer, mode)
+  }
+
+  def loadBoardFromJson(json: JsValue): BoardComponent ={
+    val numRows = (json \ "numrows").as[Int]
+    val numCols = (json \ "numcols").as[Int]
+
+    var board = Board(numRows, numCols)
+    val cells = for {
+    row <- 0 until numRows
+    col <- 0 until numCols
+  } yield {
+    val colorResult = (json \ "matrix" \ (row.toString) \ col.toString).validate[StoneComponent]
+
+    colorResult match {
+      case JsSuccess(color, _) => 
+        // Aktualisiere die Zelle, wenn sie einen anderen Wert hat
+        if (board.getStoneAt(row, col) != color) {
+          board.getBoard.replaceCell(row, col, color) // Board wird neu erstellt
+        }
+      case JsError(errors) =>
+        println(s"Error reading stone at ($row, $col): $errors")
+    }
+  }
+    board
+  }
 
   // implicit val stoneWrites: Writes[StoneComponent] = Writes {
   //   case Stone.Empty => JsString("Empty")
@@ -70,7 +124,6 @@ class FileIO extends FileIOInterface{
           )
         }
       )
-
 
     )
 
