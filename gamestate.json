@@ -1,17 +1,17 @@
 {
   "currentplayer" : {
-    "name" : "Alice",
-    "stone" : "White",
-    "role" : "Human"
-  },
-  "nextplayer" : {
-    "name" : "Bob",
+    "name" : "BBB",
     "stone" : "Black",
     "role" : "Human"
   },
-  "mode" : "classic",
-  "numrows" : 8,
-  "numcols" : 8,
+  "nextplayer" : {
+    "name" : "AAA",
+    "stone" : "White",
+    "role" : "Human"
+  },
+  "mode" : "Human",
+  "numrows" : 6,
+  "numcols" : 6,
   "matrix" : [ {
     "row" : 0,
     "col" : 0,
@@ -37,14 +37,6 @@
     "col" : 5,
     "color" : "Empty"
   }, {
-    "row" : 0,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 0,
-    "col" : 7,
-    "color" : "Empty"
-  }, {
     "row" : 1,
     "col" : 0,
     "color" : "Empty"
@@ -59,7 +51,7 @@
   }, {
     "row" : 1,
     "col" : 3,
-    "color" : "Empty"
+    "color" : "White"
   }, {
     "row" : 1,
     "col" : 4,
@@ -67,14 +59,6 @@
   }, {
     "row" : 1,
     "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 1,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 1,
-    "col" : 7,
     "color" : "Empty"
   }, {
     "row" : 2,
@@ -87,11 +71,11 @@
   }, {
     "row" : 2,
     "col" : 2,
-    "color" : "Empty"
+    "color" : "White"
   }, {
     "row" : 2,
     "col" : 3,
-    "color" : "Empty"
+    "color" : "White"
   }, {
     "row" : 2,
     "col" : 4,
@@ -99,14 +83,6 @@
   }, {
     "row" : 2,
     "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 2,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 2,
-    "col" : 7,
     "color" : "Empty"
   }, {
     "row" : 3,
@@ -119,7 +95,7 @@
   }, {
     "row" : 3,
     "col" : 2,
-    "color" : "Empty"
+    "color" : "Black"
   }, {
     "row" : 3,
     "col" : 3,
@@ -127,18 +103,10 @@
   }, {
     "row" : 3,
     "col" : 4,
-    "color" : "Black"
-  }, {
-    "row" : 3,
-    "col" : 5,
     "color" : "Empty"
   }, {
     "row" : 3,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 3,
-    "col" : 7,
+    "col" : 5,
     "color" : "Empty"
   }, {
     "row" : 4,
@@ -155,22 +123,14 @@
   }, {
     "row" : 4,
     "col" : 3,
-    "color" : "Black"
+    "color" : "Empty"
   }, {
     "row" : 4,
     "col" : 4,
-    "color" : "White"
+    "color" : "Empty"
   }, {
     "row" : 4,
     "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 4,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 4,
-    "col" : 7,
     "color" : "Empty"
   }, {
     "row" : 5,
@@ -195,78 +155,6 @@
   }, {
     "row" : 5,
     "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 5,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 5,
-    "col" : 7,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 0,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 1,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 2,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 3,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 4,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 6,
-    "col" : 7,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 0,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 1,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 2,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 3,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 4,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 5,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 6,
-    "color" : "Empty"
-  }, {
-    "row" : 7,
-    "col" : 7,
     "color" : "Empty"
   } ]
 }

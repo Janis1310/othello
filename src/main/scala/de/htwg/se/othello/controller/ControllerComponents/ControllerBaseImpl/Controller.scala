@@ -14,12 +14,17 @@ import scala.util.{Failure, Success, Try}
 import com.google.inject.Inject
 import de.htwg.se.othello.model.BoardComponents.MatrixInterface
 import de.htwg.se.othello.model.BoardComponents.StoneComponent
+import de.htwg.se.othello.OthelloModule
+import com.google.inject.Guice
+import de.htwg.se.othello.model.FileIOComponent.FileIOInterface
 
 
 class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManagerComponent, val moveHandler: MoveHandlerTemplateInterface) extends ControllerComponent {
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var gameMode: String = ""
+  val injector = Guice.createInjector(new OthelloModule)
+  val fileIo = injector.getInstance(classOf[FileIOInterface])
 
   def boardToString: String = board.toString
 
@@ -145,6 +150,23 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
   def setBoard(board: BoardComponent): Unit = {
     this.board = board
     //notifyObservers
+  }
+
+  def save(): Unit = {
+    fileIo.save(board, players.head, players.last, gameMode)
+  }
+
+  def load(): Unit = {
+    val (loadedBoard, loadedCurrentPlayer, loadedNextPlayer, loadedMode) = fileIo.load()
+    board = loadedBoard
+    players = players.enqueue(loadedCurrentPlayer).enqueue(loadedNextPlayer)
+    gameMode = loadedMode
+    if (getCurrentPlayer.stone == Stone.Black) {
+      changeState(GameState.BLACK_TURN)
+    } else {
+      changeState(GameState.WHITE_TURN)
+    }
+    notifyObservers
   }
 
   def countStone():(Int, Int) = {

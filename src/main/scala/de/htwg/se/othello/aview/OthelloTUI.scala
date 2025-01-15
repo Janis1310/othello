@@ -31,6 +31,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
           println("Neues Spiel gestartet!")
           controller.setGameMode("AI")
           controller.changeState(GameState.InputPlayer1)
+        case "l" =>controller.load()
         case _ => println("Ungültige Eingabe. 'p' für zum Spielen gegen ein Mensch, 'k' zum Spielen gegen KI, 'q' zum Beenden.")
       }
 
@@ -77,6 +78,10 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
           }
 
       input match {
+        case "s" =>
+          controller.save()
+          println("Saved!")
+          System.exit(0)
         case "z" =>
           controller.undo
           println("Undo")
@@ -116,7 +121,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
     if (controller.getGameState == GameState.BLACK_TURN || controller.getGameState == GameState.WHITE_TURN) {
       val (w, s) = controller.countStone()
       println(s"Weißen Steine: $w | Schwarze Steine: $s")
-      println("q => quit, z => undo, d => redo")
+      println("q => quit, z => undo, d => redo, s => Save und Quit")
       println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ${controller.getCurrentPlayer.stone} ")
       println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
     }
@@ -125,7 +130,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
   def start: Unit = {
     if (controller.getGameState == GameState.SETUP){
       println("Willkommen zu Othello!")
-      println("q => quit, p => Gegen Mensch spielen, k = Gegen KI spielen")
+      println("q => Quit, p => Gegen Mensch spielen, k = Gegen KI spielen, l = Laden")
 
     }
   }

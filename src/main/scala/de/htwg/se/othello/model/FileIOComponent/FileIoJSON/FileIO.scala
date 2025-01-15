@@ -56,23 +56,16 @@ class FileIO extends FileIOInterface{
     val numRows = (json \ "numrows").as[Int]
     val numCols = (json \ "numcols").as[Int]
 
-    var board = Board(numRows, numCols)
-    val cells = for {
-    row <- 0 until numRows
-    col <- 0 until numCols
-  } yield {
-    val colorResult = (json \ "matrix" \ (row.toString) \ col.toString).validate[StoneComponent]
+    val matrixData = (json \ "matrix").as[List[JsObject]]
 
-    colorResult match {
-      case JsSuccess(color, _) => 
-        // Aktualisiere die Zelle, wenn sie einen anderen Wert hat
-        if (board.getStoneAt(row, col) != color) {
-          board.getBoard.replaceCell(row, col, color) // Board wird neu erstellt
-        }
-      case JsError(errors) =>
-        println(s"Error reading stone at ($row, $col): $errors")
+    var board = Board(numRows, numCols)
+
+    matrixData.foreach { stoneData =>
+      val row = (stoneData \ "row").as[Int]
+      val col = (stoneData \ "col").as[Int]
+      val stone = (stoneData \ "color").as[StoneComponent]
+      board = Board(board.getBoard.replaceCell(row, col, stone))
     }
-  }
     board
   }
 

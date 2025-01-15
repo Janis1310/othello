@@ -36,7 +36,10 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
     val aiButton = new RadioButton("Gegen KI spielen") {
       font = new Font("Arial", Font.BOLD, 16)
     }
-    val buttonGroup = new ButtonGroup(playerButton, aiButton)
+    val loadButton = new RadioButton("Load"){
+      font = new Font("Arial", Font.BOLD, 16)
+    }
+    val buttonGroup = new ButtonGroup(playerButton, aiButton, loadButton)
     val confirmButton = new Button("Weiter"){
       font = new Font("Arial", Font.BOLD, 16)
     }
@@ -45,6 +48,8 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
         contents += playerButton
         contents += HStrut(10) // Horizontaler Abstand zwischen den Radiobuttons
         contents += aiButton
+        contents += HStrut(10)
+        contents += loadButton
       }
 
     val buttonPanel = new FlowPanel{
@@ -68,7 +73,9 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
           controller.setGameMode("AI")
           controller.changeState(GameState.InputPlayer1)
           contents = initBoard
-        } else {
+        } else if (loadButton.selected){
+          controller.load()
+        }else {
           Dialog.showMessage(
             null,
             "Bitte wählen Sie einen Spielmodus aus!",
@@ -80,7 +87,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 
     // Layout
     new BoxPanel(Orientation.Vertical) {
-      contents += titelLabel
+      contents += new FlowPanel(FlowPanel.Alignment.Left)(titelLabel)
       contents += VStrut(20) // Vertikaler Abstand zwischen Titel und Radiobuttons
       contents += new FlowPanel(FlowPanel.Alignment.Left)(modeLabel)
       contents += VStrut(10) // Vertikaler Abstand
