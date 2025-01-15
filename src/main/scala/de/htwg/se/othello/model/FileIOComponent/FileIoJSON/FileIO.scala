@@ -25,7 +25,7 @@ class FileIO extends FileIOInterface{
   }
 
   override def load(): (BoardComponent, Player, Player, String) = {
-    
+
     val source: String = Source.fromFile("gameState.json").getLines.mkString
     val json: JsValue = Json.parse(source)
     val injector = Guice.createInjector(new OthelloModule)
@@ -128,6 +128,5 @@ class FileIO extends FileIOInterface{
     )
 
   }
-
 
 }

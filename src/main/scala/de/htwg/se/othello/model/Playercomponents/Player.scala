@@ -54,7 +54,22 @@ object Player {
         "role" -> ai.role
       )
   }
-
-  
 }
+
+  implicit val playerReads: Reads[Player] = Reads { json =>
+    (json \ "role").as[String] match {
+      case "Human" =>
+        for {
+          name <- (json \ "name").validate[String]
+          stone <- (json \ "stone").validate[StoneComponent]
+        } yield HumanPlayer(name, stone)
+      case "AI" =>
+        for {
+          name <- (json \ "name").validate[String]
+          stone <- (json \ "stone").validate[StoneComponent]
+        } yield AIPlayer(name, stone)
+      case e => JsError(s"Unbekannte Spielerrolle: $e")
+    }
+  }
+
 }

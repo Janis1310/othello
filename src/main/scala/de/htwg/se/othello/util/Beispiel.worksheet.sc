@@ -18,4 +18,10 @@ val mode = "classic"
 val fileIO = new FileIO
 fileIO.save(board, currentPlayer, nextPlayer, mode)
 
+val (loadedBoard, loadedCurrentPlayer, loadedNextPlayer, loadedMode) = fileIO.load()
+println(loadedCurrentPlayer)
+println(loadedMode)
+println(loadedBoard)
+
+
 // Überprüfung: Inhalt von "gamestate.json" manuell prüfen.
