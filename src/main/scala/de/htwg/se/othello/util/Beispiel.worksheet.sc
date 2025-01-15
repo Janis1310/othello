@@ -3,7 +3,7 @@ import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 import play.api.libs.json._
 import de.htwg.se.othello.model.BoardComponents.BoardComponent
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
-import de.htwg.se.othello.model.FileIOComponent.FileIoJSON.FileIO
+import de.htwg.se.othello.model.FileIOComponent.FileIoXML.FileIO
 val player = Player("Player1", Stone.Black, "Human")
 
 val json = Json.toJson(player)
@@ -18,10 +18,6 @@ val mode = "classic"
 val fileIO = new FileIO
 fileIO.save(board, currentPlayer, nextPlayer, mode)
 
-val (loadedBoard, loadedCurrentPlayer, loadedNextPlayer, loadedMode) = fileIO.load()
-println(loadedCurrentPlayer)
-println(loadedMode)
-println(loadedBoard)
 
 
 // Überprüfung: Inhalt von "gamestate.json" manuell prüfen.
