@@ -14,4 +14,11 @@ object StoneComponent{
     case Stone.White => JsString("White") 
     case Stone.Black => JsString("Black")
   }
+
+  implicit val stoneReads: Reads[StoneComponent] = Reads {
+    case JsString("Empty") => JsSuccess(Stone.Empty)
+    case JsString("White") => JsSuccess(Stone.White)
+    case JsString("Black") => JsSuccess(Stone.Black)
+    case _ => JsError("Unknown stone type")
+  }
 }
