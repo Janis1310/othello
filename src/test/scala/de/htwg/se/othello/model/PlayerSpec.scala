@@ -57,4 +57,54 @@ class PlayerSpec extends AnyWordSpec with Matchers {
       aiPlayer.toString shouldBe "B (AI): W"
     }
   }
+  "Player equals method" should {
+
+    "return true for two HumanPlayers with the same attributes" in {
+      val player1 = new HumanPlayer("Player1", Stone.Black)
+      val player2 = new HumanPlayer("Player1", Stone.Black)
+
+      player1.equals(player2) shouldBe true
+    }
+
+    "return false for two HumanPlayers with different names" in {
+      val player1 = new HumanPlayer("Player1", Stone.Black)
+      val player2 = new HumanPlayer("Player2", Stone.Black)
+
+      player1.equals(player2) shouldBe false
+    }
+    "return false for two HumanPlayers with different stones" in {
+      val player1 = new HumanPlayer("Player1", Stone.Black)
+      val player2 = new HumanPlayer("Player1", Stone.White)
+
+      player1.equals(player2) shouldBe false
+    }
+
+    "return false for a HumanPlayer and an AIPlayer with the same attributes" in {
+      val humanPlayer = new HumanPlayer("Player1", Stone.Black)
+      val aiPlayer = new AIPlayer("Player1", Stone.Black)
+
+      humanPlayer.equals(aiPlayer) shouldBe false
+    }
+
+    "return true for two AIPlayers with the same attributes" in {
+      val player1 = new AIPlayer("Player2", Stone.White)
+      val player2 = new AIPlayer("Player2", Stone.White)
+
+      player1.equals(player2) shouldBe true
+    }
+
+    "return false for two AIPlayers with different names" in {
+      val player1 = new AIPlayer("Player1", Stone.White)
+      val player2 = new AIPlayer("Player2", Stone.White)
+
+      player1.equals(player2) shouldBe false
+    }
+
+    "return false for two AIPlayers with different stones" in {
+      val player1 = new AIPlayer("Player1", Stone.Black)
+      val player2 = new AIPlayer("Player1", Stone.White)
+
+      player1.equals(player2) shouldBe false
+    }
+  }
 }

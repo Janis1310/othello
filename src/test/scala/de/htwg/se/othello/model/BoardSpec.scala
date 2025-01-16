@@ -108,6 +108,15 @@ class BoardSpec extends AnyWordSpec with Matchers {
         originalBoard.getBoard.cell(3, 3)
       )
     }
+    "return a Stone at a specific stone" in {
+      val board = new Board(8,8)
+      board.getStoneAt(4,4) shouldBe(Stone.White)
+      intercept[IllegalArgumentException] {
+        board.getStoneAt(4, 9)
+      }.getMessage should include("liegt außerhalb des Boards")
+      
+    }
+
     "throw UnsupportedOperationException when calling copy() on an unsupported Matrix type" in {
       val dummyMatrix = new DummyMatrix[StoneComponent]
       val board = new Board(dummyMatrix)

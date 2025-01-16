@@ -92,13 +92,13 @@ object MoveHandler extends MoveHandlerTemplate{
   private def flipDirection(dx: Int, dy: Int, x: Int, y: Int, opponent: StoneComponent, player: StoneComponent, board: BoardComponent): BoardComponent = {
 
     if (x < 0 || x >= board.getBoard.numRows || y < 0 || y >= board.getBoard.numCols) 
-      println("------------------test1-----------------")
+      //println("------------------test1-----------------")
       return board // direction is out of bounds
 
     board.getBoard.cell(x, y) match {
       case `opponent` =>
         if (x + dx < 0 || x + dx >= board.getBoard.numRows || y + dy < 0 || y + dy >= board.getBoard.numCols) {
-          println("------------------test2-----------------")
+          //println("------------------test2-----------------")
           return board // Keine gültige Richtung, Rückgabe ohne Änderung
         }
         // Geh in die Richtung weiter, um das Ende der Reihe zu suchen
@@ -108,7 +108,7 @@ object MoveHandler extends MoveHandlerTemplate{
         if (flipboard.getBoard.cell(x + dx, y + dy) == player) {
           flipboard.placeStone(x, y, player)
         } else {
-          println("------------------test3-----------------")
+          //println("------------------test3-----------------")
           board // Keine Umwandlung, da nicht von `player` eingeschlossen
         }
 
