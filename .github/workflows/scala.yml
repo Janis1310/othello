@@ -19,12 +19,12 @@ jobs:
       - name: Install SBT
         run: |
           echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
-          curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99e82a75642ac823" | sudo apt-key add -
+          curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99e82a75642ac823" | gpg --dearmor | sudo tee /usr/share/keyrings/sbt-archive-keyring.gpg > /dev/null
           sudo apt-get update && sudo apt-get install sbt -y
       - name: Compile
         run: sbt compile
       - name: Run tests
-        run: sbt test
+        run: sbt -Djava.awt.headless=true test
 
   run_tests:
     runs-on: ubuntu-latest
@@ -39,11 +39,11 @@ jobs:
       - name: Install SBT
         run: |
           echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
-          curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99e82a75642ac823" | sudo apt-key add -
+          curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99e82a75642ac823" | gpg --dearmor | sudo tee /usr/share/keyrings/sbt-archive-keyring.gpg > /dev/null
           sudo apt-get update && sudo apt-get install sbt -y
       - name: Build Project and Export Coverage
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           export CI_BRANCH="${GITHUB_REF#refs/heads/}"
-          sbt clean coverage test coverageReport coveralls
+          sbt -Djava.awt.headless=true clean coverage test coverageReport coveralls
