@@ -7,7 +7,7 @@ import de.htwg.se.othello.Othello.injector
 case class Matrix[T](matrix: Vector[Vector[T]]) extends MatrixInterface[T] {
   val numRows: Int = matrix.size
   val numCols: Int =
-    if (numRows > 0) matrix(0).size else 0 // Handle empty matrix case
+    if (numRows > 0) matrix(0).size else 0
 
   @Inject
   def this() = this(Vector.empty[Vector[T]])

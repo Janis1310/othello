@@ -68,36 +68,6 @@ class FileIO extends FileIOInterface{
     }
     board
   }
-
-  // implicit val stoneWrites: Writes[StoneComponent] = Writes {
-  //   case Stone.Empty => JsString("Empty")
-  //   case Stone.White => JsString("White")
-  //   case Stone.Black => JsString("Black")
-  // }
-
-//   implicit val stoneReads: Reads[StoneComponent] = Reads {
-//     case JsString("Empty") => JsSuccess(Stone.Empty)
-//     case JsString("White") => JsSuccess(Stone.White)
-//     case JsString("Black") => JsSuccess(Stone.Black)
-//     case _ => JsError("Unknown stone type")
-//   }
-
-//    implicit val playerWrites: Writes[Player] = new Writes[Player] {
-//   override def writes(player: Player): JsValue = player match {
-//     case human: HumanPlayer =>
-//       Json.obj(
-//         "name" -> human.name,
-//         "stone" -> Json.toJson(human.stone),
-//         "role" -> human.role
-//       )
-//     case ai: AIPlayer =>
-//       Json.obj(
-//         "name" -> ai.name,
-//         "stone" -> Json.toJson(ai.stone),
-//         "role" -> ai.role
-//       )
-//   }
-// }
   def gameStateToJson(board: BoardComponent, curretplayer: Player, nextplayer: Player, mode: String)= {
     Json.obj(
       "currentplayer" -> Json.toJson(curretplayer),

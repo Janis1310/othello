@@ -1,20 +1,20 @@
 <gamestate>
     <player>
         <role>Human</role>
-        <name>BBBBBBBBB</name>
-        <stone>S</stone>
+        <name>Alice</name>
+        <stone>W</stone>
         <currentplayer>currentplayer</currentplayer>
     </player>
     <player>
         <role>Human</role>
-        <name>AAAAAAAA</name>
-        <stone>W</stone>
+        <name>Bob</name>
+        <stone>S</stone>
         <currentplayer>nextplayer</currentplayer>
     </player>
     <mode>mode</mode>
     <board>
-        <numrows>10</numrows>
-        <numcols>10</numcols>
+        <numrows>8</numrows>
+        <numcols>8</numcols>
         <matrix>
             <cell>
                 <row>0</row>
@@ -57,16 +57,6 @@
                 <color>.</color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>0</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
                 <row>1</row>
                 <col>0</col>
                 <color>.</color>
@@ -104,16 +94,6 @@
             <cell>
                 <row>1</row>
                 <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>1</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>1</row>
-                <col>9</col>
                 <color>.</color>
             </cell>
             <cell>
@@ -157,16 +137,6 @@
                 <color>.</color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>2</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
                 <row>3</row>
                 <col>0</col>
                 <color>.</color>
@@ -184,119 +154,99 @@
             <cell>
                 <row>3</row>
                 <col>3</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>3</row>
-                <col>4</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>3</row>
-                <col>5</col>
                 <color>W</color>
             </cell>
             <cell>
                 <row>3</row>
-                <col>6</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>3</row>
-                <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>3</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>3</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>0</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>1</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>2</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>3</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>4</col>
-                <color>W</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>5</col>
-                <color>W</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>6</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>4</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>0</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>1</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>2</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>3</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
                 <col>4</col>
                 <color>S</color>
             </cell>
             <cell>
-                <row>5</row>
+                <row>3</row>
                 <col>5</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>3</row>
+                <col>6</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>3</row>
+                <col>7</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>0</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>1</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>2</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>3</col>
+                <color>S</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>4</col>
                 <color>W</color>
             </cell>
             <cell>
+                <row>4</row>
+                <col>5</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>6</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>4</row>
+                <col>7</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>0</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>1</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>2</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>3</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>4</col>
+                <color>.</color>
+            </cell>
+            <cell>
+                <row>5</row>
+                <col>5</col>
+                <color>.</color>
+            </cell>
+            <cell>
                 <row>5</row>
                 <col>6</col>
                 <color>.</color>
@@ -304,16 +254,6 @@
             <cell>
                 <row>5</row>
                 <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>5</row>
-                <col>9</col>
                 <color>.</color>
             </cell>
             <cell>
@@ -357,16 +297,6 @@
                 <color>.</color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>6</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
                 <row>7</row>
                 <col>0</col>
                 <color>.</color>
@@ -404,116 +334,6 @@
             <cell>
                 <row>7</row>
                 <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>7</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>7</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>0</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>1</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>2</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>3</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>4</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>5</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>6</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>8</row>
-                <col>9</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>0</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>1</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>2</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>3</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>4</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>5</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>6</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>7</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>8</col>
-                <color>.</color>
-            </cell>
-            <cell>
-                <row>9</row>
-                <col>9</col>
                 <color>.</color>
             </cell>
         </matrix>

@@ -4,11 +4,10 @@ import de.htwg.se.othello.model.BoardComponents.StoneComponent
 import play.api.libs.json._
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 
-// Product (interface)
 trait Player {
   def name: String
   def stone: StoneComponent
-  def role: String // Add this method to define the player's role
+  def role: String
 
   override def equals(obj: Any): Boolean = obj match {
     case that: Player =>
@@ -19,17 +18,15 @@ trait Player {
   }
 }
 
-// concreteProduct: HumanPlayer
 case class HumanPlayer(val name: String, val stone: StoneComponent)
     extends Player {
-  val role: String = "Human" // Define the role for HumanPlayer
+  val role: String = "Human"
   override def toString: String = s"$name: $stone"
 }
 
-// concreteProduct: AIPlayer
 case class AIPlayer(val name: String, val stone: StoneComponent)
     extends Player {
-  val role: String = "AI" // Define the role for AIPlayer
+  val role: String = "AI"
   override def toString: String = s"$name (AI): $stone"
 }
 

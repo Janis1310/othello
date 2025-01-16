@@ -26,8 +26,8 @@ object Othello {
     
     while (input != "q") {
       tui.start
-      input = StdIn.readLine() // Warten auf die Eingabe im TUI
-      tui.processInputLine(input) // Verarbeite die Eingabe
+      input = StdIn.readLine()
+      tui.processInputLine(input)
     }
   }
     
