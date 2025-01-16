@@ -257,18 +257,16 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
   }
 
     def createboard: BorderPanel = new BorderPanel {
-        // Obere Statusanzeige
-        layout(new Label(s"${controller.getCurrentPlayer.name} ist dran, Deine Farbe ist: ${controller.getCurrentPlayer.stone}")) = BorderPanel.Position.North
+      layout(new Label(s"${controller.getCurrentPlayer.name} ist dran, Deine Farbe ist: ${controller.getCurrentPlayer.stone}")) = BorderPanel.Position.North
 
         // Spielfeld als zentrales Element
         layout(new GridPanel(controller.getBoard.getBoard.numRows, controller.getBoard.getBoard.numCols) {
           for (row <- 0 until controller.getBoard.getBoard.numRows; col <- 0 until controller.getBoard.getBoard.numCols) {
             val cellValue = controller.getBoard.getBoard.cell(row, col) // Zelleninhalt abrufen
             val button = new Button {
-              text = " " // Text bleibt leer
+              text = " "
               preferredSize = new Dimension(50, 50)
-
-              // Hintergrundfarbe je nach Zellenwert setzen
+              border = BorderFactory.createLineBorder(Color.BLACK, 1)
               cellValue match {
                 case Stone.Empty => background = new Color(65,100,40) // Leeres Feld
                 case Stone.Black => icon = black_stone; background = new Color(65,100,40)  // Schwarzer Stein
@@ -305,15 +303,20 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
         layout(new BoxPanel(Orientation.Vertical) {
           val (w, s) = controller.countStone()
           preferredSize = new Dimension(210, 200)
+          background = backgroundColor
 
           contents += Swing.VStrut(80)
            contents += new Label {
             text = s"Punktestand => W: $w | S: $s"
             font = new Font("Arial", Font.BOLD, 14)
+            foreground = foregroundColor
           }
           contents += Swing.VStrut(20)
            contents += new Button("Undo") {
             maximumSize = new Dimension(200, 30)
+            foreground = foregroundColor
+            background = backgroundColor
+            border = BorderFactory.createLineBorder(foregroundColor, 3)
             reactions += {
                case ButtonClicked(_) =>
                 controller.undo
@@ -323,6 +326,9 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 
           contents += new Button("Redo") {
             maximumSize = new Dimension(200, 30)
+            background = backgroundColor
+            foreground = foregroundColor
+            border = BorderFactory.createLineBorder(foregroundColor, 3)
             reactions += {
               case ButtonClicked(_) =>
                 controller.redo
@@ -332,6 +338,9 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
 
           contents += new Button("Save and Quit") {
             maximumSize = new Dimension(200, 30)
+            background = backgroundColor
+            foreground = foregroundColor
+            border = BorderFactory.createLineBorder(foregroundColor, 3)
             reactions += {
               case ButtonClicked(_) =>
                 controller.save()
@@ -343,7 +352,7 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
           }) = BorderPanel.Position.East
         }
   
-  centerOnScreen()  // Das Fenster wird zentriert
+  centerOnScreen()
   visible = true
 
   def start(): Unit = {
