@@ -17,6 +17,7 @@ import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandlerTemplate
 import com.google.inject.Provides
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone.EmptyStone
+import de.htwg.se.othello.model.FileIOComponent._
 
 class OthelloModule extends AbstractModule with ScalaModule {
 
@@ -31,6 +32,7 @@ class OthelloModule extends AbstractModule with ScalaModule {
     bind(classOf[MoveHandlerTemplateInterface]).toInstance(MoveHandler)
     bind[BoardComponent].toInstance(new Board(8, 8))
     bind(classOf[ControllerComponent]).to(classOf[Controller])
+    bind[FileIOInterface].to[FileIoXML.FileIO]
 
   }
 

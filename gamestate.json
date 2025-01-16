@@ -1,0 +1,272 @@
+{
+  "currentplayer" : {
+    "name" : "Alice",
+    "stone" : "White",
+    "role" : "Human"
+  },
+  "nextplayer" : {
+    "name" : "Bob",
+    "stone" : "Black",
+    "role" : "Human"
+  },
+  "mode" : "classic",
+  "numrows" : 8,
+  "numcols" : 8,
+  "matrix" : [ {
+    "row" : 0,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 0,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 1,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 2,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 3,
+    "color" : "White"
+  }, {
+    "row" : 3,
+    "col" : 4,
+    "color" : "Black"
+  }, {
+    "row" : 3,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 3,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 3,
+    "color" : "Black"
+  }, {
+    "row" : 4,
+    "col" : 4,
+    "color" : "White"
+  }, {
+    "row" : 4,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 4,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 5,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 6,
+    "col" : 7,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 0,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 1,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 2,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 3,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 4,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 5,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 6,
+    "color" : "Empty"
+  }, {
+    "row" : 7,
+    "col" : 7,
+    "color" : "Empty"
+  } ]
+}
