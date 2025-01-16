@@ -17,6 +17,7 @@ import de.htwg.se.othello.model.BoardComponents.StoneComponent
 import de.htwg.se.othello.OthelloModule
 import com.google.inject.Guice
 import de.htwg.se.othello.model.FileIOComponent.FileIOInterface
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 
 
 class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManagerComponent, val moveHandler: MoveHandlerTemplateInterface) extends ControllerComponent {
@@ -36,13 +37,17 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
       } else {
         players = players :+ Player("AI", Stone.BlackStone, "AI")
         println(s"${players.head.name} wurde hinzugefügt!")
+        Player.setPlayers(players)
       }
     } else if (gameState == GameState.InputPlayer2) {
       players = players :+ Player(playerName, Stone.BlackStone, "Human")
       println(s"${players.head.name} und ${players.last.name} wurden hinzugefügt!")
+      Player.setPlayers(players)
     } else {
-      throw new IllegalStateException("Spieler können nur im InputPlayer Zustand hinzugefügt werden")    }
+      throw new IllegalStateException("Spieler können nur im InputPlayer Zustand hinzugefügt werden")
+    }
   }
+
 
   def setGameMode(mode: String): Unit = {
     gameMode = mode
@@ -50,7 +55,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
 
   def getGameMode: String = gameMode
 
-  def getPlayers: Queue[Player] = players
+  def getPlayers: Queue[Player] = Player.getPlayers
 
   def getCurrentPlayer: Player = players.head
 
@@ -63,6 +68,20 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
       case GameState.WHITE_TURN => changeState(GameState.BLACK_TURN)
       case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
       case _ => throw new IllegalStateException("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
+    }
+    if (!MoveHandler.isAnyMovePossible(board, getCurrentPlayer.stone)) {
+      println("Es gibt keinen gültigen Zug. Kein Spielerwechsel!")
+      val (currentPlayer, updatedQueue) = players.dequeue
+      players = updatedQueue.enqueue(currentPlayer)
+      gameState match {
+
+        case GameState.WHITE_TURN => changeState(GameState.BLACK_TURN)
+        case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
+      }
+      if(!MoveHandler.isAnyMovePossible(board, getCurrentPlayer.stone)) {
+        println("Das Spiel ist zu ende. Es gibt keine legalen Züge mehr.")
+        //end()
+      }
     }
     notifyObservers
   }
@@ -110,8 +129,9 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
         throw new IllegalStateException("Züge sind nur während eines Spielzugs erlaubt.");
     }
   }
+
   def processAITurn(): Boolean = {
-    StrategyContext.setPlayers(players)
+    Player.setPlayers(players)
     val strategy = StrategyContext.strategy
 
     strategy(board) match {
@@ -132,7 +152,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
   def undo: Unit = {
     val board = this.getBoard
     undoManager.undoStep()
-    if(!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
+    if (!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
       nextPlayer()
       notifyObservers
     }
@@ -141,7 +161,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
   def redo: Unit = {
     val board = this.getBoard
     undoManager.redoStep()
-    if(!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
+    if (!this.boardToString.replaceAll("\\s+", "").equals(board.toString.replaceAll("\\s+", ""))) {
       nextPlayer()
       notifyObservers
     }
@@ -169,11 +189,11 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
     notifyObservers
   }
 
-  def countStone():(Int, Int) = {
+  def countStone(): (Int, Int) = {
     val stones = for {
-    row <- 0 until board.numRows
-    col <- 0 until board.numCols
-  } yield board.getBoard.cell(row, col)
+      row <- 0 until board.numRows
+      col <- 0 until board.numCols
+    } yield board.getBoard.cell(row, col)
 
     val blackCount = stones.count(_ == Stone.Black)
     val whiteCount = stones.count(_ == Stone.White)
