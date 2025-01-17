@@ -6,7 +6,7 @@ import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Board
 import com.google.inject.Guice
 import de.htwg.se.othello.controller.ControllerComponents.ControllerBaseImpl
 
-import de.htwg.se.othello.aview.TUI
+import de.htwg.se.othello.aview.OthelloTUI
 import de.htwg.se.othello.controller.ControllerComponents.ControllerComponent
 import scala.io.StdIn
 import scala.concurrent.Future
@@ -15,7 +15,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 object Othello {
   val injector = Guice.createInjector(new OthelloModule)
   val controller = injector.getInstance(classOf[ControllerComponent])
-  val tui = TUI(controller)
+  val tui = OthelloTUI(controller)
   //val gui = OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
