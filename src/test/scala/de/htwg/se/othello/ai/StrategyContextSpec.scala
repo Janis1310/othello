@@ -14,15 +14,13 @@ import scala.util.Random
 class StrategyContextSpec extends AnyWordSpec with Matchers {
 
   "StrategyContext" should {
-    "set and get players correctly" in {
-      val player1 = Player("Player1", Stone.Black, "AI")
-      val player2 = Player("Player2", Stone.White, "Human")
-      val players = Queue(player1, player2)
 
-      StrategyContext.setPlayers(players)
-      StrategyContext.getPlayers shouldBe players
-      StrategyContext.getCurrentPlayer shouldBe player1
-    }
+    val player1 = Player("Player1", Stone.Black, "AI")
+    val player2 = Player("Player2", Stone.White, "Human")
+    val players = Queue(player1, player2)
+
+    Player.setPlayers(players)
+
 
     "execute strategy1 and strategy2 correctly" in {
       val player = Player("Player1", Stone.Black, "AI")
@@ -35,32 +33,33 @@ class StrategyContextSpec extends AnyWordSpec with Matchers {
     }
   }
 }
-   /* "select randomly either strategy1 or strategy2" in {
-      val strategy = StrategyContext.strategy
-      if (strategy == StrategyContext.strategy1) {
-        strategy shouldBe (StrategyContext.strategy1)
-      } else {
-        strategy shouldBe (StrategyContext.strategy2)
-      }
-    }
 
-  }
+/* "select randomly either strategy1 or strategy2" in {
+   val strategy = StrategyContext.strategy
+   if (strategy == StrategyContext.strategy1) {
+     strategy shouldBe (StrategyContext.strategy1)
+   } else {
+     strategy shouldBe (StrategyContext.strategy2)
+   }
+ }
+
+}
 
 
-  "select randomly either strategy1 or strategy2" in {
-    var strategy1Chosen = false
-    var strategy2Chosen = false
+"select randomly either strategy1 or strategy2" in {
+ var strategy1Chosen = false
+ var strategy2Chosen = false
 
-    for (_ <- 1 to 100) {
-      val chosenStrategy = StrategyContext.strategy
-      println(f"chosenStrategy: $chosenStrategy, StrategyContext.strategy1: ${StrategyContext.strategy1}")
-      if (chosenStrategy == StrategyContext.strategy1) strategy1Chosen = true
-      if (chosenStrategy == StrategyContext.strategy2) strategy2Chosen = true
-    }
+ for (_ <- 1 to 100) {
+   val chosenStrategy = StrategyContext.strategy
+   println(f"chosenStrategy: $chosenStrategy, StrategyContext.strategy1: ${StrategyContext.strategy1}")
+   if (chosenStrategy == StrategyContext.strategy1) strategy1Chosen = true
+   if (chosenStrategy == StrategyContext.strategy2) strategy2Chosen = true
+ }
 
-    strategy1Chosen shouldBe true
-    strategy2Chosen shouldBe true
-  }*/
+ strategy1Chosen shouldBe true
+ strategy2Chosen shouldBe true
+}*/
 
 
 

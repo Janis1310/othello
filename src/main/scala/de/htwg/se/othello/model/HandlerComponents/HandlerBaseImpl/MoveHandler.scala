@@ -1,8 +1,12 @@
 package de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl
 
-import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone.Stone
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Stone, Stoneposition}
 import de.htwg.se.othello.model.BoardComponents.{BoardComponent, StoneComponent, StonepositionComponent}
 import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandlerTemplate
+import de.htwg.se.othello.model.Playercomponents.Player.getCurrentPlayer
+
+import scala.util.control.Breaks.{break, breakable}
 
 object MoveHandler extends MoveHandlerTemplate{
 
@@ -18,7 +22,15 @@ object MoveHandler extends MoveHandlerTemplate{
         )
 
 
-    override def isValidMove(stoneposition: StonepositionComponent, board: BoardComponent): Boolean = {
+  def isAnyMovePossible(board: BoardComponent, currentPlayerStone: Stone): Boolean = {
+    (0 until board.numRows).exists(i =>
+      (0 until board.numCols).exists(j =>
+        isValidMove(Stoneposition(i, j, currentPlayerStone), board)
+      )
+    )
+  }
+
+  override def isValidMove(stoneposition: StonepositionComponent, board: BoardComponent): Boolean = {
 
         if(stoneposition.x < 0 || stoneposition.x >= board.getBoard.numRows || stoneposition.y < 0 || stoneposition.y >= board.getBoard.numCols) {
           printf("Ungültige Position: (" + "%d, %d)", stoneposition.x, stoneposition.y) // Außerhalb vom brett

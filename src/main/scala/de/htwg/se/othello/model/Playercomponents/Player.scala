@@ -1,8 +1,10 @@
 package de.htwg.se.othello.model.Playercomponents
 
 import de.htwg.se.othello.model.BoardComponents.StoneComponent
-import play.api.libs.json._
+import play.api.libs.json.*
 import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
+
+import scala.collection.immutable.Queue
 
 trait Player {
   def name: String
@@ -68,5 +70,16 @@ object Player {
       case e => JsError(s"Unbekannte Spielerrolle: $e")
     }
   }
+
+  private var players: Queue[Player] = Queue()
+
+  // Methode zum Setzen der Spieler
+  def setPlayers(players: Queue[Player]): Unit = {
+    this.players = players
+  }
+
+  def getPlayers: Queue[Player] = players
+
+  def getCurrentPlayer: Player = players.head
 
 }
