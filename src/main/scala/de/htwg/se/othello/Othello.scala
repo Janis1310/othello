@@ -19,7 +19,7 @@ object Othello {
   val gui = OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
-    Future{gui.start()}
+    //Future{gui.start()}
 
     Future {
     var input = ""
