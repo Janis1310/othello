@@ -83,7 +83,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
         //end()
       }
     }
-    //notifyObservers
+    notifyObservers
   }
 
   def getBoard: BoardComponent = board

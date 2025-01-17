@@ -1,14 +1,14 @@
 <gamestate>
     <player>
-        <role>AI</role>
-        <name>AI</name>
-        <stone>S</stone>
-        <currentplayer>currentplayer</currentplayer>
-    </player>
-    <player>
         <role>Human</role>
         <name>Player 1</name>
         <stone>W</stone>
+        <currentplayer>currentplayer</currentplayer>
+    </player>
+    <player>
+        <role>AI</role>
+        <name>AI</name>
+        <stone>S</stone>
         <currentplayer>nextplayer</currentplayer>
     </player>
     <mode>mode</mode>
@@ -19,77 +19,77 @@
             <cell>
                 <row>0</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>1</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>2</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>3</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>4</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>5</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>0</row>
                 <col>7</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>1</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>2</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>3</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>4</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>5</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>1</row>
@@ -99,37 +99,37 @@
             <cell>
                 <row>2</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>1</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>2</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>3</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>4</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>5</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
@@ -139,17 +139,17 @@
             <cell>
                 <row>3</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
                 <col>1</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
                 <col>2</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
@@ -159,22 +159,22 @@
             <cell>
                 <row>3</row>
                 <col>4</col>
-                <color>W</color>
+                <color>S</color>
             </cell>
             <cell>
                 <row>3</row>
                 <col>5</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
                 <col>7</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>4</row>
@@ -184,17 +184,17 @@
             <cell>
                 <row>4</row>
                 <col>1</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>4</row>
                 <col>2</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>4</row>
                 <col>3</col>
-                <color>S</color>
+                <color>W</color>
             </cell>
             <cell>
                 <row>4</row>
@@ -204,137 +204,137 @@
             <cell>
                 <row>4</row>
                 <col>5</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>4</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>4</row>
                 <col>7</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>1</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>2</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>3</col>
-                <color>S</color>
+                <color>W</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>4</col>
-                <color>W</color>
+                <color>S</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>5</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>5</row>
                 <col>7</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>0</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>1</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>2</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>3</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>4</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>5</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>6</row>
                 <col>7</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>0</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>1</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>2</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>3</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>4</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>5</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>6</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>7</row>
                 <col>7</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
         </matrix>
     </board>
