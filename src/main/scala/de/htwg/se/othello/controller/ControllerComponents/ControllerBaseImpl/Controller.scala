@@ -137,12 +137,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
     strategy(board) match {
       case Some(move) =>
         println(s"Die KI macht den Zug (${move.x}, ${move.y}).")
-        if (makeMove(move.x, move.y)) {
-          println("Zug erfolgreich!")
-          true
-        } else {
-          throw new IllegalArgumentException("Fehler: Der KI-Zug war ungültig.") // Das sollte niemals eintreten
-        }
+        makeMove(move.x, move.y)
 
       case None =>
         false
