@@ -16,10 +16,10 @@ object Othello {
   val injector = Guice.createInjector(new OthelloModule)
   val controller = injector.getInstance(classOf[ControllerComponent])
   val tui = TUI(controller)
-  //val gui = OthelloGUI(controller)
+  val gui = OthelloGUI(controller)
 
   def main(args: Array[String]): Unit = {
-    //Future{gui.start()}
+    gui.start()
 
     Future {
     var input = ""
