@@ -1,13 +1,13 @@
 <gamestate>
     <player>
         <role>Human</role>
-        <name>Player 1</name>
+        <name>Jake</name>
         <stone>W</stone>
         <currentplayer>currentplayer</currentplayer>
     </player>
     <player>
-        <role>AI</role>
-        <name>AI</name>
+        <role>Human</role>
+        <name>Miréio</name>
         <stone>S</stone>
         <currentplayer>nextplayer</currentplayer>
     </player>
@@ -114,7 +114,7 @@
             <cell>
                 <row>2</row>
                 <col>3</col>
-                <color>W</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>2</row>
@@ -149,7 +149,7 @@
             <cell>
                 <row>3</row>
                 <col>2</col>
-                <color>S</color>
+                <color>.</color>
             </cell>
             <cell>
                 <row>3</row>
@@ -194,7 +194,7 @@
             <cell>
                 <row>4</row>
                 <col>3</col>
-                <color>S</color>
+                <color>W</color>
             </cell>
             <cell>
                 <row>4</row>
