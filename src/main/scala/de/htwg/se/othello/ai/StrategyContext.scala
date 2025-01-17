@@ -1,29 +1,19 @@
 package de.htwg.se.othello.ai
 
-import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{
-  Board,
-  Stone,
-  Stoneposition
-}
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone, Stoneposition}
 import de.htwg.se.othello.model.BoardComponents.BoardComponent
 import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 import de.htwg.se.othello.model.Playercomponents.Player
-import scala.util.Random
+import de.htwg.se.othello.model.Playercomponents.Player.getCurrentPlayer
 
-import scala.util.control.Breaks._
+import scala.util.Random
+import scala.util.control.Breaks.*
 import de.htwg.se.othello.util.Observable
+
 import scala.collection.immutable.Queue
 
 object StrategyContext {
-  private var players: Queue[Player] = Queue()
 
-  // Methode zum Setzen der Spieler
-  def setPlayers(players: Queue[Player]): Unit = {
-    this.players = players
-  }
-
-  def getPlayers: Queue[Player] = players
-  def getCurrentPlayer: Player = players.head
   def strategy: BoardComponent => Option[Stoneposition] = {
     if (Random.nextInt() % 2 == 0) strategy1 else strategy2
   }

@@ -7,6 +7,7 @@ import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.{Board, Stone}
 import scala.collection.immutable.Queue
 import de.htwg.se.othello.controller.ControllerComponents.{ControllerComponent, GameState}
 import de.htwg.se.othello.model.BoardComponents.BoardComponent
+import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 import de.htwg.se.othello.model.Playercomponents.Player
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -103,6 +104,26 @@ class ControllerSpec extends AnyWordSpec with Matchers {
         controller.nextPlayer()
       }.getMessage should include("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
+    "next player when no move is possible" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.setGameMode("Human")
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Alex")
+      controller.changeState(GameState.InputPlayer2)
+      controller.addPlayers("Pascal")
+      controller.changeState(GameState.InputBoardSize)
+      controller.createNewBoard(8,8)
+      controller.changeState(GameState.WHITE_TURN)
+      val board = new Board(8,8)
+      val updatedBoard = board
+        .placeStone(4,3,Stone.White)
+        .placeStone(3,4,Stone.White)
+        .placeStone(7,7,Stone.White)
+        .placeStone(6,7,Stone.Black)
+      controller.setBoard(updatedBoard)
+      controller.nextPlayer()
+      println(MoveHandler.isAnyMovePossible(controller.getBoard, Stone.BlackStone))
+    }
 
     "processAiTurn" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
@@ -110,7 +131,7 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       controller.createNewBoard(8, 8)
       controller.setGameMode("Ai")
       controller.changeState(GameState.InputPlayer1)
-      controller.addPlayers("Dominik")
+      controller.addPlayers("Domminik")
       controller.changeState(GameState.BLACK_TURN)
       controller.processAITurn() shouldBe true
 
