@@ -5,35 +5,32 @@ import de.htwg.se.othello.model.CommandComponents.UndoManagerComponent
 import com.google.inject.Inject
 
 class UndoManager @Inject extends UndoManagerComponent {
-  private var undoStack: List[Command] = Nil // Stack of runed commands
-  private var redoStack: List[Command] =
-    Nil // Stack der rückgängig gemachten Befehle
+  private var undoStack: List[Command] = Nil
+  private var redoStack: List[Command] = Nil
 
   override def doStep(command: Command): Unit = {
-    undoStack = command :: undoStack // Füge den Befehl zum undoStack hinzu
-    command.doStep // Führe den Befehl aus
+    undoStack = command :: undoStack
+    command.doStep
   }
 
-// Macht den letzten Befehl rückgängig und fügt ihn zum redoStack hinzu
   override def undoStep(): Unit = {
     undoStack match {
-      case Nil => // Stack ist leer, nichts zu tun
+      case Nil =>
       case head :: stack =>
-        head.undoStep // Mache den Befehl rückgängig
-        undoStack = stack // Entferne den Befehl aus dem undoStack
-        redoStack =
-          head :: redoStack // Füge den rückgängig gemachten Befehl zum redoStack hinzu
+        head.undoStep
+        undoStack = stack
+        redoStack = head :: redoStack
     }
   }
 
   override def redoStep(): Unit = {
     redoStack match {
-      case Nil => // Redo-Stack ist leer, nichts zu tun
+      case Nil =>
       case head :: stack =>
-        head.redoStep // Wiederhole den rückgängig gemachten Befehl
-        redoStack = stack // Entferne den Befehl aus dem redoStack
+        head.redoStep
+        redoStack = stack
         undoStack =
-          head :: undoStack // Füge den wiederholten Befehl zum undoStack hinzu
+          head :: undoStack 
     }
   }
 }

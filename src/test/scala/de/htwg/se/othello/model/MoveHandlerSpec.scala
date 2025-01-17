@@ -96,5 +96,28 @@ class MoveHandlerSpec extends AnyWordSpec {
         }
       }
     }
+    "isAnyMovePossible" should {
+      "be false when no move is possible" in {
+
+        val board = new Board(8, 8)
+        val updatedBoard = board
+          .placeStone(4, 3, Stone.White)
+          .placeStone(3, 4, Stone.White)
+        MoveHandler.isAnyMovePossible(updatedBoard, Stone.White) shouldBe false
+      }
+      "be true when a move is possible" in {
+        val board = new Board(8, 8)
+        MoveHandler.isAnyMovePossible(board, Stone.White) shouldBe true
+      }
+      "be also false when no move is possible" in {
+        val board = new Board(8, 8)
+        val updatedBoard = board
+          .placeStone(4, 3, Stone.White)
+          .placeStone(3, 4, Stone.White)
+          .placeStone(7, 7, Stone.White)
+          .placeStone(6, 7, Stone.Black)
+        MoveHandler.isAnyMovePossible(updatedBoard, Stone.BlackStone) shouldBe false
+      }
+    }
   }
 }

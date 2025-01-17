@@ -27,5 +27,9 @@ trait ControllerComponent extends Observable{
     def processAITurn() : Boolean
 
     def countStone() : (Int, Int)
+
+    def load() : Unit
+
+    def save() : Unit
   
 }
