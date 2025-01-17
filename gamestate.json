@@ -1,15 +1,15 @@
 {
   "currentplayer" : {
-    "name" : "Alice",
-    "stone" : "White",
-    "role" : "Human"
-  },
-  "nextplayer" : {
-    "name" : "Bob",
+    "name" : "Player 2",
     "stone" : "Black",
     "role" : "Human"
   },
-  "mode" : "classic",
+  "nextplayer" : {
+    "name" : "Player 1",
+    "stone" : "White",
+    "role" : "Human"
+  },
+  "mode" : "Human",
   "numrows" : 8,
   "numcols" : 8,
   "matrix" : [ {
@@ -155,7 +155,7 @@
   }, {
     "row" : 4,
     "col" : 3,
-    "color" : "Black"
+    "color" : "White"
   }, {
     "row" : 4,
     "col" : 4,
@@ -187,7 +187,7 @@
   }, {
     "row" : 5,
     "col" : 3,
-    "color" : "Empty"
+    "color" : "White"
   }, {
     "row" : 5,
     "col" : 4,

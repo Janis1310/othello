@@ -11,7 +11,7 @@ import scala.concurrent.{Future, ExecutionContext}
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.google.inject.Inject
 
-class TUI @Inject()(controller: ControllerComponent) extends Observer {
+class OthelloTUI @Inject()(controller: ControllerComponent) extends Observer {
   controller.add(this)
 
 
@@ -74,8 +74,7 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
         } else {
           println("Die KI konnte keinen gültigen Zug finden. Das Spiel ist vorbei!")
         }
-        
-          }
+      }
 
       input match {
         case "s" =>

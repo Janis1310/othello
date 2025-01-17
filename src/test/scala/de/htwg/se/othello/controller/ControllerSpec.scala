@@ -104,7 +104,7 @@ class ControllerSpec extends AnyWordSpec with Matchers {
         controller.nextPlayer()
       }.getMessage should include("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
-    "next player when no move is possible" in {
+    "next player when no move is possible WHITE_TURN" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.setGameMode("Human")
       controller.changeState(GameState.InputPlayer1)
@@ -123,6 +123,26 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       controller.setBoard(updatedBoard)
       controller.nextPlayer()
       println(MoveHandler.isAnyMovePossible(controller.getBoard, Stone.BlackStone))
+    }
+    "next player when no move is possible BLACK_TURN" in {
+      val controller = injector.getInstance(classOf[ControllerComponent])
+      controller.setGameMode("Human")
+      controller.changeState(GameState.InputPlayer1)
+      controller.addPlayers("Alex")
+      controller.changeState(GameState.InputPlayer2)
+      controller.addPlayers("Pascal")
+      controller.changeState(GameState.InputBoardSize)
+      controller.createNewBoard(8, 8)
+      controller.changeState(GameState.BLACK_TURN)
+      val board = new Board(8, 8)
+      val updatedBoard = board
+        .placeStone(4, 3, Stone.White)
+        .placeStone(3, 4, Stone.White)
+        .placeStone(7, 7, Stone.White)
+        .placeStone(6, 7, Stone.Black)
+      controller.setBoard(updatedBoard)
+      controller.nextPlayer()
+      println(MoveHandler.isAnyMovePossible(controller.getBoard, Stone.WhiteStone))
     }
 
     "processAiTurn" in {
@@ -148,11 +168,7 @@ class ControllerSpec extends AnyWordSpec with Matchers {
       controller.nextPlayer()
       controller.makeMove(2,4)
       controller.processAITurn() shouldBe false
-
-
     }
-
-
     "getGameMode" in {
       val controller = injector.getInstance(classOf[ControllerComponent])
       controller.setGameMode("Human")
@@ -210,5 +226,58 @@ class ControllerSpec extends AnyWordSpec with Matchers {
 
     controller.boardToString.replaceAll("\\s+", "") shouldBe initialBoardStr
       .replaceAll("\\s+", "")
+  }
+
+  "save and load white turn" in {
+    val controller = injector.getInstance(classOf[ControllerComponent])
+    controller.changeState(GameState.InputBoardSize)
+    controller.createNewBoard(8, 8)
+    controller.setGameMode("AI")
+    controller.changeState(GameState.InputPlayer1)
+    controller.addPlayers("Jake")
+    controller.changeState(GameState.WHITE_TURN)
+    print(controller.makeMove(5, 3))
+    controller.save()
+    val controller1 = injector.getInstance(classOf[ControllerComponent])
+    controller1.load()
+
+    controller1.getBoard.getStoneAt(5,3) should be (Stone.White)
+  }
+/*
+  "save and load black turn" in {
+    val controller = injector.getInstance(classOf[ControllerComponent])
+    controller.changeState(GameState.InputBoardSize)
+    controller.createNewBoard(8, 8)
+    controller.setGameMode("Human")
+    controller.changeState(GameState.InputPlayer1)
+    controller.addPlayers("Jake")
+    controller.changeState(GameState.InputPlayer2)
+    controller.addPlayers("Miréio")
+    controller.changeState(GameState.WHITE_TURN)
+    controller.makeMove(5, 3)
+    controller.makeMove(5,4)
+    controller.save()
+    val controller1 = injector.getInstance(classOf[ControllerComponent])
+    controller1.load()
+
+    controller1.getBoard.getStoneAt(5,4) should be (Stone.Black)
+  }*/
+
+  "countStone" in {
+    val controller = injector.getInstance(classOf[ControllerComponent])
+    controller.changeState(GameState.InputBoardSize)
+    controller.createNewBoard(8, 8)
+    controller.setGameMode("Human")
+    controller.changeState(GameState.InputPlayer1)
+    controller.addPlayers("Jake")
+    controller.changeState(GameState.InputPlayer2)
+    controller.addPlayers("Miréio")
+    controller.changeState(GameState.WHITE_TURN)
+    println(controller.makeMove(5, 3))
+    println(controller.makeMove(5, 4))
+    val countStones = controller.countStone()
+
+    countStones._1 shouldBe 3
+    countStones._2 shouldBe 3
   }
 }

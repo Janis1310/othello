@@ -1,340 +1,340 @@
 <gamestate>
     <player>
-        <role>AI</role>
-        <name>AI</name>
-        <stone>S</stone>
-        <currentplayer>currentplayer</currentplayer>
+        <role> AI </role>
+        <name> AI </name>
+        <stone> S </stone>
+        <currentplayer> currentplayer </currentplayer>
     </player>
     <player>
-        <role>Human</role>
-        <name>Player 1</name>
-        <stone>W</stone>
-        <currentplayer>nextplayer</currentplayer>
+        <role> Human </role>
+        <name> Jake </name>
+        <stone> W </stone>
+        <currentplayer> nextplayer </currentplayer>
     </player>
     <mode>mode</mode>
     <board>
-        <numrows>8</numrows>
-        <numcols>8</numcols>
+        <numrows> 8 </numrows>
+        <numcols> 8 </numcols>
         <matrix>
             <cell>
-                <row>0</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>1</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>2</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>3</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 3 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>4</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>5</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 0 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>0</row>
-                <col>7</col>
-                <color>S</color>
+                <row> 0 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 1 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>1</col>
-                <color>S</color>
+                <row> 1 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>2</col>
-                <color>S</color>
+                <row> 1 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>3</col>
-                <color>S</color>
+                <row> 1 </row>
+                <col> 3 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>4</col>
-                <color>S</color>
+                <row> 1 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>5</col>
-                <color>W</color>
+                <row> 1 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 1 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>1</row>
-                <col>7</col>
-                <color>.</color>
+                <row> 1 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 2 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>1</col>
-                <color>S</color>
+                <row> 2 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>2</col>
-                <color>S</color>
+                <row> 2 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>3</col>
-                <color>S</color>
+                <row> 2 </row>
+                <col> 3 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>4</col>
-                <color>W</color>
+                <row> 2 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>5</col>
-                <color>S</color>
+                <row> 2 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 2 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>2</row>
-                <col>7</col>
-                <color>.</color>
+                <row> 2 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 3 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>1</col>
-                <color>S</color>
+                <row> 3 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>2</col>
-                <color>S</color>
+                <row> 3 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>3</col>
-                <color>W</color>
+                <row> 3 </row>
+                <col> 3 </col>
+                <color> W </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>4</col>
-                <color>W</color>
+                <row> 3 </row>
+                <col> 4 </col>
+                <color> S </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>5</col>
-                <color>W</color>
+                <row> 3 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 3 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>3</row>
-                <col>7</col>
-                <color>W</color>
+                <row> 3 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>0</col>
-                <color>.</color>
+                <row> 4 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>1</col>
-                <color>W</color>
+                <row> 4 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>2</col>
-                <color>W</color>
+                <row> 4 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>3</col>
-                <color>S</color>
+                <row> 4 </row>
+                <col> 3 </col>
+                <color> W </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>4</col>
-                <color>S</color>
+                <row> 4 </row>
+                <col> 4 </col>
+                <color> W </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>5</col>
-                <color>S</color>
+                <row> 4 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 4 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>4</row>
-                <col>7</col>
-                <color>W</color>
+                <row> 4 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 5 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>1</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>2</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>3</col>
-                <color>S</color>
+                <row> 5 </row>
+                <col> 3 </col>
+                <color> W </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>4</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>5</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>5</row>
-                <col>7</col>
-                <color>W</color>
+                <row> 5 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>0</col>
-                <color>S</color>
+                <row> 6 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>1</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>2</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>3</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 3 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>4</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>5</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>6</row>
-                <col>7</col>
-                <color>W</color>
+                <row> 6 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>0</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 0 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>1</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 1 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>2</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 2 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>3</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 3 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>4</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 4 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>5</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 5 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>6</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 6 </col>
+                <color> . </color>
             </cell>
             <cell>
-                <row>7</row>
-                <col>7</col>
-                <color>W</color>
+                <row> 7 </row>
+                <col> 7 </col>
+                <color> . </color>
             </cell>
         </matrix>
     </board>
