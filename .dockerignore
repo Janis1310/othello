@@ -1,0 +1,16 @@
+.git
+*.log
+node_modules
+
+# Ignoriere alle .env-Dateien
+*.env
+
+# Ignoriere die Log-Dateien
+*.log
+
+# Ignoriere alle temporären Dateien
+*.tmp
+
+# Ignoriere alle versteckten Dateien
+.*
+
