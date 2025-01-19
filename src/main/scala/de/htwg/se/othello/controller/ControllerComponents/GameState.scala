@@ -19,13 +19,13 @@ object GameState extends Enumeration {
   )
 
   private val stateActions = Map[GameState, () => Unit](
-    SETUP -> (() => println("Setup: Spieler hinzufügen und Board konfigurieren.")),
+  SETUP -> (() => println("Setup: Spieler hinzufügen und Board konfigurieren.")),
   
   WHITE_TURN -> (() => println("Weiß")),
   
   BLACK_TURN -> (() => println("Schwarz")),
   
-  GAME_OVER -> (() => println("Spielstand anzeigen und beenden.")),
+  GAME_OVER -> (() => println("Das Spiel ist zu ende. Es gibt keine legalen Züge mehr.")),
   
   PAUSED -> (() => println("Spiel pausiert.")),
   

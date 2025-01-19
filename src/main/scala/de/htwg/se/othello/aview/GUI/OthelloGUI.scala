@@ -16,6 +16,7 @@ import de.htwg.se.othello.controller.ControllerComponents.GameState
 import scala.annotation.constructorOnly
 import javax.swing.SwingUtilities
 import scala.util.Success
+import javax.swing.JOptionPane
 private val backgroundColor = new Color(65,100,40)
 private val foregroundColor = Color.WHITE
 
@@ -177,9 +178,11 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
       columns = 5
       background = backgroundColor
       border = BorderFactory.createLineBorder(foregroundColor, 3)
+      foreground = foregroundColor
     }
     val colsField = new TextField {
       background = backgroundColor
+      foreground = foregroundColor
       columns = 5
       border = BorderFactory.createLineBorder(foregroundColor, 3)
     }
@@ -364,12 +367,21 @@ class OthelloGUI(controller:ControllerComponent) extends MainFrame with Observer
     validate() // Aktualisiert das Layout repaint() // Zeichnet die GUI neu
     repaint()
 }
+  def showWinner() : Unit = {
+    val winner = controller.getWinner()
+    val message = winner match {
+       case Some(name) => s"Der Gewinner ist: $name"
+       case None => "Das Spiel endet unentschieden."
+    }
+
+    JOptionPane.showMessageDialog(null, message, "Spielergebnis", JOptionPane.INFORMATION_MESSAGE)
+    System.exit(0)
+  }
 
   override def update: Unit = {
       refreshBoard()
-        
-      //println(controller.boardToString) // Das brauchen wir nicht, oder?
-      
+      if (controller.getGameState == GameState.GAME_OVER)
+        showWinner()
     }
 
 }

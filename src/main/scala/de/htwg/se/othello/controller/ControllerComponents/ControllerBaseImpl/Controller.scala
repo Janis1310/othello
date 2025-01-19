@@ -21,6 +21,8 @@ import de.htwg.se.othello.model.HandlerComponents.HandlerBaseImpl.MoveHandler
 
 
 class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManagerComponent, val moveHandler: MoveHandlerTemplateInterface) extends ControllerComponent {
+
+
   private var players: Queue[Player] = Queue()
   private var gameState: GameState.GameState = GameState.SETUP
   private var gameMode: String = ""
@@ -69,6 +71,7 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
       case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
       case _ => throw new IllegalStateException("Spielerwechsel ist im aktuellen Zustand nicht möglich.")
     }
+
     if (!MoveHandler.isAnyMovePossible(board, getCurrentPlayer.stone)) {
       println("Es gibt keinen gültigen Zug. Kein Spielerwechsel!")
       val (currentPlayer, updatedQueue) = players.dequeue
@@ -79,11 +82,9 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
         case GameState.BLACK_TURN => changeState(GameState.WHITE_TURN)
       }
       if(!MoveHandler.isAnyMovePossible(board, getCurrentPlayer.stone)) {
-        println("Das Spiel ist zu ende. Es gibt keine legalen Züge mehr.")
-        //end()
+        changeState(GameState.GAME_OVER)
       }
     }
-    notifyObservers
   }
 
   def getBoard: BoardComponent = board
@@ -198,5 +199,17 @@ class Controller @Inject()(var board: BoardComponent, val undoManager: UndoManag
     val blackCount = stones.count(_ == Stone.Black)
     val whiteCount = stones.count(_ == Stone.White)
     (whiteCount, blackCount)
+  }
+
+  def getWinner() : Option[String] = {
+    val (w, s) = countStone()
+
+    if (w > s) {
+      players.find(_.stone == Stone.White).map(_.name)
+    } else if (w < s) {
+      players.find(_.stone == Stone.Black).map(_.name)
+    } else {
+      None
+    }
   }
 }

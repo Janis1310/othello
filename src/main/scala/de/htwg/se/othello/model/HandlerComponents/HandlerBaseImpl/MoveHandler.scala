@@ -38,7 +38,7 @@ object MoveHandler extends MoveHandlerTemplate{
         }
         
         if ( board.getBoard.cell(stoneposition.x, stoneposition.y)!= Stone.Empty) { 
-            println("Field is not empty")
+            //println("Field is not empty")
             return false
         }
 

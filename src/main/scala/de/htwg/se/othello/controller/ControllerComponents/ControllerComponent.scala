@@ -31,5 +31,7 @@ trait ControllerComponent extends Observable{
     def load() : Unit
 
     def save() : Unit
+
+    def getWinner() : Option[String]
   
 }

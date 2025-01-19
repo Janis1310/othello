@@ -10,6 +10,8 @@ import scala.io.StdIn
 import scala.concurrent.{Future, ExecutionContext}
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.google.inject.Inject
+import scala.annotation.constructorOnly
+import de.htwg.se.othello.model.BoardComponents.BoardBaseImpl.Stone
 
 class TUI @Inject()(controller: ControllerComponent) extends Observer {
   controller.add(this)
@@ -124,6 +126,11 @@ class TUI @Inject()(controller: ControllerComponent) extends Observer {
       println("q => quit, z => undo, d => redo, s => Save und Quit")
       println(s"${controller.getCurrentPlayer.name}, Du bist dran. Dein Stein ist: ${controller.getCurrentPlayer.stone} ")
       println("Geben Sie die Koordinaten des Steins ein (Format: Zeile,Spalten: )")
+    } else if(controller.getGameState == GameState.GAME_OVER){
+      controller.getWinner() match {
+        case Some(name) => println(s"Der Gewinner ist: $name!!!!")
+        case None => println("Das Spiel endet unentschieden.")
+      }
     }
   }
 
