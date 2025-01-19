@@ -21,7 +21,6 @@ src/.scala-build/
 
 # VS Code
 .vscode/
-.
 *.json
 *.xml
 
