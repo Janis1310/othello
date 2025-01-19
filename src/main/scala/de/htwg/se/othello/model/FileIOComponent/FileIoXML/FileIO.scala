@@ -63,11 +63,11 @@ class FileIO extends FileIOInterface{
         </cell>
     }
     
-    <board>
-    <numrows>{numrows}</numrows>
-    <numcols>{numcols}</numcols>
-    <matrix>{matrixXml}</matrix>
-  </board>
+      <board>
+        <numrows>{numrows}</numrows>
+        <numcols>{numcols}</numcols>
+        <matrix>{matrixXml}</matrix>
+      </board>
     
   }
 
